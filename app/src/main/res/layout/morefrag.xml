@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/more_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:msrv_gravity="center"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/camera"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/more_recyclerview"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:onClick="show"
+            android:focusable="true"
+            android:src="@drawable/camera"/>
+        <!--
+        <TextView
+            android:id="@+id/instruct"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/camera"
+            android:layout_height="wrap_content"
+            android:text="Click to report information on Covid-19"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/ruct"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/instruct"
+            android:layout_height="wrap_content"
+            android:text="Swipe Right for Emergency Reports"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:gravity="center"/> -->
+
+        <TextView
+            android:id="@+id/flytext"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/camera"
+            android:layout_height="wrap_content"
+            android:text="Click on the camera Icon to Report Other Issues and Feedback or Swipe Right for Emergency Reports"
+            android:textSize="10sp"
+            android:textColor="@color/colorAccent"
+            android:gravity="center"
+            android:ellipsize = "marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fadingEdge = "horizontal"
+            android:marqueeRepeatLimit = "marquee_forever"
+            android:scrollHorizontally = "true"
+            android:singleLine = "true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progress_bar"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            tools:text="This is example"/>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

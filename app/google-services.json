@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1060833318766",
+    "firebase_url": "https://nispsasmapp.firebaseio.com",
+    "project_id": "nispsasmapp",
+    "storage_bucket": "nispsasmapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060833318766:android:f5a10aa70259d5bf37d37f",
+        "android_client_info": {
+          "package_name": "com.a2tocsolutions.nispsasapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060833318766-8a64ntue32hfa56ja894fqrkbn0orhbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWWBWARBB05GoPUa-v782-TpMUp5DFihs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060833318766-8a64ntue32hfa56ja894fqrkbn0orhbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060833318766:android:f70640579e6dde0c",
+        "android_client_info": {
+          "package_name": "com.nispsasm.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060833318766-8a64ntue32hfa56ja894fqrkbn0orhbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWWBWARBB05GoPUa-v782-TpMUp5DFihs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1060833318766-8a64ntue32hfa56ja894fqrkbn0orhbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView11"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="-4dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ndic" />
+
+    <TextView
+        android:id="@+id/textView21"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="64dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView9"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Nigeria Deposit Insurance Corporation(NDIC)"
+        android:textColor="#130C0C"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

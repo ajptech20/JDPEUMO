@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/drawable/blank_change.xml" value="0.1" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/drawable/ic_outline_videocam_off_24.xml" value="0.1" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/drawable/img_uplaod.xml" value="0.1" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/drawable/stat_notify_call_mute.xml" value="0.1" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/activity_imigration.xml" value="0.18070652173913043" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/activity_main2.xml" value="0.14266304347826086" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/activity_n_e_m.xml" value="0.18070652173913043" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/activity_n_e_m_a_v_i_d.xml" value="0.18070652173913043" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/activity_pg.xml" value="0.18070652173913043" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/activitymain2.xml" value="0.14266304347826086" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/alertfrag.xml" value="0.18070652173913043" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/image_post.xml" value="0.14266304347826086" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/live_stream_activity.xml" value="0.15811088295687886" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/more_fragment.xml" value="0.1" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/nav_header_main.xml" value="0.14266304347826086" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/layout/slidingup_pannel.xml" value="0.14266304347826086" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/menu/demo.xml" value="0.2" />
+        <entry key="..\:/My Files/PossibleProduction/Android/JDPCM/app/src/main/res/menu/more_menu.xml" value="0.1" />
+        <entry key="..\:/Users/2TOC G/Downloads/NISPSAS-FINAL/app/src/main/res/layout/activity_see_smthing_say_smthing_video.xml" value="0.14266304347826086" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

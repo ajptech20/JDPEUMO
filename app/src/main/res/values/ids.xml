@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="PreviewSurfaceView" type="id" />
+    <item name="action_toggle" type="id" />
+    <item name="nav_view" type="id" />
+    <item name="agency" type="id" />
+    <item name="about" type="id" />
+    <item name="termsandcontitions" type="id" />
+    <item name="UploadProgressBar" type="id" />
+    <item name="UploadStatusText" type="id" />
+    <item name="type_comment" type="id" />
+</resources>

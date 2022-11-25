@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".Video_post_player">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:cardElevation="18dp">
+
+        <RelativeLayout
+            android:id="@+id/vidprogression"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+
+    <com.bambuser.broadcaster.SurfaceViewWithAutoAR
+        android:id="@+id/VideoSurfaceView"
+        android:layout_height="790dp"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true" />
+
+        <RelativeLayout
+            android:id="@+id/PlayerContentView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="100dp"
+            android:layout_marginStart="100dp">
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="200dp"
+            android:layout_marginStart="100dp">
+
+            <ImageView
+                android:id="@+id/stop_close_live2"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_baseline_cast_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_marginTop="18dp"
+                android:text="Tap to watch Live"
+                android:layout_marginStart="50dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/brstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/calibri"
+            android:layout_marginBottom="140dp"
+            android:text=""
+            android:layout_gravity="bottom"
+            android:layout_marginStart="10dp"
+            android:background="@color/colorAccent"
+            android:padding="6dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="100dp"
+            android:layout_marginStart="0dp">
+
+            <TextView
+                android:id="@+id/rep_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_marginTop="18dp"
+                android:layout_alignParentStart="true"
+                android:text=""
+                android:layout_marginStart="10dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/report_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_marginTop="18dp"
+                android:text=""
+                android:layout_marginStart="60dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/rep_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_marginTop="18dp"
+                android:text=""
+                android:layout_marginStart="130dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/rep_comment"
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:fontFamily="@font/calibri"
+            android:layout_marginBottom="40dp"
+            android:text=""
+            android:layout_gravity="bottom"
+            android:layout_marginStart="10dp"
+            android:background="@color/semi_transparent"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/stop_close_live3"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_clear_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_marginTop="12dp"
+                android:text="Live Posts"
+                android:layout_marginStart="50dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/poster_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="50dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:elevation="12dp"
+                android:id="@+id/view2"
+                app:cardCornerRadius="40dp"
+                android:layout_centerHorizontal="true"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp">
+            <ImageView
+                android:id="@+id/reporter_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+
+    <TextView android:id="@+id/PlayerStatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:textSize="20sp" />
+
+    <!--<SeekBar android:id="@+id/PlayerVolumeSeekBar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:progress="100"
+        android:max="100" />-->
+
+    <TextView android:id="@+id/BroadcastLiveTextView"
+        android:text="LIVE"
+        android:background="#FF0000"
+        android:textColor="#FFFFFF"
+        android:padding="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <TextView android:id="@+id/BroadcastLatencyTextView"
+        android:padding="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/BroadcastLiveTextView"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <TextView android:id="@+id/ViewerStatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+    </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="125"
+        android:background="#FFFFFF"
+        android:layout_gravity="bottom"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/app_home1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/action_settings"
+            android:layout_weight="25"
+            android:layout_gravity="start"
+            android:src="@drawable/ic_action_home"
+            />
+
+        <ImageView
+            android:id="@+id/image_posts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/action_settings"
+            android:layout_weight="25"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_apps_black_24dp"
+            />
+
+        <ImageView
+            android:id="@+id/short_videos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/action_settings"
+            android:layout_weight="25"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_baseline_subscriptions_24"
+            />
+        <ImageView
+            android:id="@+id/video_pull_test"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/action_settings"
+            android:layout_weight="25"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_name"
+            />
+        <ImageView
+            android:id="@+id/new_post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:contentDescription="@string/action_settings"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_control_point_black_24dp"
+            />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

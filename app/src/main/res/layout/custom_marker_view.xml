@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="Nathaniel"
+        android:textSize="16dp"
+        android:textColor="@android:color/black"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+    android:id="@+id/tvContent1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="7dp"
+    android:layout_below="@+id/tvContent"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:text="Nathaniel"
+    android:textSize="14dp"
+    android:textColor="@android:color/black"
+    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+    <TextView
+        android:id="@+id/tvContent2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/tvContent1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="Nathaniel"
+        android:textSize="14dp"
+        android:textColor="@android:color/black"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

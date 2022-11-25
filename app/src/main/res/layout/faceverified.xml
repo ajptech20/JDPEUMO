@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/passport"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:contentDescription="passport photo"
+        android:gravity="center" />
+
+
+    <TextView
+        android:id="@+id/f_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passport"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="Name:  "
+        android:layout_marginStart="20dp" />
+    <TextView
+        android:id="@+id/f_nametext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/f_name"
+        android:layout_below="@id/passport"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response"
+        android:layout_toEndOf="@id/f_name" />
+
+    <TextView
+        android:id="@+id/f_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/f_nametext"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="Phone Number:  "
+        android:layout_marginStart="20dp" />
+    <TextView
+        android:id="@+id/f_phonetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_nametext"
+       android:layout_toRightOf="@id/f_phone"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response"
+        android:layout_toEndOf="@id/f_phone" />
+
+    <TextView
+        android:id="@+id/f_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/f_phonetext"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="Age:  "
+        android:layout_marginStart="20dp" />
+    <TextView
+        android:id="@+id/f_agetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_phonetext"
+        android:layout_marginTop="12dp"
+        android:layout_toRightOf="@id/f_age"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response"
+        android:layout_toEndOf="@id/f_age" />
+
+    <TextView
+        android:id="@+id/f_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/f_agetext"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="Gender:  "
+        android:layout_marginStart="20dp" />
+    <TextView
+        android:id="@+id/f_gendertext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/f_gender"
+        android:layout_below="@id/f_agetext"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response"
+        android:layout_toEndOf="@id/f_gender" />
+
+    <TextView
+        android:id="@+id/f_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_gender"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="State of Origin:  "
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/f_statetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_gendertext"
+        android:layout_toRightOf="@id/f_state"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response" />
+
+    <TextView
+        android:id="@+id/f_lga"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_state"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="LGA:  "
+        android:layout_marginStart="20dp" />
+
+    <TextView
+        android:id="@+id/f_lgatext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_statetext"
+        android:layout_toRightOf="@id/f_lga"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response"
+        android:layout_toEndOf="@id/f_lga" />
+
+
+    <TextView
+        android:id="@+id/f_trade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/f_lga"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:text="Trade:  "
+        android:layout_marginStart="20dp" />
+
+    <TextView
+        android:id="@+id/f_tradetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_lgatext"
+        android:layout_toRightOf="@id/f_trade"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response"
+        android:layout_toEndOf="@id/f_trade" />
+
+
+
+    <TextView
+        android:id="@+id/f_addresstext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/f_tradetext"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        tools:text="Response" />
+
+        <TextView
+            android:id="@+id/f_empname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/f_addresstext"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="Name:" />
+
+        <TextView
+            android:id="@+id/f_empnametext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/f_empname"
+            android:layout_below="@+id/f_addresstext"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            tools:text="Response"
+            android:layout_toEndOf="@id/f_empname" />
+
+        <TextView
+            android:id="@+id/f_empcomment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/f_empname"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="Comment:" />
+
+        <TextView
+            android:id="@+id/f_empcommenttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/f_empnametext"
+            android:layout_toRightOf="@id/f_empcomment"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            tools:text="Response"
+            android:layout_toEndOf="@id/f_empcomment" />
+
+        <TextView
+            android:id="@+id/f_emprate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/f_empcomment"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="Rate:" />
+
+        <TextView
+            android:id="@+id/f_empratetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/f_empcommenttext"
+            android:layout_toRightOf="@id/f_emprate"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            tools:text="Response"
+            android:layout_toEndOf="@id/f_emprate" />
+
+        <TextView
+            android:id="@+id/f_empdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/f_emprate"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="Date:" />
+
+        <TextView
+            android:id="@+id/f_empdatetext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/f_empratetext"
+            android:layout_toRightOf="@id/f_empdate"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            tools:text="Response"
+            android:layout_toEndOf="@id/f_empdate" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/f_empdate"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

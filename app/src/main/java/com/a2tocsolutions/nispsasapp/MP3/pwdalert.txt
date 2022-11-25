@@ -1,0 +1,5 @@
+String PWD_ALERT = "NISPSAS/Mobile";
+
+@FormUrlEncoded
+    @POST(Routes.PWD_ALERT + "/pushPwdAlert")
+    Call<Void> crimeAlert(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("type") String type);

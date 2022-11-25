@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatb"
+            android:layout_width="186dp"
+            android:layout_height="173dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="95dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="call"
+            android:src="@drawable/dial"
+            app:backgroundTint="#FFFFFF"
+            app:elevation="6dp"
+            app:fabCustomSize="200dp"
+            app:maxImageSize="200dp"
+            app:srcCompat="@drawable/dial" />
+
+
+        <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+            android:id="@+id/emergency_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:msrv_gravity="center" />
+
+
+        <!--   <TextView
+            android:id="@+id/instruct"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/camera"
+            android:layout_height="wrap_content"
+            android:text="Click to report information on Covid-19"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/ruct"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/instruct"
+            android:layout_height="wrap_content"
+            android:text="Swipe Left for Complaints, Commerce and Other Institution"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>-->
+
+
+    </RelativeLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

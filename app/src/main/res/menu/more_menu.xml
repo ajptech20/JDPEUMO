@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/help">
+        <menu>
+            <group
+                android:id="@+id/secogroup"
+                android:checkableBehavior="single">
+                <item
+                    android:id="@+id/about"
+                    android:icon="@drawable/ic_error_outline_black_24dp"
+                    android:title="About" />
+                <item
+                    android:id="@+id/agency"
+                    android:icon="@drawable/ic_business_black_24dp"
+                    android:title="@string/agency" />
+                <item
+                    android:id="@+id/contact"
+                    android:icon="@drawable/ic_contacts_black_24dp"
+                    android:title="@string/contact" />
+                <item
+                    android:id="@+id/termsandcontitions"
+                    android:icon="@drawable/ic_error_outline_black_24dp"
+                    android:title="@string/terms" />
+
+
+            </group>
+        </menu>
+    </item>
+</menu>

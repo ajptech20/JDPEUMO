@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.a2tocsolutions.nispsasapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.PREVENT_POWER_KEY" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="m">
+        <activity android:name=".FireVideo" />
+        <activity android:name=".SeeSmthingSaySmthingVideo" />
+        <activity android:name=".DisasterPage" />
+        <activity android:name=".seesay" />
+        <activity android:name=".pg" />
+        <activity android:name=".nscdclanding" />
+        <activity android:name=".activities.CorrectionServices" />
+        <activity android:name=".activities.Imigration" />
+        <activity android:name=".activities.NSCDC" />
+        <activity android:name=".fakeNews" />
+        <activity android:name=".RAPEUPLOAD" />
+        <activity android:name=".block_drainage" />
+        <activity android:name=".looming" />
+        <activity android:name=".video" />
+        <activity android:name=".CameraAndPage" />
+        <activity android:name=".ActivityDiscriminate" />
+        <activity android:name=".activities.Vigilante" />
+        <activity android:name=".EFO" />
+        <activity android:name=".PwdActivity" />
+        <activity android:name=".activities.RequestProject" />
+        <activity android:name=".activities.govpro" />
+        <activity android:name=".activities.fasm" />
+        <activity android:name=".RAPE" />
+        <activity android:name=".NEMA" />
+        <activity android:name=".FireService" />
+        <activity android:name=".Fragments.adminis" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.SplashActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".activities.MainActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.BanksActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.StateComplaint"
+            android:parentActivityName=".activities.ComplaintActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.ComplaintActivity" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Abia"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Adamawa"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.AkwaIbom"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Anambra"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Bauchi"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Bayelsa"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Benue"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Borno"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.CrossRiver"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Delta"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Ebonyi"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Enugu"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Edo"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Ekiti"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.FCT"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Gombe"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Imo"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Jigawa"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Kaduna"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Kano"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Katsina"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Kebbi"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Kogi"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Kwara"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Lagos"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Nasarawa"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Niger"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Ogun"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Ondo"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Osun"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Oyo"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Plateau"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Rivers"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Sokoto"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Taraba"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Yobe"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.Zamfara"
+            android:parentActivityName=".activities.StateComplaint"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.StateComplaint" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.environmentissues"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.healthissues"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.legalissues"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.newsupdate"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.transportissues"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.CovidActivity"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyArtisanDomestic"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyExtinguisher"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyAddress"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyNational"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyHunter"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyPSID"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifySecurityCode"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
+        <activity
+            android:name=".activities.VerifyTransporter"
+            android:parentActivityName=".activities.VerifyActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ArticlesDetail"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.ScanActivity" />
+        <activity android:name=".activities.MoreActivity" />
+        <activity
+            android:name=".activities.About"
+            android:parentActivityName=".activities.MoreActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MoreActivity" />
+        </activity>
+        <activity
+            android:name=".activities.HowToActivity"
+            android:parentActivityName=".activities.MoreActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MoreActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AgencyList"
+            android:parentActivityName=".activities.MoreActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MoreActivity" />
+        </activity>
+        <activity
+            android:name=".activities.Policy"
+            android:parentActivityName=".activities.MoreActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MoreActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AgricSat"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/Theme2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AgricSatDetail"
+            android:parentActivityName=".activities.AgricSat"
+            android:theme="@style/Theme2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.AgricSat" />
+        </activity>
+        <activity
+            android:name=".activities.Terms"
+            android:parentActivityName=".activities.LoginActivity"
+            android:theme="@style/Theme2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".activities.FaceUserDetail"
+            android:parentActivityName=".activities.algon.VerifyArtisanDomestic"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.algon.VerifyArtisanDomestic" />
+        </activity>
+        <activity android:name=".activities.statactivities.lagactivities.Vehiclereg" />
+        <activity
+            android:name=".activities.statactivities.lagactivities.tvstation"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Trafficcontrol"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Specialtask"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Signoutdoor"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.radiostation"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.PublicComplaint"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Potholecollapse"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.ndlea"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.nafdac"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Healthfacilities"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Floodblock"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Fakedrugs"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Environmentmonitor"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Envinoise"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Cuttingroad"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Brtbus"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Brokenpipe"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Ambulance"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Refuseissues"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Opencorpse"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Mediation"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+
+        <activity
+            android:name=".activities.statactivities.lagactivities.naptip"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Childrenfactory"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Childtraffic"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Abuseabroad"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyChild"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Stollenchild"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.ComplaintActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.cpccomplaint"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyMedical"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyPlatenumber"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AlgonActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.CommerceActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.InstitutionsActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AlgonVerifyActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.FfsActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.CorrectionActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.ImmigrationActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.PoliceActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.NscdcActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.MotActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.NimcActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyUnion"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifySecurity"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyAmbulance"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyHospital"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyHouse"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyFamers"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyTrader"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.algon.VerifyDrainage"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.FaceCodeActivity"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifySecurityFace"
+            android:parentActivityName=".activities.VerifyActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.VerifyActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.VerifyHajj"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.VerifyNdic"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.MotorReg"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.SchoolReg"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.NotificationActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name=".activities.NotificationActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.institutions.VerifyNscdcActivity"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.RegisNscdcActivity"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.UploadMediaActivity"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.statactivities.lagactivities.Othernaptip"
+            android:parentActivityName=".activities.statactivities.Lagos"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.EdureportActivity"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.EduregActivity"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+        <activity
+            android:name=".activities.institutions.EduActivity"
+            android:parentActivityName=".activities.InstitutionsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.a2tocsolutions.nispsasapp.activities.InstitutionsActivity" />
+        </activity>
+
+        <service
+            android:name=".service.NispsasLockService"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".service.NispsasScreenReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+                <action android:name="android.intent.action.QUICKBOOT_POWEROFF" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.MyFirebaseMessageService"
+            android:exported="false">
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/logo" />
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_color"
+                android:resource="@color/textColorPrimary" />
+
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.Activity_home"
+            android:screenOrientation="portrait"
+            android:title="Shorts"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.New_post"
+            android:screenOrientation="portrait"
+            android:title="Shorts"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.Go_New_live"
+            android:parentActivityName=".Activity_home"
+            android:screenOrientation="portrait"
+            android:title="Streaming Live"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.picture_uploader"
+            android:screenOrientation="portrait"
+            android:title="Upload Picture"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.shortvideo_uploader"
+            android:screenOrientation="portrait"
+            android:title="Upload Video"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.ImagePostsActivity"
+            android:screenOrientation="portrait"
+            android:title="Posts"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.LiveVideoActivity"
+            android:screenOrientation="portrait"
+            android:title="Posts"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.A_live_video_posts"
+            android:screenOrientation="portrait"
+            android:title="Posts"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.Video_post_player"
+            android:screenOrientation="portrait"
+            android:title="Posts"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.ShortVideoActivity"
+            android:screenOrientation="portrait"
+            android:title="Posts"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.Nested_scrool_test"
+            android:screenOrientation="portrait"
+            android:title="Nested"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.a2tocsolutions.nispsasapp.GetArticles"
+            android:screenOrientation="portrait"
+            android:title="Nested"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

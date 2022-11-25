@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="uploadImages">
+        <item>Pick from gallery</item>
+        <item>Click from camera</item>
+        <item>Record video</item>
+        <item>Remove image</item>
+    </string-array>
+
+    <string-array name="cirpvalue">
+        <item>Select type of report…</item>
+        <item>Report Suspected Cultist</item>
+        <item>Report Sexual Harassment</item>
+        <item>Report Compulsory Handout Sales</item>
+        <item>Report Lecturer Truancy</item>
+        <item>Report Student Prostitution</item>
+        <item>Report Perceived Violence</item>
+        <item>Report Drug Abuse</item>
+        <item>Report Water Scarcity and Other</item>
+    </string-array>
+
+    <string-array name="itemIds">
+        <item>gallery_image</item>
+        <item>camera_image</item>
+        <item>record_video</item>
+        <item>remove_image</item>
+    </string-array>
+
+    <string-array name="face">
+        <item>Click from camera</item>
+    </string-array>
+
+    <string-array name="faceIds">
+        <item>camera_image</item>
+    </string-array>
+
+    <string-array name="ratingvalue">
+        <item>Choose...</item>
+        <item>Bad</item>
+        <item>Poor</item>
+        <item>Good</item>
+        <item>Very Good</item>
+        <item>Excellent</item>
+        <item>Satisfactory</item>
+    </string-array>
+
+    <string-array name="covidvalue">
+        <item>Select...</item>
+        <item>Crime</item>
+        <item>Terrorism</item>
+        <item>Banditry</item>
+    </string-array>
+
+    <string-array name="corrvalue">
+        <item>Select...</item>
+        <item>Report inmates condition</item>
+        <item>Report jail break plan</item>
+        <item> Report discriminations against ex convict</item>
+        <item>Report unjust and long awaiting trials</item>
+    </string-array>
+
+
+    <string-array name="immivalue">
+        <item>Select...</item>
+        <item>Report suspected  illegal immigrant</item>
+        <item>Report passport racketeering</item>
+        <item>Report delay in processing</item>
+        <item>Report personnel excesses</item>
+    </string-array>
+
+    <string-array name="live_vid_option">
+        <item>Select Type of Post..</item>
+        <item>GBV</item>
+        <item>Votetal Education</item>
+        <item>Public Awaireness</item>
+    </string-array>
+
+
+    <string-array name="nscdcvalue">
+        <item>Select...</item>
+        <item>Report Personnel Excesses</item>
+        <item>Report unsecured public assets </item>
+        <item>Report pipeline leakages and Vandalism</item>
+    </string-array>
+
+    <string-array name="discriminatevalue">
+        <item>Select...</item>
+        <item>Inaccessible Building</item>
+        <item>Domestic Abuse</item>
+        <item>SGBV</item>
+        <item>Equal oppurtunities issuing</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="statevalue">
+        <item>Abia</item>
+        <item>Adamawa</item>
+        <item>Akwa Ibom</item>
+        <item>Anambra</item>
+        <item>Bauchi</item>
+        <item>Benue</item>
+        <item>Borno</item>
+        <item>Bayelsa</item>
+        <item>Cross River</item>
+        <item>Delta</item>
+        <item>Ebonyi</item>
+        <item>Edo</item>
+        <item>Ekiti</item>
+        <item>Enugu</item>
+        <item>Federal Capital Territory</item>
+        <item>Gombe</item>
+        <item>Jigawa</item>
+        <item>Imo</item>
+        <item>Kaduna</item>
+        <item>Kebbi</item>
+        <item>Kano</item>
+        <item>Kogi</item>
+        <item>Lagos</item>
+        <item>Katsina</item>
+        <item>Kwara</item>
+        <item>Nasarawa</item>
+        <item>Niger</item>
+        <item>Ogun</item>
+        <item>Ondo</item>
+        <item>Rivers</item>
+        <item>Oyo</item>
+        <item>Osun</item>
+        <item>Sokoto</item>
+        <item>Plateau</item>
+        <item>Taraba</item>
+        <item>Yobe</item>
+        <item>Zamfara</item>
+    </string-array>
+
+</resources>

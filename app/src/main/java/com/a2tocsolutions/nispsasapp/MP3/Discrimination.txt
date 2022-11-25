@@ -1,0 +1,3 @@
+@Multipart
+    @POST(Routes.UPLOAD_MEDIA + "/pushDiscrimMediaAlerts")
+    Call<Void> uploadComment(@Part("comment") RequestBody comment, @Part MultipartBody.Part file, @Part("reporter") RequestBody reporter, @Part("lat") RequestBody lat, @Part("lng") RequestBody lng, @Part("type") RequestBody type);

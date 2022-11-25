@@ -1,0 +1,272 @@
+<resources>
+    <plurals name="num_locations_reported">
+        <item quantity="zero">No location reported</item>
+        <item quantity="one">One location reported</item>
+        <item quantity="other">%d locations reported</item>
+    </plurals>
+    <string name="app_name">JDP-EUMO</string>
+    <string name="slogan">Nigeria Internal Security And Public Safety Alert System</string>
+    <string name="home">Home</string>
+    <string name="verify">Verify</string>
+    <string name="bank">Bank</string>
+    <string name="shop">Shop</string>
+    <string name="covid">
+        1. Report people who have traveled Abroad within the last 4weeks.
+        2. Click to report Social gathering
+        3. Click to report cas who refuse to Alert NCDC
+    </string>
+    <string name="more">More</string>
+    <string name="slogan2">Nigeria Internal Security And Public Safety Alert System</string>
+    <string name="account">Account</string>
+    <string name="sign_up">Sign up</string>
+    <string name="my_profile">My Profile</string>
+    <string name="help">Help</string>
+    <string name="how_to">How to use</string>
+    <string name="agency">Partners</string>
+    <string name="contact">Contact us</string>
+    <string name="password">Password</string>
+    <string name="next">Sign up</string>
+    <string name="name">Full Name </string>
+    <string name="phone">Phone Number</string>
+    <string name="article">Articles</string>
+    <string name="article_text">ARTICLE COMES HERE</string>
+    <string name="setting">Settings</string>
+    <string name="agency_text">Click on logo to access agency portals</string>
+    <string name="check_more">Check more</string>
+    <string name="tap">Only Tap/Press these buttons in emergency situations</string>
+    <string name="emergency_1">Press power button 3 times in emergencies when you cannot talk</string>
+    <string name="warning">Warning! False alarm is prosecutable offence under the law  </string>
+    <string name="message">Upload comments here</string>
+    <string name="interior">Ministry of Interior</string>
+    <string name="error_name">Name is required</string>
+    <string name="error_phone">Phone number is required</string>
+    <string name="error_id">Identity Number is required</string>
+    <string name="comment">Comment</string>
+    <string name="upload">Upload</string>
+    <string name="uploadMedia">Upload media</string>
+    <string name="fire_extinguisher">Be aware of fake Fire Extinguisher, kindly verify by entering the Fire Extinguisher code below</string>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="title_activity_main">Barcode Reader Sample</string>
+    <string name="barcode_header">Click &quot;Read Barcode&quot; to read a barcode</string>
+    <string name="read_barcode">Read Barcode</string>
+    <string name="auto_focus">Auto Focus</string>
+    <string name="use_flash">Use Flash</string>
+    <string name="barcode_success">Barcode read successfully</string>
+    <string name="barcode_failure">No barcode captured</string>
+    <string name="barcode_error">"Error reading barcode: %1$s"</string>
+    <string name="error_fire">Fire extinguisher code is required</string>
+    <string name="ministry">Federal Ministry of Interior</string>
+    <string name="policy_agreement">By Login into this App I Agree to the TERMS and CONDITIONS. </string>
+    <string name="privacy">Privacy Policy </string>
+
+    <string name="privacy1">  SCADA built the NISPSAS app as a Free app. This SERVICE is provided by SCADA at no cost and is intended for use as is.
+    This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.
+    If you choose to use our Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.
+    The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at NISPSAS unless otherwise defined in this Privacy Policy.
+    </string>
+    <string name="privacy2">Information Collection and Use:
+    For a better experience, while using our Service, we may require you to provide us with certain personally identifiable information, including but not limited to Full Name, Phone Number, Location, Images, Other Registration forms. The information that we request will be retained by us and used as described in this privacy policy.
+    The app does use third party services that may collect information used to identify you.
+    Link to privacy policy of third-party service providers used by the app
+    •	Google Play Services
+    </string>
+    <string name="privacy3">Log Data:
+    We want to inform you that whenever you use our Service, in a case of an error in the app we collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing our Service, the time and date of your use of the Service, and other statistics.
+    </string>
+
+    <string name="privacy4">Cookies:
+    Cookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your devices internal memory.
+    This Service does not use these "cookies" explicitly. However, the app may use third party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service.
+    </string>
+    <string name="privacy5">Service Providers:
+    We may employ third-party companies and individuals due to the following reasons:
+    •	To facilitate our Service;
+    •	To provide the Service on our behalf;
+    •	To perform Service-related services; or
+    •	To assist us in analyzing how our Service is used.
+    We want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.
+    </string>
+
+    <string name="privacy6">Security:
+    We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it.
+            But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+    </string>
+
+    <string name="privacy7">Links to Other Sites:
+    This Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to review the Privacy Policy of these websites. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+    </string>
+    <string name="privacy8">Children’s Privacy:
+    These Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.
+    </string>
+
+    <string name="privacy9">Changes to This Privacy Policy:
+    We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.
+    </string>
+
+    <string name="privacy10">Contact Us:
+    If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us info@NISPSAS.com.ng. Services do not address anyone under the age of 13. We do not knowingly collect personally identifiable information from children under 13. In the case we discover that a child under 13 has provided us with personal information, we immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact us so that we will be able to do necessary actions.
+    </string>
+    <string name="transporter_verify">Avoid kidnappers, crime and robbery by taking precautions, you can verify fake drivers by entering Driver EN code or scanning the QR code</string>
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="settings">Settings</string>
+    <string name="notice">Note: If your passport is not displaying kindly Contact your company Admin to give you the appropriate link to Update your passport.  </string>
+    <string name="no_location_detected">.
+        No location detected. Make sure location is enabled on the device.
+    </string>
+    <string name="error_transport">Transporter code is required</string>
+    <string name="error_hunter">Hunter Service code is required</string>
+    <string name="error_psid">PSID Service code is required</string>
+
+    <string name="error_vigilante">Vigilante Service code is required</string>
+    <string name="unknown_location">Unknown location</string>
+    <string name="default_channel">Default channel</string>
+    <string name="about">
+Nigeria Internal Security and Public Safety Alert System (NISPSAS) is a converged mobile application platform for public safety related facilities in various Ministries, Departments and Agencies (MDAs). NISPSAS is a fulfillment of internal security and public safety mandates of Ministry of Interior(MoI) and Ministry of Communications and digital Economy  converged regulation piller of  National Digital Economy Policy and Strategy(NDEPS),  which highlights the need for a single regulatory instrument that will enable government put to effective use the splitter safety and security platform operating in silos across MDAs and operationalize  Government to Citizens (G2C) and Citizens to Government (C2G) interactive pillar of  NDEPS to create safe environment for smooth implementation of presidential order 003 and 005.
+    </string>
+    <string name="about1">
+NISPSAS   application was jointly developed by the Nigeria Police Force (NPF), Nigeria Security and Civil Defence Corps (NSCDC), Federal Fire Service (FFS), Nigeria Immigration Service (NIS), Nigeria Correctional Service (NCS) with operational collaboration of Department of State Services (DSS) and the office of the National Security Adviser (NSA)  utilizing development regulation pillar of National Digital Economy Strategy and indigenous proprietary software of 2TOC Solutions ltd
+NISPSAS platform is primarily developed to enhance inter-agency response coordination and deepen public participation in national security, while providing one-stop shop access to  response.
+    </string>
+
+    <string name="about2">
+NISPSAS is targeted at:
+
+
+
+
+
+	•	Enhancing a converged and immediate deployment of the splitter safety and security facilities operating in silos across MDAs in Nigeria.
+	•	Increase intelligence gathering and sharing to curb banditry, terrorism, other crimes, etc.
+	•	 Operationalise   sustainable intelligence  delivery from hunters, vigilantes and voluntary public  to  Nigeria Police  district intelligence desk, State police command , MOI situation room and DSS
+	•	Promote inter-agencies collaboration.
+	•	Lower the access barrier for persons with disabilities to access safety and security platforms.
+	•	To enable public report crime when they cannot talk in the face of crime threat such as bank robbery, Road armed robbery, Kidnaping etc.
+	•	Provide platform for sustainable Fire prevention  and reduce response to Fire. While controlling the use of fire extinguisher for;
+	•	Improvised Explosive Device (IED) manufacturing
+	•	Proliferation of small and light arms
+	•	Drug trafficking etc.
+	•	Provide public access to reporting looming building collapse and blocked drainage to avert flood while alerting response agencies on flood threat.
+	•	Provide platform for people with disabilities to report discrimination and threat in line with disability act and convention on the right of persons with disabilities.
+	•	To further promote the utilization of 112 National emergency call number
+	•	To provide voluntary intelligence sharing platform between the public and the Police, Airforce etc.
+	•	Provide student in higher institution of learning with platform to control cultism by reporting incidences to curb campus cultism and violence.
+	•	Control fake news by verifying publisher ID as Nigeria Union of Journalist (NUJ) member
+	•	Protect passengers against road crimes such as “one-chance’’, kidnapping etc.
+	•	Protect  foreigners, visitors, tourist as well as investors from falling victim of fake airport  taxi and other road transport related crime
+	•	Promote the campaign against rape and other gender based violence.
+	•	Control crime, violence and other vices associated with fake vigilante, Hunters, Gate man etc.
+	•	Measure the degree of responsiveness of agencies to public distress
+	•	Measure the level of agencies preparedness to national emergencies
+
+    </string>
+
+    <string name="about3">
+iii. Verify Unidentified Artisan and Domestic private drivers who commit offences and crime such as conspiracy and robbery of employer, theft of vehicle, building material on site, girl child assault, rape and tax invasion.
+
+    </string>
+
+    <string name="about4">
+iv. Verify Fake Drivers License use by unqualified person to secure critical job such as school bus and commercial passenger transportation driver, which in turn causes lose of lives and properties in accident
+
+    </string>
+    v. Fake Fire Extinguisher which fails at the point of usage and its cylinder being use for drug
+    trafficking, bomb manufacturing etc.
+
+    <string name="about5">
+vi. Verify fake private security guards who impersonate to commit crime.
+
+    </string>
+    <string name="about6">
+vii. Verify accredited election observer and personnel.
+    </string>
+    <string name="about7">
+viii. Direct Bank online webpage page to control public failing  victim of bank fraud through webpage cloning to commit bank cyber crime offences.
+    </string>
+
+    <string name="fire_text">Press or Tap this button once to call Federal, State and Local Fire Service Station nearest to your location in fire emergency relief</string>
+    <string name="medical_text">Press or Tap this button once to call the hospital and ambulance nearest to your location for medical emergencies and relief</string>
+    <string name="accident_text">Press or Tap this button once in accident emergencies to call all security and medical first responders to your location.</string>
+    <string name="crime_text">Press or Tap this button once to call Federal, State and Local Fire Service Station nearest to your location in fire emergency relief</string>
+    <string name="emergency_text">In emergencies where you cannot talk and may need to call for help discreetly press the power button thrice</string>
+    <string name="ministry_interior">FEDERAL MINISTRY OF INTERIOR</string>
+    <string name="ministry_transport">FEDERAL MINISTRY OF TRANSPORTATION</string>
+    <string name="ministry_agriculture">FEDERAL MINISTRY OF AGRICULTURE</string>
+    <string name="nigeria_police">THE NIGERIAN POLICE</string>
+    <string name="civil_defense">THE NIGERIAN SECURITY AND CIVIL DEFENSE CORPS</string>
+    <string name="fire_service">THE FEDERAL FIRE SERVICE</string>
+    <string name="immigration_service">THE NIGERIAN IMMIGRATION SERVICE</string>
+    <string name="prison_service">THE NIGERIAN PRISON SERVICE</string>
+    <string name="road_safety">THE NIGERIAN ROAD SAFETY CORPS</string>
+    <string name="email">Email</string>
+    <string name="website">Website</string>
+    <string name="date">Date</string>
+    <string name="error_surname">Surname is required</string>
+    <string name="error_firstname">Firstname is required</string>
+    <string name="error_sex">Male or Female is required</string>
+    <string name="error_phoneno">Phone Number is required</string>
+    <string name="error_plateno">Plate Number type is required</string>
+    <string name="error_encode">EN-Code is required</string>
+    <string name="error_productinfo">Product Information is required</string>
+    <string name="error_cugname">CUG Name is required</string>
+    <string name="error_sesaphid">SAT-C ID is required</string>
+    <string name="error_departurepoint">Departure point is required</string>
+    <string name="error_destinationpoint">Destination point is required</string>
+    <string name="terms">Terms and Conditions  </string>
+
+    <string name="terms1"> By downloading or using the app, these terms will automatically apply to you – you should make sure therefore that you read them carefully before using the app. You’re not allowed to copy, or modify the app,
+        any part of the app, or our trademarks in any way. You’re not allowed to attempt to extract the source code of the app, and you also shouldn’t try to translate the app into other languages, or make derivative versions. The app itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to SCADA.
+    </string>
+
+    <string name="terms2">SCADA is committed to ensuring that the app is as useful and efficient as possible. For that reason, we reserve the right to make changes to the app or to charge for its services, at any time and for any reason. We will never charge you for the app or its services without making it very clear to you exactly what you’re paying for.
+    </string>
+    <string name="terms3">The NISPSAS app stores and processes personal data that you have provided to us, in order to provide our Service. It’s your responsibility to keep your phone and access to the app secure. We therefore recommend that you do not jailbreak or root your phone, which is the process of removing software restrictions and limitations imposed by the official operating system of your device.
+        It could make your phone vulnerable to malware/viruses/malicious programs, compromise your phone’s security features and it could mean that the NISPSAS app won’t work properly or at all.
+    </string>
+    <string name="terms4">You should be aware that there are certain things that SCADA will not take responsibility for. Certain functions of the app will require the app to have an active internet connection. The connection can be Wi-Fi, or provided by your mobile network provider,
+        but SCADA cannot take responsibility for the app not working at full functionality if you don’t have access to WI-FI or Internet Connection, and you don’t have any of your data allowance left.
+    </string>
+
+    <string name="terms5">If you’re using the app outside of an area with Wi-Fi, you should remember that your terms of the agreement with your mobile network provider will still apply. As a result, you may be charged by your mobile provider for the cost of data for the duration of the connection while accessing the app, or other third-party charges.
+        In using the app, you’re accepting responsibility for any such charges, including roaming data charges if you use the app outside of your home territory (i.e. region or country) without turning off data roaming. If you are not the bill payer for the device on which you’re using the app, please be aware that we assume that you have received permission from the bill payer for using the app.
+        Along the same lines, SCADA cannot always take responsibility for the way you use the app i.e. You need to make sure that your device stays charged – if it runs out of battery and you can’t turn it on to avail the Service, SCADA cannot accept responsibility.
+    </string>
+
+    <string name="terms6">With respect to SCADA’s responsibility for your use of the app, when you’re using the app, it’s important to bear in mind that although we endeavor to ensure that it is updated and correct at all times,
+        we do rely on third parties to provide information to us so that we can make it available to you. SCADA accepts no liability for any loss, direct or indirect, you experience as a result of relying wholly on this functionality of the app.
+    </string>
+
+    <string name="terms7">At some point, we may wish to update the app. The app is currently available on Android – the requirements for system(and for any additional systems we decide to extend the availability of the app to) may change, and you’ll need to download the updates if you want to keep using the app.
+        SCADA does not promise that it will always update the app so that it is relevant to you and/or works with the Android version that you have installed on your device. However, you promise to always accept updates to the application when offered to you, we may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination to you.
+        Unless we tell you otherwise, upon any termination, (a) the rights and licenses granted to you in these terms will end; (b) you must stop using the app, and (if needed) delete it from your device.
+    </string>
+
+    <string name="terms8">Changes to This Terms and Conditions </string>
+    <string name="terms9">We may update our Terms and Conditions from time to time. Thus, you are advised to review this page periodically for any changes.
+        We will notify you of any changes by posting the new Terms and Conditions on this page. These changes are effective immediately after they are posted on this page.
+</string>
+
+    <string name="terms10">Contact Us:
+    If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us Info@NISPSAS.com.ng
+    </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="msg_token_fmt" />
+
+
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_show" />
+    <string name="action_hide" />
+
+    <string name="action_anchor_enable">Enable Anchor Point</string>
+    <string name="action_anchor_disable">Disable Anchor Point</string>
+</resources>
+

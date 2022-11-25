@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_margin">
+
+
+    <TextView
+        android:id="@+id/fire_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Kindly Verify NDIC Code by Scanning or Enter the Code"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fire_layout"
+        style="@style/Widget.Cafms.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fire_text"
+        android:layout_marginTop="30dp"
+        android:hint="NDIC Code"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="4.0dip"
+        android:paddingTop="5.0dip"
+        android:paddingRight="4.0dip"
+        android:paddingBottom="1.0dip"
+        android:orientation="horizontal"
+        android:layout_below="@+id/fire_layout">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/read_barcode"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/round_button_red"
+            android:textColor="@color/white"
+            android:text="Scan"
+            android:layout_weight="1.0"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_button"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text="Submit"
+            android:layout_weight="1.0"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/progress_bar"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorAccent"
+            tools:text="This is example"/>
+    </RelativeLayout>
+
+</RelativeLayout>
