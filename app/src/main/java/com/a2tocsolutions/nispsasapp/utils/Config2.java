@@ -2,8 +2,8 @@ package com.a2tocsolutions.nispsasapp.utils;
 
 public class Config2 {
     //Data URL
-    //public static final String DATA_URL = "https://nispsas.com.ng/paginationtest/shortvids.php?page=";
-    public static final String DATA_URL = "http://nispsas.com.ng/paginationtest/livevids.php?page=";
+    public static final String DATA_URL = "https://nispsas.com.ng/paginationtest/shortvids.php?page=";
+    //public static final String DATA_URL = "http://nispsas.com.ng/paginationtest/livevids.php?page=";
 
     //JSON TAGS
     public static final String TAG_IMAGE_URL = "image";
