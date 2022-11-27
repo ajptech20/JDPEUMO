@@ -23,7 +23,7 @@ public class All_live_video_posts extends Activity {
         ImageView live_stream_starter = findViewById(R.id.go_live_stream);
         ImageView image_uploader_starter = findViewById(R.id.post_new_image);
         ImageView video_uploader_starter = findViewById(R.id.post_new_short);
-        ImageView test_videopull = findViewById(R.id.video_pull_test);
+        //ImageView test_videopull = findViewById(R.id.video_pull_test);
         slideView = findViewById(R.id.slideView);
         liveVid = findViewById(R.id.new_stream);
         dim = findViewById(R.id.dim);
@@ -99,7 +99,7 @@ public class All_live_video_posts extends Activity {
             }
         });
 
-        test_videopull.setOnClickListener(new View.OnClickListener() {
+        /*test_videopull.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(All_live_video_posts.this, Video_post_player.class);
@@ -108,7 +108,7 @@ public class All_live_video_posts extends Activity {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                 finish();
             }
-        });
+        });*/
 
     }
 }

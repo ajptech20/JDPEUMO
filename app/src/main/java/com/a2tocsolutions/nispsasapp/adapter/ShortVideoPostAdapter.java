@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.a2tocsolutions.nispsasapp.R;
 import com.a2tocsolutions.nispsasapp.Video_post_player;
-import com.a2tocsolutions.nispsasapp.database.ImgPost;
+import com.a2tocsolutions.nispsasapp.database.ShortPost;
 import com.a2tocsolutions.nispsasapp.networking.ImgPostRequest;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -22,19 +22,15 @@ import com.android.volley.toolbox.NetworkImageView;
 import java.util.List;
 
 public class ShortVideoPostAdapter extends RecyclerView.Adapter<ShortVideoPostAdapter.ViewHolder> {
-
     //Imageloader to load image
     private ImageLoader imageLoader;
     private Context context;
 
-    EditText send_text;
-    ImageView send_button;
-
     //List to store all superheroes
-    List<ImgPost> superHeroes;
+    List<ShortPost> superHeroes;
 
     //Constructor of this class
-    public ShortVideoPostAdapter(List<ImgPost> superHeroes, Context context){
+    public ShortVideoPostAdapter(List<ShortPost> superHeroes, Context context){
         super();
         //Getting all superheroes
         this.superHeroes = superHeroes;
@@ -55,7 +51,7 @@ public class ShortVideoPostAdapter extends RecyclerView.Adapter<ShortVideoPostAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         //Getting the particular item from the list
-        ImgPost superHero =  superHeroes.get(position);
+        ShortPost superHero =  superHeroes.get(position);
 
         //Loading image from url
         imageLoader = ImgPostRequest.getInstance(context).getImageLoader();
@@ -65,11 +61,11 @@ public class ShortVideoPostAdapter extends RecyclerView.Adapter<ShortVideoPostAd
         //Showing data on the views
         holder.imageView.setImageUrl(superHero.getImageUrl(), imageLoader);
         holder.textViewName.setText(superHero.getName());
-        //holder.textViewId.setText(superHero.getId());
+        holder.textViewRepId.setText(superHero.getId());
         holder.textViewDescription.setText(superHero.getComment());
         //holder.textViewimg.setText(superHero.getImageUrl());
 
-        holder.textViewRepId.setText(superHero.getRepId());
+        //holder.textViewRepId.setText(superHero.getRepId());
         holder.textViewState.setText(superHero.getState());
         //holder.textViewStatus.setText(superHero.getStatus());
         holder.textViewRType.setText(superHero.getRepType());
@@ -88,8 +84,11 @@ public class ShortVideoPostAdapter extends RecyclerView.Adapter<ShortVideoPostAd
         return superHeroes.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        //private final ImageView send_button;
         //Views
+        public ImageView send_button;
+        public TextView send_text;
         public NetworkImageView imageView;
         public TextView textViewName;
         public TextView textViewId;
@@ -110,6 +109,8 @@ public class ShortVideoPostAdapter extends RecyclerView.Adapter<ShortVideoPostAd
         //Initializing Views
         public ViewHolder(View itemView) {
             super(itemView);
+            send_button = (ImageView) itemView.findViewById(R.id.send_button_id);
+            itemView.setOnClickListener(this);
             imageView = (NetworkImageView) itemView.findViewById(R.id.reporter_image);
 
             imageViewPreview = (NetworkImageView) itemView.findViewById(R.id.post_image);
@@ -130,12 +131,22 @@ public class ShortVideoPostAdapter extends RecyclerView.Adapter<ShortVideoPostAd
 
             textViewDescription = (TextView) itemView.findViewById(R.id.post_description);
             send_text = (EditText) itemView.findViewById(R.id.send_text_id);
-            send_button = (ImageView) itemView.findViewById(R.id.send_button_id);
 
-            send_button.setOnClickListener(this::onClick);
         }
 
-        private void onClick(View v) {
+        @Override
+        public void onClick(View view) {
+            send_button.setOnClickListener(v -> {
+                String str = send_text.getText().toString();
+                Intent intent = new Intent(context.getApplicationContext(), Video_post_player.class);
+                intent.putExtra("message_key", str);
+                view.getContext().startActivity(intent);
+            });
+        }
+
+
+
+        /*private void onClick(View v) {
             // get the value which input by user in EditText and convert it to string
             String str = send_text.getText().toString();
             // Create the Intent object of this class Context() to Second_activity class
@@ -148,6 +159,7 @@ public class ShortVideoPostAdapter extends RecyclerView.Adapter<ShortVideoPostAd
         }
 
         private void startActivity(Intent intent) {
-        }
+        }*/
     }
+
 }

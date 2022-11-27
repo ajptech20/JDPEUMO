@@ -46,8 +46,8 @@
             android:id="@+id/PlayerContentView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginTop="100dp"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
             android:layout_marginStart="100dp">
         </RelativeLayout>
         <RelativeLayout
@@ -68,6 +68,7 @@
                 android:src="@drawable/ic_baseline_cast_24" />
 
             <TextView
+                android:id="@+id/rep_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/calibri"
@@ -95,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="115dp"
             android:layout_marginStart="0dp">
 
             <TextView
@@ -111,7 +112,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/report_area"
+                android:id="@+id/vidarea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/calibri"
@@ -121,7 +122,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
             <TextView
-                android:id="@+id/rep_type"
+                android:id="@+id/report_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/calibri"
@@ -137,7 +138,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
             android:fontFamily="@font/calibri"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="10dp"
             android:text=""
             android:layout_gravity="bottom"
             android:layout_marginStart="10dp"
@@ -161,6 +162,7 @@
                 android:src="@drawable/ic_clear_black_24dp" />
 
             <TextView
+                android:id="@+id/post_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/calibri"
@@ -206,8 +208,8 @@
     <TextView android:id="@+id/PlayerStatusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
         android:layout_margin="10dp"
         android:textSize="20sp" />
 
@@ -296,7 +298,7 @@
             android:src="@drawable/ic_baseline_subscriptions_24"
             />
         <ImageView
-            android:id="@+id/video_pull_test"
+            android:id="@+id/view_live_posts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/action_settings"
@@ -313,5 +315,114 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_control_point_black_24dp"
             />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dim"
+        android:alpha="0"
+        android:fitsSystemWindows="true"
+        android:background="@color/semi_transparent"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/slideView"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Type of Post"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:textColor="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="125"
+            android:background="#FFFFFF"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/post_new_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_weight="40"
+                android:contentDescription="@string/action_settings"
+                android:src="@drawable/img_upload" />
+
+            <ImageView
+                android:id="@+id/post_new_short"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/action_settings"
+                android:layout_weight="40"
+                android:layout_gravity="center"
+                android:src="@drawable/short_video_upload"
+                />
+
+            <ImageView
+                android:id="@+id/go_live_stream"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/action_settings"
+                android:layout_weight="40"
+                android:layout_gravity="center"
+                android:src="@drawable/live_vid_stream"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/new_stream"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/white">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="125"
+            android:background="#FFFFFF"
+            android:paddingTop="50dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
+
+            <com.bambuser.broadcaster.SurfaceViewWithAutoAR
+                android:id="@+id/NEMAVIDSurfaceView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/NEMAVIDButton"
+                android:layout_width="65dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="173dp"
+                android:layout_marginTop="603dp"
+                android:layout_marginEnd="173dp"
+                android:layout_marginBottom="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/record" />
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

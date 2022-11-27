@@ -3,6 +3,7 @@ package com.a2tocsolutions.nispsasapp;
 import static com.a2tocsolutions.nispsasapp.utils.Constants.VERIFY_BASE_URL;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import com.bambuser.broadcaster.LatencyMeasurement;
 import com.bambuser.broadcaster.PlayerState;
 import com.bambuser.broadcaster.SurfaceViewWithAutoAR;
 import com.bumptech.glide.Glide;
+import com.mancj.slideup.SlideUp;
 
 import java.io.IOException;
 
@@ -43,8 +45,15 @@ public class Video_post_player extends Activity {
     private static final String APPLICATION_ID = "mOQq8sbExROCWxFjbkGoaA";
     private static final String API_KEY = "FKmAFDPiQFccMBe9Pp8d5Q";
 
+    private SlideUp slideUp;
+    private SlideUp slideUpnewLive;
+    private View dim;
+    private View slideView;
+    private View liveVid;
+
     //private static final String resourceuri = "https://cdn.bambuser.net/broadcasts/14905708-614c-4594-82b5-204480d79088?da_signature_method=HMAC-SHA256&da_id=9e1b1e83-657d-7c83-b8e7-0b782ac9543a&da_timestamp=1668467523&da_static=1&da_ttl=0&da_signature=803fc706e07267c94297983bc5ae2728d7b415ff1efc9b72f6a5580df814d442";
     private static final String live_vid = "amlive";
+    //TextView receiver_msg;
 
     @BindView(R.id.vidprogression)
     RelativeLayout progress;
@@ -53,19 +62,147 @@ public class Video_post_player extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_player_post);
+        ImageView live_stream_starter = findViewById(R.id.go_live_stream);
+        ImageView image_uploader_starter = findViewById(R.id.post_new_image);
+        ImageView video_uploader_starter = findViewById(R.id.post_new_short);
+        slideView = findViewById(R.id.slideView);
+        liveVid = findViewById(R.id.new_stream);
+        dim = findViewById(R.id.dim);
+        slideUp = new SlideUp(slideView);
+        slideUpnewLive = new SlideUp(liveVid);
+        slideUp.hideImmediately();
+        slideUpnewLive.hideImmediately();
+
         mDefaultDisplay = getWindowManager().getDefaultDisplay();
         mPlayerContentView = findViewById(R.id.PlayerContentView2);
         mPlayerStatusTextView = findViewById(R.id.PlayerStatusTextView);
         mBroadcastLiveTextView = findViewById(R.id.BroadcastLiveTextView);
         mBroadcastLatencyTextView = findViewById(R.id.BroadcastLatencyTextView);
         mVideoSurfaceView = findViewById(R.id.VideoSurfaceView);
+        //receiver_msg = findViewById(R.id.vidarea);
         //mVolumeSeekBar = findViewById(R.id.PlayerVolumeSeekBar);
         //mVolumeSeekBar.setOnSeekBarChangeListener(mVolumeSeekBarListener);
         mViewerStatusTextView = findViewById(R.id.ViewerStatusTextView);
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         mOkHttpClient = builder.build();
-        String callid = (live_vid);
+        Intent intent = getIntent();
+        String str = intent.getStringExtra("message_key");
+        //receiver_msg.setText(str);
+        String callid = (str);
+        //String callid = (live_vid);
         verifyPsid(callid);
+        //Toast.makeText(Video_post_player.this, callid, Toast.LENGTH_SHORT).show();
+
+        ImageView go_home = findViewById(R.id.app_home1);
+        go_home.setOnClickListener(new View.OnClickListener()  {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Video_post_player.this, Activity_home.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                finish();
+            }
+        });
+
+        ImageView New_postbam = findViewById(R.id.new_post);
+        New_postbam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                slideUp.animateIn();
+            }
+        });
+
+        slideUpnewLive.setSlideListener(new SlideUp.SlideListener() {
+            @Override
+            public void onSlideDown(float v) {
+                dim.setAlpha(1 - (v / 100));
+            }
+
+            @Override
+            public void onVisibilityChanged(int i) {
+                if (i == View.GONE) {
+                    //fab.show();
+                }
+
+            }
+        });
+
+        live_stream_starter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Video_post_player.this, Go_New_live.class);
+                //Intent intent = new Intent(getApplicationContext(), Go_New_live.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+
+        image_uploader_starter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Video_post_player.this, picture_uploader.class);
+                //Intent intent = new Intent(getApplicationContext(), picture_uploader.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+
+        video_uploader_starter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Video_post_player.this, shortvideo_uploader.class);
+                //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+
+        ImageView view_live_videos = findViewById(R.id.view_live_posts);
+        view_live_videos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    intent = new Intent(Video_post_player.this, LiveVideoActivity.class);
+                }
+                //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+
+        ImageView view_image_post = findViewById(R.id.image_posts);
+        view_image_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    intent = new Intent(Video_post_player.this, ImagePostsActivity.class);
+                }
+                //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+        ImageView short_video_post = findViewById(R.id.short_videos);
+        short_video_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    intent = new Intent(Video_post_player.this, ShortVideoActivity.class);
+                }
+                //Intent intent = new Intent(getApplicationContext(), picture_uploader.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
     }
 
     // validation on all fields
@@ -90,6 +227,7 @@ public class Video_post_player extends Activity {
                                 String sgname = verifyResponse.getSGname();
                                 String sgphone = verifyResponse.getSGphone();
                                 String sgstate = verifyResponse.getSGstate();
+                                String date = verifyResponse.getSGdate();
 
                                 String sgreptype = verifyResponse.getSgreptype();
                                 String sgreparea = verifyResponse.getSgreparea();
@@ -99,7 +237,7 @@ public class Video_post_player extends Activity {
                                 String videosrc = verifyResponse.getSGvideourl();
                                 String imageUrl = verifyResponse.getImage();
                                 //progress.setVisibility(View.GONE);
-                                showDialog(sgresponse, sgname, sgphone, sgstate, imageUrl, videosrc, sgreptype, sgreparea, sgcomment, sgstatuse);
+                                showDialog(sgresponse, sgname, sgphone, sgstate, imageUrl, videosrc, sgreptype, sgreparea, sgcomment, sgstatuse, date);
                                 String resourceuri = (videosrc);
                                 //Toast.makeText(Video_post_player.this, resourceuri, Toast.LENGTH_SHORT).show();
                                 getLatestResourceUri(resourceuri);
@@ -160,19 +298,23 @@ public class Video_post_player extends Activity {
         }
     }
 
-    private void showDialog(String sgresponse, String sgname, String sgphone, String sgstate, String imageUrl, String videosrc, String sgreptype, String sgreparea, String sgcomment, String sgstatuse) {
+    private void showDialog(String sgresponse, String sgname, String sgphone, String sgstate, String imageUrl, String videosrc, String sgreptype, String sgreparea, String sgcomment, String sgstatuse, String date) {
         //TextView verifiedResponse = view.findViewById(R.id.verifiedResponse);
         //verifiedResponse.setText(sgresponse);
         TextView nametext = findViewById(R.id.poster_name);
         nametext.setText(sgname);
         TextView statustext = findViewById(R.id.brstatus);
         statustext.setText(sgstatuse);
+        TextView psttype = findViewById(R.id.post_type);
+        psttype.setText(sgstatuse);
         TextView statetext = findViewById(R.id.rep_state);
         statetext.setText(sgstate);
-        TextView Areaofrep = findViewById(R.id.report_area);
+        TextView Areaofrep = findViewById(R.id.vidarea);
         Areaofrep.setText(sgreparea);
         TextView ReportType = findViewById(R.id.rep_type);
         ReportType.setText(sgreptype);
+        TextView RepDate = findViewById(R.id.report_date);
+        RepDate.setText(date);
         TextView ReporComment = findViewById(R.id.rep_comment);
         ReporComment.setText(sgcomment);
         ImageView imageView = (ImageView) findViewById(R.id.reporter_image);
@@ -185,9 +327,9 @@ public class Video_post_player extends Activity {
     protected void onResume() {
         super.onResume();
         mVideoSurfaceView = findViewById(R.id.VideoSurfaceView);
-        mPlayerStatusTextView.setText("Loading latest broadcast");
-        String callid = (live_vid);
-        verifyPsid(callid);
+        mPlayerStatusTextView.setText("Loading broadcast...");
+        //String callid = (live_vid);
+        //verifyPsid(callid);
     }
 
     @Override
@@ -244,7 +386,7 @@ public class Video_post_player extends Activity {
     private void initPlayer(String resourceUri) {
         if (resourceUri == null) {
             if (mPlayerStatusTextView != null)
-                mPlayerStatusTextView.setText("Could not get info about latest broadcast");
+                mPlayerStatusTextView.setText("Could not get info about broadcast");
             return;
         }
         if (mVideoSurfaceView == null) {

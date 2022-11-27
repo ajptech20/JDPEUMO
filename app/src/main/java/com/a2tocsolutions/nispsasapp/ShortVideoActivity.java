@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.a2tocsolutions.nispsasapp.adapter.ShortVideoPostAdapter;
-import com.a2tocsolutions.nispsasapp.database.ImgPost;
+import com.a2tocsolutions.nispsasapp.database.ShortPost;
 import com.a2tocsolutions.nispsasapp.utils.Config2;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,7 +34,7 @@ import java.util.List;
 public class ShortVideoActivity extends AppCompatActivity implements RecyclerView.OnScrollChangeListener {
 
     //Creating a List of superheroes
-    private List<ImgPost> listSuperHeroes;
+    private List<ShortPost> listSuperHeroes;
 
     //Creating Views
     private RecyclerView recyclerView;
@@ -231,7 +231,7 @@ public class ShortVideoActivity extends AppCompatActivity implements RecyclerVie
     private void parseData(JSONArray array) {
         for (int i = 0; i < array.length(); i++) {
             //Creating the superhero object
-            ImgPost superHero = new ImgPost();
+            ShortPost superHero = new ShortPost();
             JSONObject json = null;
             try {
                 //Getting json

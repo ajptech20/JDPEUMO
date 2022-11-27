@@ -184,5 +184,5 @@ public interface Service {
 
     @FormUrlEncoded
     @POST(Routes.Fetch_Live_Videos)
-    Call<VideoReportDetails> getlivevideos(@Field("vidtype") String callid);
+    Call<VideoReportDetails> getlivevideos(@Field("id") String callid);
 }

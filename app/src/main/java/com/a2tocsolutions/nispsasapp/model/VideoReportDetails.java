@@ -45,6 +45,10 @@ public class VideoReportDetails implements Parcelable
     @Expose
     private String sgreparea;
 
+    @SerializedName("Date")
+    @Expose
+    private String date;
+
     @SerializedName("Image")
     @Expose
     private String image;
@@ -77,6 +81,7 @@ public class VideoReportDetails implements Parcelable
         this.sgstatuse = ((String) in.readValue((String.class.getClassLoader())));
         this.sgreptype = ((String) in.readValue((String.class.getClassLoader())));
         this.sgreparea = ((String) in.readValue((String.class.getClassLoader())));
+        this.date = ((String) in.readValue((String.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));
     }
 
@@ -90,15 +95,16 @@ public class VideoReportDetails implements Parcelable
         this.response = response;
     }
 
-    public String getSGname() {
-        return sgname;
-    }
+    public String getSGname() {return sgname;}
     public void setSGname(String sgname) {
         this.sgname = sgname;
     }
 
     public String getSGphone() {return sgphone;}
     public void setSGphone(String sgphone) {this.sgphone = sgphone;}
+
+    public String getSGdate() {return date;}
+    public void setSGdate(String date) {this.date = date;}
 
     public String getSGcomment() {return sgcomment;}
     public void setSgcomment(String sgcomment) {this.sgcomment = sgcomment;}

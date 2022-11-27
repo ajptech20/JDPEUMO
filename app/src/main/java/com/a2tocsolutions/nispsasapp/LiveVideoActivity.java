@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.a2tocsolutions.nispsasapp.adapter.LiveVideoPostAdapter;
-import com.a2tocsolutions.nispsasapp.database.ImgPost;
+import com.a2tocsolutions.nispsasapp.adapter.ShortVideoPostAdapter;
+import com.a2tocsolutions.nispsasapp.database.ShortPost;
 import com.a2tocsolutions.nispsasapp.utils.Config3;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,12 +34,13 @@ import java.util.List;
 public class LiveVideoActivity extends AppCompatActivity implements RecyclerView.OnScrollChangeListener {
 
     //Creating a List of superheroes
-    private List<ImgPost> listSuperHeroes;
+    private List<ShortPost> listSuperHeroes;
 
     //Creating Views
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+
 
     private SlideUp slideUp;
     private SlideUp slideUpnewLive;
@@ -86,7 +87,7 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
         }
 
         //initializing our adapter
-        adapter = new LiveVideoPostAdapter(listSuperHeroes, this);
+        adapter = new ShortVideoPostAdapter(listSuperHeroes, this);
 
         //Adding adapter to recyclerview
         recyclerView.setAdapter(adapter);
@@ -157,19 +158,6 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
                 finish();
             }
         });
-
-        ImageView test_videopull = findViewById(R.id.view_live_posts);
-        test_videopull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LiveVideoActivity.this, Video_post_player.class);
-                //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
         ImageView view_image_post = findViewById(R.id.image_posts);
         view_image_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +169,7 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
                 finish();
             }
         });
+
         ImageView short_video_post = findViewById(R.id.short_videos);
         short_video_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,7 +232,7 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
     private void parseData(JSONArray array) {
         for (int i = 0; i < array.length(); i++) {
             //Creating the superhero object
-            ImgPost superHero = new ImgPost();
+            ShortPost superHero = new ShortPost();
             JSONObject json = null;
             try {
                 //Getting json
