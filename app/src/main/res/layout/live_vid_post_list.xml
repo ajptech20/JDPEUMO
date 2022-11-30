@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -96,8 +96,19 @@
                     android:layout_marginStart="75dp"
                     android:layout_alignParentLeft="true"
                     android:src="@drawable/ic_action_share" />
+                <EditText
+                    android:id="@+id/send_text_id"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="Input"
+                    android:textSize="25dp"
+                    android:visibility="gone"
+                    android:textStyle="bold" />
 
                 <ImageView
+                    android:id="@+id/send_button_id"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
@@ -129,6 +140,7 @@
                     android:text="Likes"
                     android:textColor="#090909"
                     android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/post_comments"
                     android:layout_width="wrap_content"

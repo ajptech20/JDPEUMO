@@ -25,6 +25,8 @@ public interface Routes {
     //String VERIFY_PSID = "verifyPsid";
     String VERIFY_PSID = "recievcall";
     String Fetch_Live_Videos = "getlivevideos";
+    String Fetch_Hot_zones = "gethotzoes";
+    String Fetch_Use_Res = "useresources";
     String VERIFY_HUNTER = "verifyHunter";
     String FACE_VERIFY ="http://nispsas.com.ng/NISPSAS/Registration";
 

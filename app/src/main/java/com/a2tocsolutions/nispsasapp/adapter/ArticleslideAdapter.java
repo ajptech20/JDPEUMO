@@ -1,206 +1,109 @@
 package com.a2tocsolutions.nispsasapp.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.a2tocsolutions.nispsasapp.R;
+import com.a2tocsolutions.nispsasapp.database.ArticleEntry;
 import com.bumptech.glide.Glide;
-import com.smarteist.autoimageslider.SliderViewAdapter;
 
-public class ArticleslideAdapter extends SliderViewAdapter<ArticleslideAdapter.SliderAdapterVH> {
+import java.util.List;
 
-    private Context context;
-    private int mCount;
+public class ArticleslideAdapter extends RecyclerView.Adapter<ArticleslideAdapter.ArticleViewHolder> {
+
+    // Member variable to handle item clicks
+    private List<ArticleEntry> mArticleEntries;
+    private Context mContext;
 
     public ArticleslideAdapter(Context context) {
-        this.context = context;
+        mContext = context;
     }
 
-
-    public void setCount(int count) {
-        this.mCount = count;
-    }
     @NonNull
     @Override
-    public SliderAdapterVH onCreateViewHolder(@NonNull ViewGroup parent) {
-        View inflate = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.slide, null);
+    public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext)
+                .inflate(R.layout.article_items, parent, false);
 
-        return new SliderAdapterVH(inflate);
+        return new ArticleViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SliderAdapterVH viewHolder, int position) {
-
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
-
-        switch (position) {
-
-            case 0:
-
-                viewHolder.textViewDescription.setText("This is slider item " + position);
-
-                viewHolder.textViewDescription.setTextSize(16);
-
-                viewHolder.textViewDescription.setTextColor(Color.GREEN);
-
-                viewHolder.imageGifContainer.setVisibility(View.GONE);
-
-                Glide.with(viewHolder.itemView)
-
-                        .load("https://images.pexels.com/photos/218983/pexels-photo-218983.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
-
-                        .fitCenter()
-
-                        .into(viewHolder.imageViewBackground);
-
-                break;
-
-            case 2:
-
-                viewHolder.textViewDescription.setText("This is slider item " + position);
-
-                viewHolder.textViewDescription.setTextSize(16);
-
-                viewHolder.textViewDescription.setTextColor(Color.GREEN);
-
-                viewHolder.imageGifContainer.setVisibility(View.GONE);
-
-                Glide.with(viewHolder.itemView)
-
-                        .load("https://images.pexels.com/photos/747964/pexels-photo-747964.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260")
-
-                        .fitCenter()
-
-                        .into(viewHolder.imageViewBackground);
-
-                break;
-
-            case 4:
-
-                viewHolder.textViewDescription.setText("This is slider item " + position);
-
-                viewHolder.textViewDescription.setTextSize(16);
-
-                viewHolder.textViewDescription.setTextColor(Color.GREEN);
-
-                viewHolder.imageGifContainer.setVisibility(View.GONE);
-
-                Glide.with(viewHolder.itemView)
-
-                        .load("https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
-
-                        .fitCenter()
-
-                        .into(viewHolder.imageViewBackground);
-
-                break;
-            case 5:
-
-                viewHolder.textViewDescription.setText("This is slider item " + position);
-
-                viewHolder.textViewDescription.setTextSize(16);
-
-                viewHolder.textViewDescription.setTextColor(Color.GREEN);
-
-                viewHolder.imageGifContainer.setVisibility(View.GONE);
-
-                Glide.with(viewHolder.itemView)
-
-                        .load(R.drawable.lagos)
-
-                        .fitCenter()
-
-                        .into(viewHolder.imageViewBackground);
-
-
-                break;
-
-            default:
-
-                viewHolder.textViewDescription.setTextSize(29);
-
-                viewHolder.textViewDescription.setTextColor(Color.GREEN);
-
-                viewHolder.textViewDescription.setText("Ohhhh! look at this!");
-
-                viewHolder.imageGifContainer.setVisibility(View.VISIBLE);
-
-                Glide.with(viewHolder.itemView)
-
-                        .load(R.drawable.crossriver)
-
-                        .fitCenter()
-
-                        .into(viewHolder.imageViewBackground);
-
-                Glide.with(viewHolder.itemView)
-
-                        .asGif()
-
-                        .load(R.drawable.coat_of_arm)
-
-                        .into(viewHolder.imageGifContainer);
-
-                break;
-
-
-
-        }
-
-
-
+    public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
+        String image_url = "https://nispsas.com.ng/NISPSAS/Postpics/";
+        // Determine the values of the wanted data
+        ArticleEntry articleEntry = mArticleEntries.get(position);
+        String name = articleEntry.getPosttitle();
+        String images = articleEntry.getPicname();
+
+        //Set values
+        holder.articleSnippet.setText(name);
+        Glide.with(mContext)
+                .load(image_url + images)
+                .into(holder.image);
     }
 
     /**
      * Returns the number of items to display.
      */
     @Override
-    public int getCount() {
-       return mCount;
+    public int getItemCount() {
+        if (mArticleEntries == null) {
+            return 0;
+        }
+        return mArticleEntries.size();
+    }
+
+    public List<ArticleEntry> getClassifier() {
+        return mArticleEntries;
     }
 
 
+    public void setTasks(List<ArticleEntry> articleEntries) {
+        mArticleEntries = articleEntries;
+        notifyDataSetChanged();
+    }
 
     // Inner class for creating ViewHolders
-    public class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
+    public class ArticleViewHolder extends RecyclerView.ViewHolder {
 
-        public View itemView;
-        public ImageView imageViewBackground;
-        public ImageView imageGifContainer;
-        TextView textViewDescription;
-        public SliderAdapterVH(View itemView) {
+        TextView articleSnippet;
+        ImageView image;
+
+        public ArticleViewHolder(View itemView) {
             super(itemView);
-            imageViewBackground = itemView.findViewById(R.id.iv_auto_image_slider);
 
-            imageGifContainer = itemView.findViewById(R.id.iv_gif_container);
+            articleSnippet = itemView.findViewById(R.id.articleSnippet);
+            image = itemView.findViewById(R.id.image);
 
-            textViewDescription = itemView.findViewById(R.id.tv_auto_image_slider);
+            itemView.setOnClickListener(v -> {
 
-            this.itemView = itemView;
+                int pos = getAdapterPosition();
+                if (pos != RecyclerView.NO_POSITION) {
+                    ArticleEntry clickedDataItem = mArticleEntries.get(pos);
+                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                    String link = "https://nispsas.com.ng/blog/Safetyblog/ViewPost/" + clickedDataItem.getPicname();
+                    builder.setStartAnimations(mContext, R.anim.slide_in_right, R.anim.slide_out_left);
+                    builder.setExitAnimations(mContext, R.anim.slide_in_left, R.anim.slide_out_right);
+                    builder.setToolbarColor(mContext.getResources().getColor(R.color.colorPrimary));
+                    builder.setCloseButtonIcon(BitmapFactory.decodeResource(
+                            mContext.getResources(), R.drawable.ic_arrow_back_black_24dp));
+                    CustomTabsIntent customTabsIntent = builder.build();
+                    customTabsIntent.launchUrl(mContext, Uri.parse(link));
+                }
 
-            }
+            });
         }
 
     }
-
-
-
+}

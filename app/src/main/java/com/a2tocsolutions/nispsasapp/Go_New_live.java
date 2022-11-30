@@ -267,7 +267,7 @@ public class Go_New_live extends AppCompatActivity {
                 final int viewId = v.getId();
                 if (mBroadcaster.canStartBroadcasting()){
                     mBroadcaster.startBroadcast();
-                //floodAlert();
+                floodAlert();
                 }else{
                     mBroadcaster.stopBroadcast();
                 } if (viewId == R.id.SwitchCameraButton) {
@@ -277,12 +277,12 @@ public class Go_New_live extends AppCompatActivity {
                     mBroadcaster.switchCamera();
                     Log.e(TAG, "Button Cliked: something else");
                 }
-                new Handler().postDelayed(new Runnable() {
+                /*new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mBroadcaster.stopBroadcast();
                     }
-                }, 60000);
+                }, 60000);*/
             }
         });
         live_stream_types = (Spinner) findViewById(R.id.live_type);

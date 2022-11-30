@@ -72,8 +72,10 @@
     <string-array name="live_vid_option">
         <item>Select Type of Post..</item>
         <item>GBV</item>
-        <item>Votetal Education</item>
-        <item>Public Awaireness</item>
+        <item>Civic/Voter Education</item>
+        <item>Public Awareness</item>
+        <item>Campaign Finance Tracking</item>
+        <item>Election Day</item>
     </string-array>
 
 

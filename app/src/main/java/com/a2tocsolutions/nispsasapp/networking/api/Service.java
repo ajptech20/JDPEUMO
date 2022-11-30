@@ -4,8 +4,10 @@ import com.a2tocsolutions.nispsasapp.model.ArticleResponse;
 import com.a2tocsolutions.nispsasapp.model.ChildResponse;
 import com.a2tocsolutions.nispsasapp.model.ExtinguisherResponse;
 import com.a2tocsolutions.nispsasapp.model.FaceVerifyResponse;
+import com.a2tocsolutions.nispsasapp.model.HotZoneDetails;
 import com.a2tocsolutions.nispsasapp.model.LoginResponse;
 import com.a2tocsolutions.nispsasapp.model.ResponseTransporter;
+import com.a2tocsolutions.nispsasapp.model.UseRscDetails;
 import com.a2tocsolutions.nispsasapp.model.VerifyDetails;
 import com.a2tocsolutions.nispsasapp.model.VerifyResponse;
 import com.a2tocsolutions.nispsasapp.model.VideoReportDetails;
@@ -77,9 +79,9 @@ public interface Service {
     @POST(Routes.PANIC_BUTTON + "/pushPanicAlert/" + "{phonenumber}/" + "{lat}/" + "{lng}/" + "Panic_Button")
     Call<Void> panicAlert(@Path("phonenumber") String phonenumber, @Path("lat") String lat, @Path("lng") String lng);
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST(Routes.ARTICLE + "/getArticle/")
-    Call<ArticleResponse> article(@Field("type") String type);
+    Call<ArticleResponse> article(@Field("type") String type);*/
 
     @FormUrlEncoded
     @POST(Routes.VERIFY_FIRE_EXTINGUISHER + "/VerifyFireCode")
@@ -185,4 +187,16 @@ public interface Service {
     @FormUrlEncoded
     @POST(Routes.Fetch_Live_Videos)
     Call<VideoReportDetails> getlivevideos(@Field("id") String callid);
+
+    @FormUrlEncoded
+    @POST(Routes.Fetch_Hot_zones)
+    Call<HotZoneDetails> gethotzones(@Field("vidtype") String callid);
+
+    @FormUrlEncoded
+    @POST(Routes.Fetch_Use_Res)
+    Call<UseRscDetails> getuseresoutce(@Field("vidtype") String callid);
+
+    @FormUrlEncoded
+    @POST(Routes.ARTICLE + "/Nemanews/")
+    Call<ArticleResponse> article(@Field("type") String type);
 }

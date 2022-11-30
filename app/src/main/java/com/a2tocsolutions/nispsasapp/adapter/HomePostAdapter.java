@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,23 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.a2tocsolutions.nispsasapp.R;
 import com.a2tocsolutions.nispsasapp.Video_post_player;
-import com.a2tocsolutions.nispsasapp.database.LivePost;
+import com.a2tocsolutions.nispsasapp.database.HomePosts;
 import com.a2tocsolutions.nispsasapp.networking.ImgPostRequest;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.List;
 
-public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdapter.ViewHolder> {
+public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.ViewHolder> {
     //Imageloader to load image
     private ImageLoader imageLoader;
     private Context context;
 
     //List to store all superheroes
-    List<LivePost> superHeroes;
+    List<HomePosts> superHeroes;
 
     //Constructor of this class
-    public LiveVideoPostAdapter(List<LivePost> superHeroes, Context context){
+    public HomePostAdapter(List<HomePosts> superHeroes, Context context){
         super();
         //Getting all superheroes
         this.superHeroes = superHeroes;
@@ -41,7 +40,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.live_vid_post_list, parent, false);
+                .inflate(R.layout.home_post_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -51,7 +50,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         //Getting the particular item from the list
-        LivePost superHero =  superHeroes.get(position);
+        HomePosts superHero =  superHeroes.get(position);
 
         //Loading image from url
         imageLoader = ImgPostRequest.getInstance(context).getImageLoader();
@@ -62,7 +61,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
         holder.imageView.setImageUrl(superHero.getImageUrl(), imageLoader);
         holder.textViewName.setText(superHero.getName());
         holder.textViewRepId.setText(superHero.getId());
-        holder.textViewDescription.setText(superHero.getComment());
+        //holder.textViewDescription.setText(superHero.getComment());
         //holder.textViewimg.setText(superHero.getImageUrl());
 
         //holder.textViewRepId.setText(superHero.getRepId());
@@ -73,7 +72,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
         holder.textViewLikes.setText(superHero.getLikes());
         holder.textViewComments.setText(superHero.getComments());
         holder.textViewDate.setText(superHero.getDate());
-        holder.imageViewPreview.setImageUrl(superHero.getPreview(), imageLoader);
+        holder.imageViewPreview.setImageUrl(superHero.getPostImg(), imageLoader);
         //holder.textViewRsuri.setText(superHero.getResUri());
 
 
@@ -87,7 +86,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //private final ImageView send_button;
         //Views
-        public ImageView send_button;
+        public TextView send_button;
         public TextView send_text;
         public NetworkImageView imageView;
         public TextView textViewName;
@@ -109,7 +108,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
         //Initializing Views
         public ViewHolder(View itemView) {
             super(itemView);
-            send_button = (ImageView) itemView.findViewById(R.id.send_button_id);
+            send_button = (TextView) itemView.findViewById(R.id.send_button_id);
             itemView.setOnClickListener(this);
             imageView = (NetworkImageView) itemView.findViewById(R.id.reporter_image);
 
@@ -129,7 +128,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
             textViewDate = (TextView) itemView.findViewById(R.id.post_date);
             //textViewRsuri = (TextView) itemView.findViewById(R.id.textViewName10);
 
-            textViewDescription = (TextView) itemView.findViewById(R.id.post_description);
+            //textViewDescription = (TextView) itemView.findViewById(R.id.post_description);
             send_text = (EditText) itemView.findViewById(R.id.send_text_id);
 
         }
@@ -143,6 +142,23 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
                 view.getContext().startActivity(intent);
             });
         }
+
+
+
+        /*private void onClick(View v) {
+            // get the value which input by user in EditText and convert it to string
+            String str = send_text.getText().toString();
+            // Create the Intent object of this class Context() to Second_activity class
+            Intent intent = new Intent(context.getApplicationContext(), Video_post_player.class);
+            // now by putExtra method put the value in key, value pair key is
+            // message_key by this key we will receive the value, and put the string
+            intent.putExtra("message_key", str);
+            // start the Intent
+            startActivity(intent);
+        }
+
+        private void startActivity(Intent intent) {
+        }*/
     }
 
 }
