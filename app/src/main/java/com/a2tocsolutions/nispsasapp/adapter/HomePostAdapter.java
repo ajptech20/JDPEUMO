@@ -23,6 +23,7 @@ import java.util.List;
 public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.ViewHolder> {
     //Imageloader to load image
     private ImageLoader imageLoader;
+    private ImageLoader postImageLoader;
     private Context context;
 
     //List to store all superheroes
@@ -55,7 +56,8 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.ViewHo
         //Loading image from url
         imageLoader = ImgPostRequest.getInstance(context).getImageLoader();
         imageLoader.get(superHero.getImageUrl(), ImageLoader.getImageListener(holder.imageView, R.drawable.ic_launcher_background, android.R.drawable.ic_dialog_alert));
-        imageLoader.get(superHero.getImageUrl(), ImageLoader.getImageListener(holder.imageViewPreview, R.drawable.ic_launcher_background, android.R.drawable.ic_dialog_alert));
+        postImageLoader = ImgPostRequest.getInstance(context).getPostImageLoader();
+        postImageLoader.get(superHero.getImageUrl(), ImageLoader.getImageListener(holder.imageViewPreview, R.drawable.ic_launcher_background, android.R.drawable.ic_dialog_alert));
 
         //Showing data on the views
         holder.imageView.setImageUrl(superHero.getImageUrl(), imageLoader);
@@ -72,7 +74,7 @@ public class HomePostAdapter extends RecyclerView.Adapter<HomePostAdapter.ViewHo
         holder.textViewLikes.setText(superHero.getLikes());
         holder.textViewComments.setText(superHero.getComments());
         holder.textViewDate.setText(superHero.getDate());
-        holder.imageViewPreview.setImageUrl(superHero.getPostImg(), imageLoader);
+        holder.imageViewPreview.setImageUrl(superHero.getPostImg(), postImageLoader);
         //holder.textViewRsuri.setText(superHero.getResUri());
 
 

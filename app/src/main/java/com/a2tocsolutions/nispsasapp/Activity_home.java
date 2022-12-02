@@ -87,6 +87,7 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         ImageView live_stream_starter = findViewById(R.id.go_live_stream);
+        ImageView user_pro = findViewById(R.id.user_profile);
         ImageView image_uploader_starter = findViewById(R.id.post_new_image);
         ImageView video_uploader_starter = findViewById(R.id.post_new_short);
         ImageView view_image_post = findViewById(R.id.image_posts);
@@ -252,6 +253,16 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                 finish();
+            }
+        });
+
+        user_pro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), UserDataUpdate.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                //finish();
             }
         });
 

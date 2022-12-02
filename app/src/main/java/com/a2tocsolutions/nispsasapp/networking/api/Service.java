@@ -197,6 +197,10 @@ public interface Service {
     Call<UseRscDetails> getuseresoutce(@Field("vidtype") String callid);
 
     @FormUrlEncoded
+    @POST(Routes.LOGIN + "/Registerpolinunit")
+    Call<LoginResponse> pollinUnit(@Field("officerphone") String officerphone, @Field("state") String state, @Field("lga") String lga, @Field("polinunit") String pollinunit);
+
+    @FormUrlEncoded
     @POST(Routes.ARTICLE + "/Nemanews/")
     Call<ArticleResponse> article(@Field("type") String type);
 }

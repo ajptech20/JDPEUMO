@@ -20,6 +20,8 @@ public interface Constants {
     String TERMS = "terms";
     String FACE_VERIFY ="http://nispsas.com.ng/NISPSAS/Registration";
     String FIREBASE_TOKEN = "firebasekey";
-
     String RESOURCE_URI = "resource_uri";
+    String LGA = "lga";
+    String PUnit = "punit";
+    String STATE = "state";
 }

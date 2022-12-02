@@ -124,4 +124,44 @@ public class PreferenceUtils {
         SharedPreferences prefs = getDefaultSharedPreferences(context);
         return prefs.getString(Constants.RESOURCE_URI, "");
     }
+
+    public static boolean saveState(String state, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.STATE, state);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getState(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.STATE, "");
+    }
+
+    public static boolean saveLga(String lga, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.LGA, lga);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getLga(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.LGA, "");
+    }
+
+    public static boolean savePollingUnit(String punit, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.PUnit, punit);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getPollingUnit(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.PUnit, "");
+    }
+
 }

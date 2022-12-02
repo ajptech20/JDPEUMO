@@ -15,6 +15,7 @@ public interface Routes {
     String LAGOS_MEDIA = "NISPSAS/Mobile/lagosMediaAlert";
     String ARTICLE = "NISPSAS/Mobile";
     String LOGIN = "NISPSAS/Mobile";
+    String LOGIN2 = "NISPSAS/Mobile";
     String UPLOAD_AGRIC = "NISPSAS/Mobile/saveSATCForm";
     String VERIFY_ADDRESS = "/PCAS/Mobile";
     //String UPLOAD_MEDIA = "NISPSAS/comment/commentreport";

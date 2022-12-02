@@ -17,12 +17,29 @@ public class ImgPostRequest {
     private static Context context;
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
+    private ImageLoader postImageLoader;
 
     private ImgPostRequest(Context context) {
         this.context = context;
         this.requestQueue = getRequestQueue();
 
         imageLoader = new ImageLoader(requestQueue,
+                new ImageLoader.ImageCache() {
+                    private final LruCache<String, Bitmap>
+                            cache = new LruCache<String, Bitmap>(20);
+
+                    @Override
+                    public Bitmap getBitmap(String url) {
+                        return cache.get(url);
+                    }
+
+                    @Override
+                    public void putBitmap(String url, Bitmap bitmap) {
+                        cache.put(url, bitmap);
+                    }
+                });
+
+        postImageLoader = new ImageLoader(requestQueue,
                 new ImageLoader.ImageCache() {
                     private final LruCache<String, Bitmap>
                             cache = new LruCache<String, Bitmap>(20);
@@ -58,5 +75,9 @@ public class ImgPostRequest {
 
     public ImageLoader getImageLoader() {
         return imageLoader;
+    }
+
+    public ImageLoader getPostImageLoader() {
+        return postImageLoader;
     }
 }

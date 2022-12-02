@@ -52,6 +52,7 @@
                         android:src="@drawable/ic_search_gray_24dp" />
 
                     <ImageView
+                        android:id="@+id/user_profile"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_alignParentTop="true"
@@ -312,7 +313,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="70"
                         android:orientation="vertical">
-
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="8dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -321,7 +326,17 @@
                             android:text="Posts"
                             android:textColor="#000000"
                             android:textSize="18sp"
+                            android:layout_alignParentStart="true"
                             android:textStyle="bold" />
+                        <ProgressBar
+                            android:id="@+id/progressBar1"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginBottom="4dp"
+                            android:layout_alignParentStart="true"
+                            />
+                        </RelativeLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -346,13 +361,6 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/activity_margin"
                         android:layout_centerInParent="true" />
-                    <ProgressBar
-                        android:id="@+id/progressBar1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:layout_gravity="center"
-                        />
 
                 </LinearLayout>
 
