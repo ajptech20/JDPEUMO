@@ -1,17 +1,9 @@
 package com.a2tocsolutions.nispsasapp.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +16,13 @@ import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.a2tocsolutions.nispsasapp.BuildConfig;
 import com.a2tocsolutions.nispsasapp.R;
@@ -52,8 +51,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.a2tocsolutions.nispsasapp.utils.Constants.BASE_URL;
 
 public class CorrectionServices extends AppCompatActivity implements View.OnClickListener {
 
@@ -293,7 +290,7 @@ public class CorrectionServices extends AppCompatActivity implements View.OnClic
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     mediaPath = cursor.getString(columnIndex);
                     // Set the Image in ImageView for Previewing the Media
-                    image_header.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
+                    //image_header.setImageBitmap(BitmapFactory.decodeFile(mediaPath));
                     cursor.close();
 
                     postPath = mediaPath;

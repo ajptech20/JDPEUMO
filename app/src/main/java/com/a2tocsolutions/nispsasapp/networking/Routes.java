@@ -11,6 +11,7 @@ public interface Routes {
     String CRIME_ALERT = "NISPSAS/Mobile";
     String PANIC_BUTTON = "NISPSAS/Mobile";
     String UPLOAD_MEDIA = "NISPSAS/Mobile";
+    String UPLOAD_USER_DATA = "NISPSAS/Mobile";
     String SCHOOL_REG = "PCAS/Mobile";
     String LAGOS_MEDIA = "NISPSAS/Mobile/lagosMediaAlert";
     String ARTICLE = "NISPSAS/Mobile";

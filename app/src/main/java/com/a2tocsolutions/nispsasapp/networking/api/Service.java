@@ -200,6 +200,12 @@ public interface Service {
     @POST(Routes.LOGIN + "/Registerpolinunit")
     Call<LoginResponse> pollinUnit(@Field("officerphone") String officerphone, @Field("state") String state, @Field("lga") String lga, @Field("polinunit") String pollinunit);
 
+
+    @Multipart
+    @POST(Routes.UPLOAD_USER_DATA + "/RegisterpolinunitUpload")
+    Call<Void> updateUserdata( @Part("officerphone") RequestBody officerphone, @Part MultipartBody.Part file, @Part("state") RequestBody states, @Part("lga") RequestBody lga, @Part("officername") RequestBody officername, @Part("town") RequestBody town);
+
+
     @FormUrlEncoded
     @POST(Routes.ARTICLE + "/Nemanews/")
     Call<ArticleResponse> article(@Field("type") String type);

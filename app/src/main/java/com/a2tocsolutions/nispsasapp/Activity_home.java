@@ -27,6 +27,7 @@ import com.a2tocsolutions.nispsasapp.model.UseRscDetails;
 import com.a2tocsolutions.nispsasapp.networking.api.Service;
 import com.a2tocsolutions.nispsasapp.networking.generator.DataGenerator;
 import com.a2tocsolutions.nispsasapp.utils.Config4;
+import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -87,11 +88,16 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         ImageView live_stream_starter = findViewById(R.id.go_live_stream);
-        ImageView user_pro = findViewById(R.id.user_profile);
+        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+        ImageView imageView = (ImageView) findViewById(R.id.app_profile);
+        Glide.with(Activity_home.this)
+                .load(user_image)
+                .into(imageView);
+        ImageView open_settings = findViewById(R.id.app_profile);
         ImageView image_uploader_starter = findViewById(R.id.post_new_image);
         ImageView video_uploader_starter = findViewById(R.id.post_new_short);
         ImageView view_image_post = findViewById(R.id.image_posts);
-        ImageView NestedScrool = findViewById(R.id.test_scrooldata);
+        ImageView open_appsettings = findViewById(R.id.app_settings);
         ImageView view_live_videos = findViewById(R.id.view_live_posts);
         ImageView short_video_post = findViewById(R.id.short_videos);
         slideView = findViewById(R.id.slideView);
@@ -190,7 +196,7 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
             }
         });
 
-        NestedScrool.setOnClickListener(new View.OnClickListener() {
+        /*NestedScrool.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Activity_home.this, GetArticles.class);
@@ -199,7 +205,7 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                 finish();
             }
-        });
+        });*/
 
         image_uploader_starter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,10 +262,19 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
             }
         });
 
-        user_pro.setOnClickListener(new View.OnClickListener() {
+        open_settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), UserDataUpdate.class);
+                Intent intent = new Intent(getApplicationContext(), AppSettings.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                //finish();
+            }
+        });
+        open_appsettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AppSettings.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                 //finish();

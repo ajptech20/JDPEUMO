@@ -52,6 +52,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity
+            android:name=".CropperActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity android:name=".FireVideo" />
         <activity android:name=".SeeSmthingSaySmthingVideo" />
         <activity android:name=".DisasterPage" />
@@ -789,7 +796,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.a2tocsolutions.nispsasapp.activities.statactivities.Lagos" />
         </activity>
-
         <activity
             android:name=".activities.statactivities.lagactivities.naptip"
             android:parentActivityName=".activities.statactivities.Lagos"
@@ -1168,162 +1174,185 @@
         </service>
 
         <activity
-            android:name="com.a2tocsolutions.nispsasapp.Activity_home"
+            android:name=".Activity_home"
             android:screenOrientation="portrait"
-            android:title="Shorts"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Shorts">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.a2tocsolutions.nispsasapp.New_post"
+            android:name=".New_post"
             android:screenOrientation="portrait"
-            android:title="Shorts"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Shorts">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.a2tocsolutions.nispsasapp.Go_New_live"
+            android:name=".Go_New_live"
             android:parentActivityName=".Activity_home"
             android:screenOrientation="portrait"
-            android:title="Streaming Live"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Streaming Live">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".picture_uploader"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Upload Picture">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".shortvideo_uploader"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Upload Video">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ImagePostsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Posts">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LiveVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Posts">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".A_live_video_posts"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Posts">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Video_post_player"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Posts">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ShortVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Posts">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Nested_scrool_test"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Nested">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".GetArticles"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Nested">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".UserDataUpdate"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Nested">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AppSettings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Nested">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+<activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
-            android:name="com.a2tocsolutions.nispsasapp.picture_uploader"
-            android:screenOrientation="portrait"
-            android:title="Upload Picture"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ResultActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.a2tocsolutions.nispsasapp.shortvideo_uploader"
-            android:screenOrientation="portrait"
-            android:title="Upload Video"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ImageCroperActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.ImagePostsActivity"
-            android:screenOrientation="portrait"
-            android:title="Posts"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.LiveVideoActivity"
-            android:screenOrientation="portrait"
-            android:title="Posts"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.A_live_video_posts"
-            android:screenOrientation="portrait"
-            android:title="Posts"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.Video_post_player"
-            android:screenOrientation="portrait"
-            android:title="Posts"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.ShortVideoActivity"
-            android:screenOrientation="portrait"
-            android:title="Posts"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.Nested_scrool_test"
-            android:screenOrientation="portrait"
-            android:title="Nested"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.GetArticles"
-            android:screenOrientation="portrait"
-            android:title="Nested"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="com.a2tocsolutions.nispsasapp.UserDataUpdate"
-            android:screenOrientation="portrait"
-            android:title="Nested"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.PICK_ACTIVITY" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
     </application>
 
 </manifest>

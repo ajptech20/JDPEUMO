@@ -27,9 +27,39 @@ public class PreferenceUtils {
         return true;
     }
 
+
     public static String getUsername(Context context) {
         SharedPreferences prefs = getDefaultSharedPreferences(context);
         return prefs.getString(Constants.USERNAME, "");
+    }
+
+    public static String getTown(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.USERTOWN, "");
+    }
+
+    public static boolean saveHome(String town, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.USERTOWN, town);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean saveLga(String lga, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.USERLGA, lga);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean saveState(String state, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.STATE, state);
+        prefsEditor.apply();
+        return true;
     }
 
     public static boolean savePhoneNumber(String phonenumber, Context context) {
@@ -38,6 +68,19 @@ public class PreferenceUtils {
         prefsEditor.putString(Constants.PHONE_NUMBER, phonenumber);
         prefsEditor.apply();
         return true;
+    }
+
+    public static boolean saveUserImage(String postPath, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.USER_IMAGE, postPath);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getUserImage(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.USER_IMAGE, "");
     }
 
     public static String getPhoneNumber(Context context) {
@@ -125,25 +168,9 @@ public class PreferenceUtils {
         return prefs.getString(Constants.RESOURCE_URI, "");
     }
 
-    public static boolean saveState(String state, Context context) {
-        SharedPreferences prefs = getDefaultSharedPreferences(context);
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString(Constants.STATE, state);
-        prefsEditor.apply();
-        return true;
-    }
-
     public static String getState(Context context) {
         SharedPreferences prefs = getDefaultSharedPreferences(context);
         return prefs.getString(Constants.STATE, "");
-    }
-
-    public static boolean saveLga(String lga, Context context) {
-        SharedPreferences prefs = getDefaultSharedPreferences(context);
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString(Constants.LGA, lga);
-        prefsEditor.apply();
-        return true;
     }
 
     public static String getLga(Context context) {
