@@ -39,6 +39,7 @@
 
 
             <TextView
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/calibri"
@@ -48,14 +49,23 @@
                 android:layout_marginEnd="50dp"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
+                android:elevation="12dp"
+                android:id="@+id/view2"
+                app:cardCornerRadius="40dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp"
-                android:src="@drawable/user_img" />
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+                <ImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/user_img"/>
+            </androidx.cardview.widget.CardView>
         </RelativeLayout>
         <ImageView
             android:id="@+id/status_live"
@@ -127,7 +137,7 @@
             android:layout_marginBottom="35dp"/>
 
         <EditText
-            android:id="@+id/phone"
+            android:id="@+id/say_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

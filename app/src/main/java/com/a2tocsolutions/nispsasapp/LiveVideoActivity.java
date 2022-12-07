@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.a2tocsolutions.nispsasapp.adapter.ShortVideoPostAdapter;
 import com.a2tocsolutions.nispsasapp.database.ShortPost;
 import com.a2tocsolutions.nispsasapp.utils.Config3;
+import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.mancj.slideup.SlideUp;
 
 import org.json.JSONArray;
@@ -58,6 +60,13 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_video_activity);
+        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+        ImageView imageView = (ImageView) findViewById(R.id.app_profile);
+        Glide.with(LiveVideoActivity.this)
+                .load(user_image)
+                .into(imageView);
+        ImageView open_settings = findViewById(R.id.app_profile);
+        ImageView open_appsettings = findViewById(R.id.app_settings);
         ImageView live_stream_starter = findViewById(R.id.go_live_stream);
         ImageView image_uploader_starter = findViewById(R.id.post_new_image);
         ImageView video_uploader_starter = findViewById(R.id.post_new_short);
@@ -179,6 +188,25 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                 finish();
+            }
+        });
+
+        open_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AppSettings.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                //finish();
+            }
+        });
+        open_appsettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AppSettings.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                //finish();
             }
         });
 

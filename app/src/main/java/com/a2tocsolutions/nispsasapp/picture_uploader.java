@@ -66,6 +66,7 @@ import com.bambuser.broadcaster.Broadcaster;
 import com.bambuser.broadcaster.CameraError;
 import com.bambuser.broadcaster.ConnectionError;
 import com.bambuser.broadcaster.Resolution;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -267,6 +268,13 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_post);
+        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+        ImageView imageView = (ImageView) findViewById(R.id.user_image);
+        Glide.with(picture_uploader.this)
+                .load(user_image)
+                .into(imageView);
+        TextView username = findViewById(R.id.user_name);
+        username.setText(PreferenceUtils.getUsername(getApplicationContext()));
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         phonenumber = PreferenceUtils.getPhoneNumber(getApplicationContext());
         reporter = PreferenceUtils.getPhoneNumber(getApplicationContext());

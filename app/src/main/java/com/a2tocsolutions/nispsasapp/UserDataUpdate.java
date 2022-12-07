@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -30,6 +29,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.a2tocsolutions.nispsasapp.networking.api.Service;
 import com.a2tocsolutions.nispsasapp.networking.generator.DataGenerator;
+import com.a2tocsolutions.nispsasapp.utils.FancyToast;
 import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.bumptech.glide.Glide;
 import com.ikhiloyaimokhai.nigeriastatesandlgas.Nigeria;
@@ -287,7 +287,7 @@ public class UserDataUpdate extends AppCompatActivity {
                 File imageFileUp = new File(resultUri.getPath());
                 postPath = String.valueOf(new File(resultUri.getPath()));
                 PreferenceUtils.saveUserImage(postPath, getApplicationContext());
-                Toast.makeText(UserDataUpdate.this, "File Url:" + imageFileUp, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(UserDataUpdate.this, "File Url:" + imageFileUp, Toast.LENGTH_SHORT).show();
                 /*img_upload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -402,7 +402,7 @@ public class UserDataUpdate extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long l) {
                 mLga = (String) parent.getItemAtPosition(position);
-                Toast.makeText(UserDataUpdate.this, "state: " + mState + " lga: " + mLga, Toast.LENGTH_LONG).show();
+                //Toast.makeText(UserDataUpdate.this, "state: " + mState + " lga: " + mLga, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -491,17 +491,17 @@ public class UserDataUpdate extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     progress.setVisibility(View.GONE);
                     emptyInputEditText();
-                    Toast.makeText(UserDataUpdate.this, "Profile Uploaded successfully", Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(getApplicationContext(), "Profile Updated successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
                 } else {
                     progress.setVisibility(View.GONE);
-                    Toast.makeText(UserDataUpdate.this, "error Uploading Profile...", Toast.LENGTH_SHORT).show();
+                    FancyToast.makeText(getApplicationContext(), "Error Uploading Profile.....", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 progress.setVisibility(View.GONE);
-                Toast.makeText(UserDataUpdate.this, "Error Uploading Profile..." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getApplicationContext(), "No internet connection...", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
             }
         });
     }

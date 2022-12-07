@@ -7,6 +7,7 @@ public interface Routes {
     String MEDICAL_ALERT = "NFDR/Mobile";
     String VERIFY_NATIONAL = "/NISPSAS/Mobile";
     String FLOOD_ALERT = "NISPSAS/Mobile";
+    String GO_LIVE_REP = "NISPSAS/Mobile";
     String COVID_ALERT = "NISPSAS/Mobile";
     String CRIME_ALERT = "NISPSAS/Mobile";
     String PANIC_BUTTON = "NISPSAS/Mobile";

@@ -18,6 +18,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -52,6 +53,7 @@ import com.bambuser.broadcaster.BroadcastStatus;
 import com.bambuser.broadcaster.Broadcaster;
 import com.bambuser.broadcaster.CameraError;
 import com.bambuser.broadcaster.ConnectionError;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -134,7 +136,7 @@ public class Go_New_live extends AppCompatActivity {
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
 
-    private String longitude, latitude, phonenumber, reporter;
+    private String longitude, latitude, phonenumber, reporter, repname, repstate, replga;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     boolean boolean_permission;
     /**
@@ -151,6 +153,7 @@ public class Go_New_live extends AppCompatActivity {
     private static final int REQUEST_READ_PHONE_STATE = 45;
     private TextView nam;
     private TextView namm;
+    private Spinner typereport;
 
 
     // location updates interval - 10sec
@@ -196,58 +199,24 @@ public class Go_New_live extends AppCompatActivity {
     public Go_New_live() {
 
     }
-    private void floodAlert() {
-
-        String type="Flood";
-        startLocationUpdates();
-        startLocation();
-
-        if (latitude == null) {
-
-            startLocation();
-            return;
-        }
-        try{
-            //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
-
-            Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<Void> call = service.floodAlert(reporter, latitude, longitude, type);
-
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                    if (response.isSuccessful()) {
-
-                        Toast.makeText(getApplicationContext(), "Flood Alert Sent Successfully",
-                                Toast.LENGTH_LONG).show();
-                    } else {
-
-                        Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-
-                    Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                            Toast.LENGTH_LONG).show();
-                }
-            });
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                    Toast.LENGTH_LONG).show();
-
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_stream_activity);
+        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+        ImageView imageView = (ImageView) findViewById(R.id.user_image);
+        Glide.with(Go_New_live.this)
+                .load(user_image)
+                .into(imageView);
+        TextView username = findViewById(R.id.user_name);
+        username.setText(PreferenceUtils.getUsername(getApplicationContext()));
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         phonenumber = PreferenceUtils.getPhoneNumber(getApplicationContext());
         reporter = PreferenceUtils.getPhoneNumber(getApplicationContext());
+        repname = PreferenceUtils.getUsername(getApplicationContext());
+        repstate = PreferenceUtils.getState(getApplicationContext());
+        replga = PreferenceUtils.getLga(getApplicationContext());
         mPreviewSurface = findViewById(R.id.live_stream_page);
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
@@ -377,6 +346,54 @@ public class Go_New_live extends AppCompatActivity {
 
         }
 
+    }
+
+    private void floodAlert() {
+
+        String type="Flood";
+        startLocationUpdates();
+        startLocation();
+
+        if (latitude == null) {
+
+            startLocation();
+            return;
+        }
+        try{
+            //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
+
+            Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
+            String mreptype = live_stream_types.getSelectedItem().toString();
+            EditText input_post_comment = findViewById(R.id.say_comment);
+            String comment = input_post_comment.getText().toString().trim();
+            Call<Void> call = service.goingLivePost(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type);
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                    if (response.isSuccessful()) {
+
+                        Toast.makeText(getApplicationContext(), "Flood Alert Sent Successfully",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "Flood Alert Failed",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+
+                    Toast.makeText(getApplicationContext(), "Flood Alert Failed",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Flood Alert Failed",
+                    Toast.LENGTH_LONG).show();
+
+        }
     }
 
     InstallStateUpdatedListener installStateUpdatedListener = new

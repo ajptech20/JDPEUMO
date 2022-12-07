@@ -105,7 +105,7 @@ public class CovidActivity extends AppCompatActivity implements View.OnClickList
 
 
         covidtyp = (Spinner) findViewById(R.id.covidtype);
-         covidtyp.setOnItemSelectedListener(new ItemSelectedListener());
+        covidtyp.setOnItemSelectedListener(new ItemSelectedListener());
         
         button_upload.setOnClickListener(this);
         selectImage.setOnClickListener(this);
