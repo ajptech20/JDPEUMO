@@ -375,7 +375,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -437,6 +436,70 @@
             android:src="@drawable/ic_control_point_black_24dp"
             />
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/campaine_finance"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        app:elevation="6dp"
+        android:layout_marginBottom="255dp"
+        android:layout_marginEnd="20dp"
+        app:backgroundTint="#3F51B5"
+        app:srcCompat="@drawable/ic_cfr_icon"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/gbv_form"
+        android:layout_width="wrap_content"
+        app:backgroundTint="#FF5722"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:contentDescription="@string/app_name"
+        app:elevation="6dp"
+        android:layout_marginBottom="190dp"
+        android:layout_marginEnd="20dp"
+        app:srcCompat="@drawable/ic_gbv_icon"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/hot_zone"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        app:elevation="6dp"
+        android:layout_marginBottom="125dp"
+        android:layout_marginEnd="20dp"
+        app:backgroundTint="#FF0000"
+        app:srcCompat="@drawable/ic_baseline_local_fire_department_24"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        app:elevation="6dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="20dp"
+        app:srcCompat="@drawable/ic_baseline_assignment_24"/>
+    <!--<TextView
+        android:id="@+id/add_alarm_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="60dp"
+        android:text="Add Alarm"/>-->
+    <!--<TextView
+        android:id="@+id/add_alarm_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Add Alarm"
+        app:layout_constraintBottom_toBottomOf="@+id/add_alarm_fab"
+        app:layout_constraintEnd_toStartOf="@+id/add_alarm_fab"
+        app:layout_constraintTop_toTopOf="@+id/add_alarm_fab" />-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -547,5 +610,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

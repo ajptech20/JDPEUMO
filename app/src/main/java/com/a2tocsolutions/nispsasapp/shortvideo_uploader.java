@@ -30,6 +30,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -58,6 +59,7 @@ import com.a2tocsolutions.nispsasapp.networking.api.Service;
 import com.a2tocsolutions.nispsasapp.networking.generator.DataGenerator;
 import com.a2tocsolutions.nispsasapp.service.NispsasLockService;
 import com.a2tocsolutions.nispsasapp.utils.AppExecutors;
+import com.a2tocsolutions.nispsasapp.utils.FancyToast;
 import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.afollestad.materialdialogs.BuildConfig;
 import com.bambuser.broadcaster.BroadcastStatus;
@@ -157,7 +159,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
 
-    private String longitude, latitude, phonenumber, reporter;
+    private String longitude, latitude, phonenumber, reporter, repname, repstate, replga;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     boolean boolean_permission;
     /**
@@ -221,7 +223,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
     }
     private void floodAlert() {
 
-        String type="Flood";
+        String type="ShortVideoUp";
         startLocationUpdates();
         startLocation();
 
@@ -234,32 +236,30 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
             //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
 
             Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<Void> call = service.floodAlert(reporter, latitude, longitude, type);
+            String mreptype = live_stream_types.getSelectedItem().toString();
+            EditText input_post_comment = findViewById(R.id.say_comment);
+            String comment = input_post_comment.getText().toString().trim();
+            Call<Void> call = service.ShortVidPost(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type);
 
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
-
-                        Toast.makeText(getApplicationContext(), "Flood Alert Sent Successfully",
-                                Toast.LENGTH_LONG).show();
+                        FancyToast.makeText(getApplicationContext(), "Your Short Video Post was successfull", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        //emptyInputEditText();
                     } else {
 
-                        Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                                Toast.LENGTH_LONG).show();
+                        FancyToast.makeText(getApplicationContext(), "Short Video Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-
-                    Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                            Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(getApplicationContext(), "No Internet Connection", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                 }
             });
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                    Toast.LENGTH_LONG).show();
+            FancyToast.makeText(getApplicationContext(), "Short Video Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
 
         }
     }
@@ -278,6 +278,9 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         phonenumber = PreferenceUtils.getPhoneNumber(getApplicationContext());
         reporter = PreferenceUtils.getPhoneNumber(getApplicationContext());
+        repname = PreferenceUtils.getUsername(getApplicationContext());
+        repstate = PreferenceUtils.getState(getApplicationContext());
+        replga = PreferenceUtils.getLga(getApplicationContext());
         mPreviewSurface = findViewById(R.id.short_videos_page);
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
@@ -314,7 +317,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
                 }, 60000);
             }
         });*/
-        live_stream_types = (Spinner) findViewById(R.id.live_type);
+        live_stream_types = (Spinner) findViewById(R.id.short_type);
         live_stream_types.setOnItemSelectedListener(new shortvideo_uploader.ItemSelectedListener());
 
         mDb = AppDatabase.getInstance(getApplicationContext());
@@ -520,7 +523,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
 
     private void chooseFile() {
         Intent chooseFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        chooseFileIntent.setType("*/*");
+        chooseFileIntent.setType("video/mp4");
         chooseFileIntent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             startActivityForResult(chooseFileIntent, FILE_CHOOSER_CODE);
@@ -609,6 +612,14 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
             mUploadDialog = null;
             try {
                 removeDialog(UPLOAD_PROGRESS_DIALOG);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        floodAlert();
+                    }
+                }, 2000);
+
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
         }});
@@ -1018,5 +1029,15 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
     private boolean mUploading = false;
     private AlertDialog mUploadDialog;
     private long mLastUploadStatusUpdateTime = 0;
+
+    private void emptyInputEditText() {
+        EditText input_post_comment = findViewById(R.id.say_comment);
+        input_post_comment.setText("");
+        refreshActivity();
+    }
+
+    private void refreshActivity(){
+        recreate();
+    }
 
 }

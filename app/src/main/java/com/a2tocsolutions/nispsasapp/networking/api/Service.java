@@ -73,8 +73,16 @@ public interface Service {
     Call<Void> floodAlert(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("type") String type);
 
     @FormUrlEncoded
-    @POST(Routes.GO_LIVE_REP + "/pushLivePost")
+    @POST(Routes.POST_REP_URL + "/pushLivePost")
     Call<Void> goingLivePost(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST(Routes.POST_REP_URL + "/pushShortsPost")
+    Call<Void> ShortVidPost(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST(Routes.POST_REP_URL + "/pushImagePost")
+    Call<Void> ImagePostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
 
     @FormUrlEncoded
     @POST(Routes.CRIME_ALERT + "/pushCrimeAlerts")

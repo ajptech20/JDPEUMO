@@ -39,6 +39,7 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mancj.slideup.SlideUp;
 
 import org.json.JSONArray;
@@ -83,10 +84,28 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
     private View slideView;
     private View liveVid;
 
+    FloatingActionButton flHotZone, flGbvForm, mAddCfm;
+    FloatingActionButton mMainbutton;
+    //TextView addAlarmActionText, addPersonActionText;
+    Boolean isAllFabsVisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        mMainbutton = findViewById(R.id.floating_action_button);
+        flHotZone = findViewById(R.id.hot_zone);
+        flGbvForm = findViewById(R.id.gbv_form);
+        mAddCfm = findViewById(R.id.campaine_finance);
+
+        /*addAlarmActionText = findViewById(R.id.add_alarm_action_text);
+        addPersonActionText = findViewById(R.id.add_person_action_text);*/
+
+        flHotZone.setVisibility(View.GONE);
+        flGbvForm.setVisibility(View.GONE);
+        mAddCfm.setVisibility(View.GONE);
+        isAllFabsVisible = false;
         ImageView live_stream_starter = findViewById(R.id.go_live_stream);
         String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
         ImageView imageView = (ImageView) findViewById(R.id.app_profile);
@@ -280,6 +299,54 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                 //finish();
             }
         });
+
+        mMainbutton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!isAllFabsVisible) {
+
+                            flHotZone.show();
+                            flGbvForm.show();
+                            mAddCfm.show();
+                            //addAlarmActionText.setVisibility(View.VISIBLE);
+                            //addPersonActionText.setVisibility(View.VISIBLE);
+
+                            //mAddFab.extend();
+                            isAllFabsVisible = true;
+                        } else {
+                            flHotZone.hide();
+                            flGbvForm.hide();
+                            mAddCfm.hide();
+                            //addAlarmActionText.setVisibility(View.GONE);
+                            //addPersonActionText.setVisibility(View.GONE);
+                            //mAddFab.shrink();
+                            isAllFabsVisible = false;
+                        }
+                    }
+                });
+
+        flGbvForm.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Activity_home.this, "Gbv Form Cliked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        flHotZone.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Activity_home.this, "Hot Zone Clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        mAddCfm.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Activity_home.this, "CFM Form Cliked", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 

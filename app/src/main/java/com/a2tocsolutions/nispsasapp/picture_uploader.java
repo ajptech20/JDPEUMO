@@ -31,6 +31,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -59,6 +60,7 @@ import com.a2tocsolutions.nispsasapp.networking.api.Service;
 import com.a2tocsolutions.nispsasapp.networking.generator.DataGenerator;
 import com.a2tocsolutions.nispsasapp.service.NispsasLockService;
 import com.a2tocsolutions.nispsasapp.utils.AppExecutors;
+import com.a2tocsolutions.nispsasapp.utils.FancyToast;
 import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.afollestad.materialdialogs.BuildConfig;
 import com.bambuser.broadcaster.BroadcastStatus;
@@ -157,7 +159,7 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
 
-    private String longitude, latitude, phonenumber, reporter;
+    private String longitude, latitude, phonenumber, reporter, repname, repstate, replga;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     boolean boolean_permission;
     /**
@@ -221,7 +223,7 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
     }
     private void floodAlert() {
 
-        String type="Flood";
+        String type="ImageUpload";
         startLocationUpdates();
         startLocation();
 
@@ -234,32 +236,30 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
             //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
 
             Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<Void> call = service.floodAlert(reporter, latitude, longitude, type);
+            String mreptype = live_stream_types.getSelectedItem().toString();
+            EditText input_post_comment = findViewById(R.id.say_comment);
+            String comment = input_post_comment.getText().toString().trim();
+            Call<Void> call = service.ImagePostUp(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type);
 
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
-
-                        Toast.makeText(getApplicationContext(), "Flood Alert Sent Successfully",
-                                Toast.LENGTH_LONG).show();
+                        FancyToast.makeText(getApplicationContext(), "Your Image Post was successful", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        //emptyInputEditText();
                     } else {
 
-                        Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                                Toast.LENGTH_LONG).show();
+                        FancyToast.makeText(getApplicationContext(), "Short Image Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-
-                    Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                            Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(getApplicationContext(), "No Internet Connection", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                 }
             });
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                    Toast.LENGTH_LONG).show();
+            FancyToast.makeText(getApplicationContext(), "Short Image Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
 
         }
     }
@@ -278,6 +278,9 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         phonenumber = PreferenceUtils.getPhoneNumber(getApplicationContext());
         reporter = PreferenceUtils.getPhoneNumber(getApplicationContext());
+        repname = PreferenceUtils.getUsername(getApplicationContext());
+        repstate = PreferenceUtils.getState(getApplicationContext());
+        replga = PreferenceUtils.getLga(getApplicationContext());
         mPreviewSurface = findViewById(R.id.image_upload_page);
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
@@ -314,7 +317,7 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
                 }, 60000);
             }
         });*/
-        live_stream_types = (Spinner) findViewById(R.id.live_type);
+        live_stream_types = (Spinner) findViewById(R.id.image_type);
         live_stream_types.setOnItemSelectedListener(new picture_uploader.ItemSelectedListener());
 
         mDb = AppDatabase.getInstance(getApplicationContext());
@@ -501,70 +504,6 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
         }
     }
 
-    private void initLocalRecording() {
-        if (mBroadcaster == null || !mBroadcaster.hasLocalMediaCapability())
-            return;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US);
-        String fileName = sdf.format(new Date()) + ".mp4";
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            File storageDir = getStorageDir();
-            if (storageDir == null) {
-                Toast.makeText(getApplicationContext(), "Can't store local copy, external storage unavailable", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            File file = new File(storageDir, fileName);
-            Broadcaster.LocalMediaObserver obs = new Broadcaster.LocalMediaObserver() {
-                public void onLocalMediaClosed(boolean success) {
-                    if (success) {
-                        Toast.makeText(getApplicationContext(), "Local copy of broadcast stored", Toast.LENGTH_SHORT).show();
-                        MediaScannerConnection.scanFile(getApplicationContext(), new String[]{file.getAbsolutePath()}, null, null);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Failed to write to video file. Storage/memory full?", Toast.LENGTH_LONG).show();
-                    }
-                }
-            };
-            boolean success = mBroadcaster.storeLocalMedia(file, obs);
-            Toast.makeText(getApplicationContext(), "Writing to " + file.getAbsolutePath() + (success ? "" : " failed"), Toast.LENGTH_SHORT).show();
-        } else {
-            // Create a video placeholder in shared storage using MediaStore on modern Android versions.
-            // mark the video placeholder as pending while the SDK is writing to it
-            ContentResolver cr = getApplicationContext().getContentResolver();
-            ContentValues cv = new ContentValues();
-            cv.put(MediaStore.MediaColumns.DISPLAY_NAME, fileName);
-            cv.put(MediaStore.MediaColumns.IS_PENDING, 1);
-            final Uri videoUri = cr.insert(MediaStore.Video.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY), cv);
-            ParcelFileDescriptor videoFD;
-            try {
-                videoFD = cr.openFileDescriptor(videoUri, "rwt");
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Failed to create local video file", Toast.LENGTH_SHORT).show();
-                cr.delete(videoUri, null, null);
-                return;
-            }
-            Broadcaster.LocalMediaObserver obs = new Broadcaster.LocalMediaObserver() {
-                public void onLocalMediaClosed(boolean success) {
-                    if (success) {
-                        // mark the video as done so it appears in the MediaStore
-                        ContentValues cv = new ContentValues();
-                        cv.put(MediaStore.MediaColumns.IS_PENDING, 0);
-                        cr.update(videoUri, cv, null, null);
-                        Toast.makeText(getApplicationContext(), "Local copy of broadcast stored", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // delete the image placeholder from MediaStore
-                        cr.delete(videoUri, null, null);
-                        Toast.makeText(getApplicationContext(), "Failed to store " + videoUri + " Storage full?", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            };
-            boolean success = mBroadcaster.storeLocalMedia(videoFD, obs);
-            if (!success) {
-                // delete the image placeholder from MediaStore
-                cr.delete(videoUri, null, null);
-                Toast.makeText(getApplicationContext(), "Writing to " + videoUri + " failed", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     private File getStorageDir() {
         if (hasPermission(permission.WRITE_EXTERNAL_STORAGE) && Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             final File externalDir = new File(Environment.getExternalStorageDirectory(), "LibBambuser");
@@ -583,7 +522,7 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
 
     private void chooseFile() {
         Intent chooseFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        chooseFileIntent.setType("*/*");
+        chooseFileIntent.setType("image/*");
         chooseFileIntent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             startActivityForResult(chooseFileIntent, FILE_CHOOSER_CODE);
@@ -672,6 +611,9 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
             mUploadDialog = null;
             try {
                 removeDialog(UPLOAD_PROGRESS_DIALOG);
+
+                new Handler().postDelayed(picture_uploader.this::floodAlert, 2000);
+
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
         }});
@@ -1081,5 +1023,15 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
     private boolean mUploading = false;
     private AlertDialog mUploadDialog;
     private long mLastUploadStatusUpdateTime = 0;
+
+    private void emptyInputEditText() {
+        EditText input_post_comment = findViewById(R.id.say_comment);
+        input_post_comment.setText("");
+        refreshActivity();
+    }
+
+    private void refreshActivity(){
+        recreate();
+    }
 
 }

@@ -26,8 +26,8 @@
                     <com.android.volley.toolbox.NetworkImageView
                         android:id="@+id/post_image"
                         android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:scaleType="fitXY"/>
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"

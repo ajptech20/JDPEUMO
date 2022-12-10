@@ -47,6 +47,7 @@ import com.a2tocsolutions.nispsasapp.networking.api.Service;
 import com.a2tocsolutions.nispsasapp.networking.generator.DataGenerator;
 import com.a2tocsolutions.nispsasapp.service.NispsasLockService;
 import com.a2tocsolutions.nispsasapp.utils.AppExecutors;
+import com.a2tocsolutions.nispsasapp.utils.FancyToast;
 import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.afollestad.materialdialogs.BuildConfig;
 import com.bambuser.broadcaster.BroadcastStatus;
@@ -220,7 +221,7 @@ public class Go_New_live extends AppCompatActivity {
         mPreviewSurface = findViewById(R.id.live_stream_page);
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
-        mBroadcaster.setTitle("FLOOD-VIR");
+        mBroadcaster.setTitle("LiveBroadcast");
         mBroadcaster.setAuthor("NISPSAS-VIR");
         mBroadcaster.setSendPosition(true);
         mBroadcastButton = findViewById(R.id.live_event);
@@ -236,7 +237,12 @@ public class Go_New_live extends AppCompatActivity {
                 final int viewId = v.getId();
                 if (mBroadcaster.canStartBroadcasting()){
                     mBroadcaster.startBroadcast();
-                floodAlert();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            floodAlert();
+                        }
+                    }, 5000);
                 }else{
                     mBroadcaster.stopBroadcast();
                 } if (viewId == R.id.SwitchCameraButton) {
@@ -350,7 +356,7 @@ public class Go_New_live extends AppCompatActivity {
 
     private void floodAlert() {
 
-        String type="Flood";
+        String type="LiveBroadcast";
         startLocationUpdates();
         startLocation();
 
@@ -372,26 +378,20 @@ public class Go_New_live extends AppCompatActivity {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
-
-                        Toast.makeText(getApplicationContext(), "Flood Alert Sent Successfully",
-                                Toast.LENGTH_LONG).show();
+                        FancyToast.makeText(getApplicationContext(), "You are now broadcasting live", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
                     } else {
 
-                        Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                                Toast.LENGTH_LONG).show();
+                        FancyToast.makeText(getApplicationContext(), "Live Broadcast Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-
-                    Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                            Toast.LENGTH_LONG).show();
+                    FancyToast.makeText(getApplicationContext(), "No Internet Connection", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                 }
             });
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Flood Alert Failed",
-                    Toast.LENGTH_LONG).show();
+            FancyToast.makeText(getApplicationContext(), "Live Broadcast Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
 
         }
     }
