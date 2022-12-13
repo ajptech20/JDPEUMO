@@ -5,6 +5,7 @@ public interface Constants {
     String BASE_URL = "https://nispsas.com.ng/";
     String Reg_School = "https://nispsas.com.ng/PCAS/Mobile/";
     String USERNAME = "username";
+    String ACC_STATUS = "account";
     String USERTOWN = "town";
     String USERLGA = "lga";
     String PHONE_NUMBER = "phone_number";

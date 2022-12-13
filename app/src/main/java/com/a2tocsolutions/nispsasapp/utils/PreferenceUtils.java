@@ -33,6 +33,11 @@ public class PreferenceUtils {
         return prefs.getString(Constants.USERNAME, "");
     }
 
+    public static String getConfStatus(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.ACC_STATUS, "");
+    }
+
     public static String getTown(Context context) {
         SharedPreferences prefs = getDefaultSharedPreferences(context);
         return prefs.getString(Constants.USERTOWN, "");
@@ -58,6 +63,14 @@ public class PreferenceUtils {
         SharedPreferences prefs = getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();
         prefsEditor.putString(Constants.STATE, state);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean saveConfirmedCode(String account, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.ACC_STATUS, account);
         prefsEditor.apply();
         return true;
     }

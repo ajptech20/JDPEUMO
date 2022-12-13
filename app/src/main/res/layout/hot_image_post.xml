@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".picture_uploader">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="770dp"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="18dp">
+
+        <com.bambuser.broadcaster.SurfaceViewWithAutoAR
+            android:id="@+id/image_upload_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/stop_close_live3"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_clear_black_24dp" />
+
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="12dp"
+                android:text="Abu Pau"
+                android:layout_marginEnd="50dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:elevation="12dp"
+                android:id="@+id/view2"
+                app:cardCornerRadius="40dp"
+                android:layout_marginTop="10dp"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+                <ImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/user_img"/>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/status_live"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"/>
+        <ImageView
+            android:id="@+id/video_on"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="130dp"
+            android:layout_marginStart="8dp"/>
+        <ImageView
+            android:id="@+id/change_camera"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="200dp"
+            android:layout_marginStart="8dp"/>
+
+        <!--<ImageView
+            android:layout_width=""
+            android:layout_height=""
+            stat_notify_call_mute
+            ic_outline_videocam_off_24/>-->
+
+        <ImageView
+            android:id="@+id/mich_on"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="8dp"/>
+
+        <ImageView
+            android:id="@+id/PhotoButton"
+            android:layout_width="65dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="173dp"
+            android:layout_gravity="bottom"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/take_pic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/calibri"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="11dp"
+            android:layout_marginEnd="225dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="80dp"
+            android:text="Please Select State:"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/stateSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="5dp"
+            android:layout_marginEnd="225dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="60dp"
+            android:textSize="16dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/calibri"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="11dp"
+            android:layout_marginEnd="225dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="25dp"
+            android:text="Please Select L.G.A:"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+        <Spinner
+            android:id="@+id/lgaSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="225dp"
+            android:layout_gravity="bottom"
+            android:padding="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="16dp"/>
+
+        <!--<Spinner
+            android:id="@+id/image_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:entries="@array/live_vid_option"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="Select Here"
+            android:padding="10dp"
+            android:textSize="14dp"
+            android:layout_marginEnd="225dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="35dp"/>-->
+
+        <EditText
+            android:id="@+id/say_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="250dp"
+            android:textColorHint="@color/ic_launcher_background"
+            android:textColor="@color/ic_launcher_background"
+            android:focusable="true"
+            android:textSize="14dp"
+            android:hint="What is happening in this area..."
+            android:layout_marginBottom="35dp"
+            android:inputType="text" />
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="18dp"
+        android:layout_gravity="bottom">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:padding="8dp"
+                android:text="IMAGE"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/shorts_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:layout_marginStart="48dp"
+                android:text="SHORT"
+                android:textColor="#F80E0E"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/select_from_gala"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="40dp"
+                android:padding="8dp"
+                android:background="@drawable/ic_baseline_folder_24"
+                android:textColor="#F80E0E"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/SwitchCameraButton"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:background="@drawable/ic_baseline_sync_24"
+                android:textColor="#F80E0E"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

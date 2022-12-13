@@ -97,7 +97,10 @@ public class Video_post_player extends Activity {
         go_home.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Video_post_player.this, Activity_home.class);
+                Intent intent = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    intent = new Intent(Video_post_player.this, Activity_home.class);
+                }
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
@@ -200,6 +203,14 @@ public class Video_post_player extends Activity {
                 //Intent intent = new Intent(getApplicationContext(), picture_uploader.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                finish();
+            }
+        });
+
+        ImageView close = findViewById(R.id.stop_close_live3);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

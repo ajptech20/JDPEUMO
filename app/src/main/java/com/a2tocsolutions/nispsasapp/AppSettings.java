@@ -1,23 +1,97 @@
 package com.a2tocsolutions.nispsasapp;
 
+import static com.a2tocsolutions.nispsasapp.utils.Constants.BASE_URL;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.a2tocsolutions.nispsasapp.model.ExtinguisherResponse;
+import com.a2tocsolutions.nispsasapp.networking.api.Service;
+import com.a2tocsolutions.nispsasapp.networking.generator.DataGenerator;
+import com.a2tocsolutions.nispsasapp.utils.FancyToast;
 import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AppSettings extends AppCompatActivity {
+
+    private String Unconfirmed;
+    private String Confirmed;
+
+    @BindView(R.id.very_progress_bar)
+    ProgressBar veryprogress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Unconfirmed = "Confirmed";
+        //Unconfirmed = (PreferenceUtils.getConfStatus(getApplicationContext()));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_settings_options);
-        ImageView go_home = findViewById(R.id.close_settings);
+        if ((PreferenceUtils.getConfStatus(getApplicationContext())) != ""){
+            LinearLayout confirmed = findViewById(R.id.confirmed_acc);
+            confirmed.setVisibility(View.VISIBLE);
+        }else{
+            LinearLayout notyetcon = findViewById(R.id.unconfirmed);
+            notyetcon.setVisibility(View.VISIBLE);
+        }
+
+        Button show = (Button) findViewById(R.id.confirm_me);
+        show.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View view) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(AppSettings.this);
+                //alertDialog.setTitle("Verification Code");
+                alertDialog.setMessage("Enter Your J-WATCHER Verification Code");
+                alertDialog.setIcon(R.drawable.ic_baseline_vpn_key_24);
+                final EditText input = new EditText(AppSettings.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertDialog.setView(input);
+
+
+                alertDialog.setPositiveButton("Confirm",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int which) {
+                                //String username = PreferenceUtils.getUsername(getApplicationContext());
+                                Boolean wantToCloseDialog = false;
+                                String jwcode = input.getText().toString();
+                                if (jwcode != ""){
+                                    verifyPersonel(jwcode);
+                                    //Toast.makeText(getApplicationContext(),"Your Code is" + jwcode , Toast.LENGTH_SHORT).show();
+                                }return;
+                            }
+                        });
+                alertDialog.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                alertDialog.show();
+            }
+
+        });
+
         ImageView edit_user_profile = findViewById(R.id.edit_profile);
         RelativeLayout aboutUs = findViewById(R.id.about_us);
         RelativeLayout Privacy = findViewById(R.id.privacy_policy);
@@ -39,16 +113,10 @@ public class AppSettings extends AppCompatActivity {
                 .load(user_image)
                 .into(imageView);
 
-        go_home.setOnClickListener(new View.OnClickListener() {
+        ImageView close = findViewById(R.id.close_settings);
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                    intent = new Intent(AppSettings.this, Activity_home.class);
-                }
-                //Intent intent = new Intent(getApplicationContext(), Go_New_live.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                 finish();
             }
         });
@@ -64,4 +132,56 @@ public class AppSettings extends AppCompatActivity {
         });
 
     }
+
+    private void verifyPersonel(String jwcode){
+        ProgressBar progression = findViewById(R.id.very_progress_bar);
+        progression.setVisibility(View.VISIBLE);
+        try {
+            Service service = DataGenerator.createService(Service.class, BASE_URL);
+            String userphone = PreferenceUtils.getPhoneNumber(getApplicationContext());
+            Call<ExtinguisherResponse> call = service.verifyJpersonnel(jwcode, userphone);
+            call.enqueue(new Callback<ExtinguisherResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<ExtinguisherResponse> call, @NonNull Response<ExtinguisherResponse> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            ExtinguisherResponse extinguisherResponse = response.body();
+                            String message = extinguisherResponse.getResponse();
+                            progression.setVisibility(View.GONE);
+                            FancyToast.makeText(getApplicationContext(), "Congrats Your Account is verified kindly close this window and reopen ", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                            updateUi();
+                            PreferenceUtils.saveConfirmedCode("Confirmed", getApplicationContext());
+                            //Toast.makeText(AppSettings.this, extinguisherResponse.getResponse(), Toast.LENGTH_LONG).show();
+                        }else {
+
+                        }
+                    }
+                }
+                @Override
+                public void onFailure(@NonNull Call<ExtinguisherResponse> call, @NonNull Throwable t) {
+                    progression.setVisibility(View.GONE);
+                    FancyToast.makeText(getApplicationContext(), "No Internet Connection or Invalid Code", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }
+            });
+        } catch (Exception e) {
+            progression.setVisibility(View.GONE);
+            FancyToast.makeText(getApplicationContext(), "Error Invalid Code", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+
+        }
+
+    }
+
+    private void updateUi(){
+        Unconfirmed = (PreferenceUtils.getConfStatus(getApplicationContext()));
+        Confirmed = (PreferenceUtils.getConfStatus(getApplicationContext()));
+        if (Unconfirmed == ""){
+            LinearLayout notyetcon = findViewById(R.id.unconfirmed);
+            notyetcon.setVisibility(View.VISIBLE);
+        }
+        if (Confirmed == "Confirmed"){
+            LinearLayout confirmed = findViewById(R.id.confirmed_acc);
+            confirmed.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

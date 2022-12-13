@@ -73,7 +73,7 @@
                         android:textCursorDrawable="@color/colorPrimary"/>-->
 
                     <Button
-                        android:id="@+id/electionSubmit"
+                        android:id="@+id/profileSubmit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"

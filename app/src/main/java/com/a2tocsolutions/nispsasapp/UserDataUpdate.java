@@ -165,7 +165,7 @@ public class UserDataUpdate extends AppCompatActivity {
         mLgaSpinner = findViewById(R.id.lgaSpinner);
         resizeSpinner(mStateSpinner, SPINNER_HEIGHT);
         resizeSpinner(mLgaSpinner, SPINNER_HEIGHT);
-        Button submit = findViewById(R.id.electionSubmit);
+        Button submit = findViewById(R.id.profileSubmit);
 
         ImageView select_image = findViewById(R.id.set_profile_image);
 
@@ -250,7 +250,6 @@ public class UserDataUpdate extends AppCompatActivity {
         });*/
 
         states = Nigeria.getStates();
-
         //call to method that'll set up state and lga spinner
         setupSpinners();
 

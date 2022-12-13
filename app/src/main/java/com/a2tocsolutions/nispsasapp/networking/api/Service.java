@@ -81,8 +81,21 @@ public interface Service {
     Call<Void> ShortVidPost(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
 
     @FormUrlEncoded
+    @POST(Routes.POST_GBVFORM_URL + "/pushGbvForm")
+    Call<Void> SubmitGbvForm(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("fullname") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type,
+                             @Field("optphysical") String physicaltype, @Field("optsex") String sextype, @Field("optemotion") String emotiontype, @Field("optsocial") String sociotype, @Field("optharm") String harmfultype, @Field("optwitness") String witness, @Field("optvictim") String victim, @Field("address") String address, @Field("victphone") String victphone);
+
+    @FormUrlEncoded
     @POST(Routes.POST_REP_URL + "/pushImagePost")
     Call<Void> ImagePostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST(Routes.POST_REP_URL + "/pushHotImagePost")
+    Call<Void> HotImagePostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("statehot") String hotstate, @Field("lgahot") String hotlga, @Field("repcomment") String comment, @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST(Routes.POST_REP_URL + "/pushHotShortVidPost")
+    Call<Void> HotShortVidPostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("statehot") String hotstate, @Field("lgahot") String hotlga, @Field("repcomment") String comment, @Field("type") String type);
 
     @FormUrlEncoded
     @POST(Routes.CRIME_ALERT + "/pushCrimeAlerts")
@@ -102,6 +115,10 @@ public interface Service {
     @FormUrlEncoded
     @POST(Routes.VERIFY_ADDRESS + "/VerifyAddress")
     Call<ExtinguisherResponse> verifyAddress(@Field("phonenumber") String phone);
+
+    @FormUrlEncoded
+    @POST(Routes.VERIFY_JWATCHER_PERSON + "/VerifyJpersonnel")
+    Call<ExtinguisherResponse> verifyJpersonnel(@Field("armecode") String jwcode, @Field("phone") String userphone);
 
     @FormUrlEncoded
     @POST(Routes.VERIFY_NATIONAL + "/VerifyNational")

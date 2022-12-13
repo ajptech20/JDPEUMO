@@ -4,6 +4,7 @@ import static com.a2tocsolutions.nispsasapp.utils.Constants.GET_HOT_URL;
 
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,8 +85,10 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
     private View dim;
     private View slideView;
     private View liveVid;
+    private String Unconfirmed;
+    private String Confirmed;
 
-    FloatingActionButton flHotZone, flGbvForm, mAddCfm;
+    FloatingActionButton flGoLive, flShortVid, flImagePost;
     FloatingActionButton mMainbutton;
     //TextView addAlarmActionText, addPersonActionText;
     Boolean isAllFabsVisible;
@@ -95,26 +99,43 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
         setContentView(R.layout.activity_main2);
 
         mMainbutton = findViewById(R.id.floating_action_button);
-        flHotZone = findViewById(R.id.hot_zone);
-        flGbvForm = findViewById(R.id.gbv_form);
-        mAddCfm = findViewById(R.id.campaine_finance);
+        flGoLive = findViewById(R.id.go_live_stream);
+        flShortVid = findViewById(R.id.post_new_short);
+        flImagePost = findViewById(R.id.post_new_image);
 
         /*addAlarmActionText = findViewById(R.id.add_alarm_action_text);
         addPersonActionText = findViewById(R.id.add_person_action_text);*/
 
-        flHotZone.setVisibility(View.GONE);
-        flGbvForm.setVisibility(View.GONE);
-        mAddCfm.setVisibility(View.GONE);
+        flGoLive.setVisibility(View.GONE);
+        flShortVid.setVisibility(View.GONE);
+        flImagePost.setVisibility(View.GONE);
         isAllFabsVisible = false;
-        ImageView live_stream_starter = findViewById(R.id.go_live_stream);
+
+        ImageView gbv_plain_form_rep = findViewById(R.id.gbv_plain_form);
         String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
         ImageView imageView = (ImageView) findViewById(R.id.app_profile);
         Glide.with(Activity_home.this)
                 .load(user_image)
                 .into(imageView);
         ImageView open_settings = findViewById(R.id.app_profile);
-        ImageView image_uploader_starter = findViewById(R.id.post_new_image);
-        ImageView video_uploader_starter = findViewById(R.id.post_new_short);
+        if ((PreferenceUtils.getConfStatus(getApplicationContext())) != ""){
+            ImageView campain_finance_form = findViewById(R.id.campaign_fin_monitor);
+            campain_finance_form.setVisibility(View.VISIBLE);
+            campain_finance_form.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = "https://nispsas.com.ng/NISPSAS/Registration/verifyCfm";
+                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                    CustomTabsIntent customTabsIntent = builder.build();
+                    customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    customTabsIntent.launchUrl(getApplicationContext(), Uri.parse(url));
+                }
+            });
+        }else{
+            ImageView camp_icon = findViewById(R.id.campaign_fin_monitor);
+            camp_icon.setVisibility(View.GONE);
+        }
+        ImageView hot_zone_rep = findViewById(R.id.hot_zone_area);
         ImageView view_image_post = findViewById(R.id.image_posts);
         ImageView open_appsettings = findViewById(R.id.app_settings);
         ImageView view_live_videos = findViewById(R.id.view_live_posts);
@@ -131,7 +152,7 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
         verifyPsid(callid);
 
         String callid2 = (live_vid2);
-        verifyPsid2(callid2);
+        GetHotzones(callid2);
 
         //Initializing Views
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -204,36 +225,14 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
             }
         });
 
-        live_stream_starter.setOnClickListener(new View.OnClickListener() {
+        gbv_plain_form_rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity_home.this, Go_New_live.class);
+                Intent intent = new Intent(Activity_home.this, Gbv_form_Activity.class);
                 //Intent intent = new Intent(getApplicationContext(), Go_New_live.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
-        /*NestedScrool.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Activity_home.this, GetArticles.class);
-                //Intent intent = new Intent(getApplicationContext(), GetArticles.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
-            }
-        });*/
-
-        image_uploader_starter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Activity_home.this, picture_uploader.class);
-                //Intent intent = new Intent(getApplicationContext(), picture_uploader.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
+                //finish();
             }
         });
 
@@ -244,18 +243,18 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                 //Intent intent = new Intent(getApplicationContext(), picture_uploader.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
+                //finish();
             }
         });
 
-        video_uploader_starter.setOnClickListener(new View.OnClickListener() {
+        hot_zone_rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity_home.this, shortvideo_uploader.class);
+                Intent intent = new Intent(Activity_home.this, hot_picture_uploader.class);
                 //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
+                //finish();
             }
         });
 
@@ -266,7 +265,7 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                 //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
+                //finish();
             }
         });
 
@@ -277,7 +276,7 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                 //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
+                //finish();
             }
         });
 
@@ -306,18 +305,18 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                     public void onClick(View view) {
                         if (!isAllFabsVisible) {
 
-                            flHotZone.show();
-                            flGbvForm.show();
-                            mAddCfm.show();
+                            flGoLive.show();
+                            flShortVid.show();
+                            flImagePost.show();
                             //addAlarmActionText.setVisibility(View.VISIBLE);
                             //addPersonActionText.setVisibility(View.VISIBLE);
 
                             //mAddFab.extend();
                             isAllFabsVisible = true;
                         } else {
-                            flHotZone.hide();
-                            flGbvForm.hide();
-                            mAddCfm.hide();
+                            flGoLive.hide();
+                            flShortVid.hide();
+                            flImagePost.hide();
                             //addAlarmActionText.setVisibility(View.GONE);
                             //addPersonActionText.setVisibility(View.GONE);
                             //mAddFab.shrink();
@@ -326,25 +325,31 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
                     }
                 });
 
-        flGbvForm.setOnClickListener(
+        flShortVid.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(Activity_home.this, "Gbv Form Cliked", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Activity_home.this, shortvideo_uploader.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                     }
                 });
-        flHotZone.setOnClickListener(
+        flGoLive.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(Activity_home.this, "Hot Zone Clicked", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Activity_home.this, Go_New_live.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                     }
                 });
-        mAddCfm.setOnClickListener(
+        flImagePost.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(Activity_home.this, "CFM Form Cliked", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Activity_home.this, picture_uploader.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
                     }
                 });
 
@@ -534,7 +539,7 @@ public class Activity_home extends AppCompatActivity implements RecyclerView.OnS
         return true;
     }
 
-    private void verifyPsid2(String callid) {
+    private void GetHotzones(String callid) {
         if (verifyFields2()) {
             //progress.setVisibility(View.VISIBLE);
             try {

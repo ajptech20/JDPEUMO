@@ -54,11 +54,11 @@
                     android:textColor="#090909"
                     android:textSize="14sp" />
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_baseline_more_vert_24" />
+                    android:src="@drawable/ic_baseline_more_vert_24" />-->
             </RelativeLayout>
 
             <com.android.volley.toolbox.NetworkImageView

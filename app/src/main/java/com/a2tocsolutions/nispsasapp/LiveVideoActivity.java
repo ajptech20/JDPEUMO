@@ -1,6 +1,7 @@
 package com.a2tocsolutions.nispsasapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mancj.slideup.SlideUp;
 
 import org.json.JSONArray;
@@ -49,6 +52,8 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
     private View dim;
     private View slideView;
     private View liveVid;
+    private String Unconfirmed;
+    private String Confirmed;
 
     //Volley Request Queue
     private RequestQueue requestQueue;
@@ -56,10 +61,29 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
     //The request counter to send ?page=1, ?page=2  requests
     private int requestCount = 1;
 
+    FloatingActionButton flGoLive, flShortVid, flImagePost;
+    FloatingActionButton mMainbutton;
+    //TextView addAlarmActionText, addPersonActionText;
+    Boolean isAllFabsVisible;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_video_activity);
+
+        mMainbutton = findViewById(R.id.floating_action_button);
+        flGoLive = findViewById(R.id.go_live_stream);
+        flShortVid = findViewById(R.id.post_new_short);
+        flImagePost = findViewById(R.id.post_new_image);
+
+        /*addAlarmActionText = findViewById(R.id.add_alarm_action_text);
+        addPersonActionText = findViewById(R.id.add_person_action_text);*/
+
+        flGoLive.setVisibility(View.GONE);
+        flShortVid.setVisibility(View.GONE);
+        flImagePost.setVisibility(View.GONE);
+        isAllFabsVisible = false;
+
         String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
         ImageView imageView = (ImageView) findViewById(R.id.app_profile);
         Glide.with(LiveVideoActivity.this)
@@ -67,9 +91,32 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
                 .into(imageView);
         ImageView open_settings = findViewById(R.id.app_profile);
         ImageView open_appsettings = findViewById(R.id.app_settings);
-        ImageView live_stream_starter = findViewById(R.id.go_live_stream);
-        ImageView image_uploader_starter = findViewById(R.id.post_new_image);
-        ImageView video_uploader_starter = findViewById(R.id.post_new_short);
+        ImageView gbv_plain_form_rep = findViewById(R.id.gbv_plain_form);
+        if ((PreferenceUtils.getConfStatus(getApplicationContext())) != ""){
+            ImageView campain_finance_form = findViewById(R.id.campaign_fin_monitor);
+            campain_finance_form.setVisibility(View.VISIBLE);
+            campain_finance_form.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = "https://nispsas.com.ng/NISPSAS/Registration/verifyCfm";
+                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                    CustomTabsIntent customTabsIntent = builder.build();
+                    customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    customTabsIntent.launchUrl(getApplicationContext(), Uri.parse(url));
+                }
+            });
+        }else{
+            ImageView camp_icon = findViewById(R.id.campaign_fin_monitor);
+            camp_icon.setVisibility(View.GONE);
+        }
+        ImageView close = findViewById(R.id.back_home);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        ImageView hot_zone_rep = findViewById(R.id.hot_zone_area);
         slideView = findViewById(R.id.slideView);
         liveVid = findViewById(R.id.new_stream);
         dim = findViewById(R.id.dim);
@@ -102,12 +149,9 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
         recyclerView.setAdapter(adapter);
 
         ImageView go_home = findViewById(R.id.app_home1);
-        go_home.setOnClickListener(new View.OnClickListener()  {
+        go_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LiveVideoActivity.this, Activity_home.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
             }
         });
@@ -135,38 +179,28 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
             }
         });
 
-        live_stream_starter.setOnClickListener(new View.OnClickListener() {
+        gbv_plain_form_rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LiveVideoActivity.this, Go_New_live.class);
+                Intent intent = new Intent(LiveVideoActivity.this, Gbv_form_Activity.class);
                 //Intent intent = new Intent(getApplicationContext(), Go_New_live.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
+                //finish();
             }
         });
 
-        image_uploader_starter.setOnClickListener(new View.OnClickListener() {
+        hot_zone_rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LiveVideoActivity.this, picture_uploader.class);
-                //Intent intent = new Intent(getApplicationContext(), picture_uploader.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
-        video_uploader_starter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LiveVideoActivity.this, shortvideo_uploader.class);
+                Intent intent = new Intent(LiveVideoActivity.this, hot_picture_uploader.class);
                 //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
+                //finish();
             }
         });
+
         ImageView view_image_post = findViewById(R.id.image_posts);
         view_image_post.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +243,60 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
                 //finish();
             }
         });
+
+        mMainbutton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!isAllFabsVisible) {
+
+                            flGoLive.show();
+                            flShortVid.show();
+                            flImagePost.show();
+                            //addAlarmActionText.setVisibility(View.VISIBLE);
+                            //addPersonActionText.setVisibility(View.VISIBLE);
+
+                            //mAddFab.extend();
+                            isAllFabsVisible = true;
+                        } else {
+                            flGoLive.hide();
+                            flShortVid.hide();
+                            flImagePost.hide();
+                            //addAlarmActionText.setVisibility(View.GONE);
+                            //addPersonActionText.setVisibility(View.GONE);
+                            //mAddFab.shrink();
+                            isAllFabsVisible = false;
+                        }
+                    }
+                });
+
+        flShortVid.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(LiveVideoActivity.this, shortvideo_uploader.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                    }
+                });
+        flGoLive.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(LiveVideoActivity.this, Go_New_live.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                    }
+                });
+        flImagePost.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(LiveVideoActivity.this, picture_uploader.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                    }
+                });
 
 
     }

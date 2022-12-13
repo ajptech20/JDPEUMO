@@ -384,12 +384,9 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
         });
 
         ImageView close = findViewById(R.id.stop_close_live3);
-        close.setOnClickListener(new View.OnClickListener()  {
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(picture_uploader.this, Activity_home.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
             }
         });

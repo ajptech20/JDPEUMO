@@ -1,12 +1,12 @@
 package com.a2tocsolutions.nispsasapp;
 
-import android.Manifest;
+import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,12 +14,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.SurfaceView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -34,10 +32,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.a2tocsolutions.nispsasapp.Fragments.AlertFrag;
-import com.a2tocsolutions.nispsasapp.activities.CovidActivity;
-import com.a2tocsolutions.nispsasapp.activities.HowToActivity;
-import com.a2tocsolutions.nispsasapp.activities.MyCustomPagerAdapter;
-//import com.a2tocsolutions.nispsasapp.adapter.ArticleAdapter;
 import com.a2tocsolutions.nispsasapp.adapter.ArticleslideAdapter;
 import com.a2tocsolutions.nispsasapp.database.AppDatabase;
 import com.a2tocsolutions.nispsasapp.database.ArticleEntry;
@@ -50,11 +44,6 @@ import com.a2tocsolutions.nispsasapp.utils.AppExecutors;
 import com.a2tocsolutions.nispsasapp.utils.FancyToast;
 import com.a2tocsolutions.nispsasapp.utils.PreferenceUtils;
 import com.afollestad.materialdialogs.BuildConfig;
-import com.bambuser.broadcaster.BroadcastStatus;
-import com.bambuser.broadcaster.Broadcaster;
-import com.bambuser.broadcaster.CameraError;
-import com.bambuser.broadcaster.ConnectionError;
-import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -66,7 +55,6 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.InstallState;
@@ -89,13 +77,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Go_New_live extends AppCompatActivity {
-    private static final String LOGTAG = "Mybroadcastingapp";
+public class Gbv_form_Activity extends AppCompatActivity{
 
-    private static final String APPLICATION_ID = "mOQq8sbExROCWxFjbkGoaA";
-
-
-    private static final String TAG = "NEMA";
+    private static final String TAG = "GBV";
     private static final int RC_APP_UPDATE = 0;
     AlertFrag mActivity = new AlertFrag();
     private static int i = 0;
@@ -103,8 +87,12 @@ public class Go_New_live extends AppCompatActivity {
     //private ArticleAdapter articleAdapter;
     private ArticleslideAdapter articleslideAdapter;
     private static final int REQUEST_PERMISSIONS = 100;
-    private TabLayout tabLayout;
-    private Spinner live_stream_types;
+    private Spinner gbv_rep_type_option;
+    private Spinner gbv_rep_type_option_physical_selected;
+    private Spinner gbv_rep_type_option_sex_selected;
+    private Spinner gbv_rep_type_option_emotion_selected;
+    private Spinner gbv_rep_type_option_socio_selected;
+    private Spinner gbv_rep_type_option_harmful_tradition_selected;
     private String swi;
 
 
@@ -130,9 +118,6 @@ public class Go_New_live extends AppCompatActivity {
     @BindView(R.id.progress_text2)
     TextView progress_text;
 
-    @BindView(R.id.image_activity)
-    TextView switch_home;
-
 
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
@@ -154,7 +139,6 @@ public class Go_New_live extends AppCompatActivity {
     private static final int REQUEST_READ_PHONE_STATE = 45;
     private TextView nam;
     private TextView namm;
-    private Spinner typereport;
 
 
     // location updates interval - 10sec
@@ -190,78 +174,43 @@ public class Go_New_live extends AppCompatActivity {
     final int pixelsToMove = 1080;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     ViewPager viewPager;
-
-    MyCustomPagerAdapter myCustomPagerAdapter;
     private boolean isCanceled;
     private boolean Gott;
     private int progressStatus = 0;
     private View SwitchButton;
 
-    public Go_New_live() {
+    public Gbv_form_Activity() {
 
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.live_stream_activity);
+        setContentView(R.layout.gbv_form_activity);
         String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
-        ImageView imageView = (ImageView) findViewById(R.id.user_image);
-        Glide.with(Go_New_live.this)
-                .load(user_image)
-                .into(imageView);
-        TextView username = findViewById(R.id.user_name);
-        username.setText(PreferenceUtils.getUsername(getApplicationContext()));
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         phonenumber = PreferenceUtils.getPhoneNumber(getApplicationContext());
         reporter = PreferenceUtils.getPhoneNumber(getApplicationContext());
         repname = PreferenceUtils.getUsername(getApplicationContext());
         repstate = PreferenceUtils.getState(getApplicationContext());
         replga = PreferenceUtils.getLga(getApplicationContext());
-        mPreviewSurface = findViewById(R.id.live_stream_page);
-        mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
-        mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
-        mBroadcaster.setTitle("LiveBroadcast");
-        mBroadcaster.setAuthor("NISPSAS-VIR");
-        mBroadcaster.setSendPosition(true);
-        mBroadcastButton = findViewById(R.id.live_event);
-        mBroadcastButton2 = findViewById(R.id.mich_on);
-        mBroadcastsatus = findViewById(R.id.status_live);
-        mBroadcastButton3 = findViewById(R.id.video_on);
-        mBroadcastclose = findViewById(R.id.stop_close_live2);
-        mBroadcastcamchange = findViewById(R.id.change_camera);
-        SwitchButton = findViewById(R.id.SwitchCameraButton);
-        mBroadcastButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int viewId = v.getId();
-                if (mBroadcaster.canStartBroadcasting()){
-                    mBroadcaster.startBroadcast();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            floodAlert();
-                        }
-                    }, 5000);
-                }else{
-                    mBroadcaster.stopBroadcast();
-                } if (viewId == R.id.SwitchCameraButton) {
-                    mBroadcaster.switchCamera();
-                    //Log.e(TAG, "Button Cliked: something else");
-                }if (viewId == R.id.change_camera){
-                    mBroadcaster.switchCamera();
-                    Log.e(TAG, "Button Cliked: something else");
-                }
-                /*new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mBroadcaster.stopBroadcast();
-                    }
-                }, 60000);*/
-            }
-        });
-        live_stream_types = (Spinner) findViewById(R.id.live_type);
-        live_stream_types.setOnItemSelectedListener(new Go_New_live.ItemSelectedListener());
+        gbv_rep_type_option = (Spinner) findViewById(R.id.rep_type);
+        gbv_rep_type_option.setOnItemSelectedListener(new Gbv_form_Activity.ItemSelectedListener());
+
+        gbv_rep_type_option_physical_selected = (Spinner) findViewById(R.id.option_physical);
+        gbv_rep_type_option_physical_selected.setOnItemSelectedListener(new Gbv_form_Activity.ItemRepSelectedListener());
+
+        gbv_rep_type_option_sex_selected = (Spinner) findViewById(R.id.option_sexual);
+        gbv_rep_type_option_sex_selected.setOnItemSelectedListener(new Gbv_form_Activity.ItemRepSelectedListener());
+
+        gbv_rep_type_option_emotion_selected = (Spinner) findViewById(R.id.option_emotional);
+        gbv_rep_type_option_emotion_selected.setOnItemSelectedListener(new Gbv_form_Activity.ItemRepSelectedListener());
+
+        gbv_rep_type_option_socio_selected = (Spinner) findViewById(R.id.option_socio);
+        gbv_rep_type_option_socio_selected.setOnItemSelectedListener(new Gbv_form_Activity.ItemRepSelectedListener());
+
+        gbv_rep_type_option_harmful_tradition_selected = (Spinner) findViewById(R.id.option_harmful);
+        gbv_rep_type_option_harmful_tradition_selected.setOnItemSelectedListener(new Gbv_form_Activity.ItemRepSelectedListener());
 
         mDb = AppDatabase.getInstance(getApplicationContext());
 
@@ -284,7 +233,7 @@ public class Go_New_live extends AppCompatActivity {
 
                 try {
                     mAppUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo, AppUpdateType.FLEXIBLE, Go_New_live.this, RC_APP_UPDATE);
+                            appUpdateInfo, AppUpdateType.FLEXIBLE, Gbv_form_Activity.this, RC_APP_UPDATE);
                 } catch (IntentSender.SendIntentException e) {
                     e.printStackTrace();
                 }
@@ -296,16 +245,15 @@ public class Go_New_live extends AppCompatActivity {
                 Log.e(TAG, "checkForAppUpdateAvailability: something else");
             }
         });
-        ImageView switchcam = findViewById(R.id.SwitchCameraButton);
-        switchcam.setOnClickListener(new View.OnClickListener() {
+        Button submit = findViewById(R.id.button_submit);
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                mBroadcaster.switchCamera();
-                //Log.e(TAG, "Button Cliked: something else");
+            public void onClick(View view) {
+                floodAlert();
             }
         });
 
-        ImageView close = findViewById(R.id.stop_close_live2);
+        TextView close = findViewById(R.id.close_form);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -313,47 +261,11 @@ public class Go_New_live extends AppCompatActivity {
             }
         });
 
-        TextView ImageUp = findViewById(R.id.image_activity);
-        ImageUp.setOnClickListener(new View.OnClickListener()  {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Go_New_live.this, picture_uploader.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
-        TextView shorts = findViewById(R.id.shorts_up);
-        shorts.setOnClickListener(new View.OnClickListener()  {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Go_New_live.this, shortvideo_uploader.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
-                finish();
-            }
-        });
-
-    }
-
-    public class ItemSelectedListener implements AdapterView.OnItemSelectedListener{
-        //get first string in the array
-        String firstItem = String.valueOf(live_stream_types.getSelectedItem());
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.WHITE);
-            firstItem.equals(String.valueOf(live_stream_types.getSelectedItem()));
-        }
-        @Override
-        public void onNothingSelected(AdapterView<?> arg){
-
-        }
-
     }
 
     private void floodAlert() {
 
-        String type="LiveBroadcast";
+        String type="GbvForm";
         startLocationUpdates();
         startLocation();
 
@@ -366,19 +278,33 @@ public class Go_New_live extends AppCompatActivity {
             //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
 
             Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            String mreptype = live_stream_types.getSelectedItem().toString();
-            EditText input_post_comment = findViewById(R.id.say_comment);
-            String comment = input_post_comment.getText().toString().trim();
-            Call<Void> call = service.goingLivePost(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type);
+            String mreptype = gbv_rep_type_option.getSelectedItem().toString();
+            String physicaltype = gbv_rep_type_option_physical_selected.getSelectedItem().toString();
+            String sextype = gbv_rep_type_option_sex_selected.getSelectedItem().toString();
+            String emotiontype = gbv_rep_type_option_emotion_selected.getSelectedItem().toString();
+            String sociotype = gbv_rep_type_option_socio_selected.getSelectedItem().toString();
+            String harmfultype = gbv_rep_type_option_harmful_tradition_selected.getSelectedItem().toString();
+            EditText input_witness = findViewById(R.id.witness);
+            String witness = input_witness.getText().toString().trim();
+            EditText input_victname = findViewById(R.id.victim);
+            String victim = input_victname.getText().toString().trim();
+            EditText input_victimadd = findViewById(R.id.add_of_victim);
+            String address = input_victimadd.getText().toString().trim();
+            EditText input_victimphoe = findViewById(R.id.victim_phone);
+            String victphone = input_victimphoe.getText().toString().trim();
+            EditText input_gencomment = findViewById(R.id.gen_comment);
+            String comment = input_gencomment.getText().toString().trim();
+            Call<Void> call = service.SubmitGbvForm(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type, physicaltype, sextype, emotiontype, sociotype, harmfultype, witness, victim, address, victphone);
 
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
-                        FancyToast.makeText(getApplicationContext(), "You are now broadcasting live", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        FancyToast.makeText(getApplicationContext(), "Your Short Video Post was successfull", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        //emptyInputEditText();
                     } else {
 
-                        FancyToast.makeText(getApplicationContext(), "Live Broadcast Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                        FancyToast.makeText(getApplicationContext(), "Short Video Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                     }
                 }
 
@@ -388,9 +314,60 @@ public class Go_New_live extends AppCompatActivity {
                 }
             });
         } catch (Exception e) {
-            FancyToast.makeText(getApplicationContext(), "Live Broadcast Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+            FancyToast.makeText(getApplicationContext(), "Short Video Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
 
         }
+    }
+
+    private void requestPermissions(List<String> missingPermissions, int code) {
+        mInPermissionRequest = true;
+        String[] permissions = missingPermissions.toArray(new String[missingPermissions.size()]);
+        try {
+            getClass().getMethod("requestPermissions", String[].class, Integer.TYPE).invoke(this, permissions, code);
+        } catch (Exception ignored) {}
+    }
+
+    public class ItemSelectedListener implements AdapterView.OnItemSelectedListener{
+        //get first string in the array
+        String firstItem = String.valueOf(gbv_rep_type_option.getSelectedItem());
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            firstItem.equals(String.valueOf(gbv_rep_type_option.getSelectedItem()));
+            if (gbv_rep_type_option.getSelectedItem().toString().equals("Physical")){
+                gbv_rep_type_option_physical_selected.setVisibility(View.VISIBLE);
+            }
+            if (gbv_rep_type_option.getSelectedItem().toString().equals("Sexual")){
+                gbv_rep_type_option_sex_selected.setVisibility(View.VISIBLE);
+            }
+            if (gbv_rep_type_option.getSelectedItem().toString().equals("Emotional and psychological")){
+                gbv_rep_type_option_emotion_selected.setVisibility(View.VISIBLE);
+            }
+            if (gbv_rep_type_option.getSelectedItem().toString().equals("Socio-economic")){
+                gbv_rep_type_option_socio_selected.setVisibility(View.VISIBLE);
+            }
+            if (gbv_rep_type_option.getSelectedItem().toString().equals("Harmful traditional practices")){
+                gbv_rep_type_option_harmful_tradition_selected.setVisibility(View.VISIBLE);
+            }
+
+        }
+        public void onNothingSelected(AdapterView<?> arg){
+
+        }
+
+    }
+
+    public class ItemRepSelectedListener implements AdapterView.OnItemSelectedListener{
+        //get first string in the array
+        String firstItem = String.valueOf(gbv_rep_type_option.getSelectedItem());
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
+
+        }
+        public void onNothingSelected(AdapterView<?> arg){
+
+        }
+
     }
 
     InstallStateUpdatedListener installStateUpdatedListener = new
@@ -482,7 +459,7 @@ public class Go_New_live extends AppCompatActivity {
     public void startLocation() {
         // Requesting ACCESS_FINE_LOCATION using Dexter library
         Dexter.withActivity(this)
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withPermission(permission.ACCESS_FINE_LOCATION)
                 .withListener(new PermissionListener() {
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
@@ -549,7 +526,7 @@ public class Go_New_live extends AppCompatActivity {
                                 // Show the dialog by calling startResolutionForResult(), and check the
                                 // result in onActivityResult().
                                 ResolvableApiException rae = (ResolvableApiException) e;
-                                rae.startResolutionForResult(Go_New_live.this, REQUEST_CHECK_SETTINGS);
+                                rae.startResolutionForResult(Gbv_form_Activity.this, REQUEST_CHECK_SETTINGS);
                             } catch (IntentSender.SendIntentException sie) {
                                 Log.i(TAG, "PendingIntent unable to execute request.");
                             }
@@ -559,31 +536,11 @@ public class Go_New_live extends AppCompatActivity {
                                     "fixed here. Fix in Settings.";
                             Log.e(TAG, errorMessage);
 
-                            Toast.makeText(Go_New_live.this, errorMessage, Toast.LENGTH_LONG).show();
+                            Toast.makeText(Gbv_form_Activity.this, errorMessage, Toast.LENGTH_LONG).show();
                     }
 
                     updateLocationUI();
                 });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            // Check for the integer request code originally supplied to startResolutionForResult().
-            case REQUEST_CHECK_SETTINGS:
-                switch (resultCode) {
-                    case Activity.RESULT_OK:
-                        Log.e(TAG, "User agreed to make required location settings changes.");
-                        // Nothing to do. startLocationupdates() gets called in onResume again.
-                        break;
-                    case Activity.RESULT_CANCELED:
-                        Log.e(TAG, "User chose not to make required location settings changes.");
-                        mRequestingLocationUpdates = false;
-                        break;
-                }
-                break;
-        }
     }
 
     private void openSettings() {
@@ -600,7 +557,7 @@ public class Go_New_live extends AppCompatActivity {
 
     private boolean checkPermissions() {
         int permissionState = ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
+                permission.ACCESS_FINE_LOCATION);
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
@@ -650,27 +607,6 @@ public class Go_New_live extends AppCompatActivity {
         }
     }
 
-    private void launchMedia() {
-        Intent intent = new Intent(this, CovidActivity.class);
-        startActivity(intent);
-    }
-
-    private void launchChat() {
-        Intent intent = new Intent(this, HowToActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mBroadcaster.onActivityDestroy();
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        mBroadcaster.onActivityPause();
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -679,75 +615,25 @@ public class Go_New_live extends AppCompatActivity {
         }
 
         updateLocationUI();
-        if (!hasPermission(Manifest.permission.CAMERA)
-                && !hasPermission(Manifest.permission.RECORD_AUDIO))
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA,
-                    Manifest.permission.RECORD_AUDIO}, 1);
-        else if (!hasPermission(Manifest.permission.RECORD_AUDIO))
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.RECORD_AUDIO}, 1);
-        else if (!hasPermission(Manifest.permission.CAMERA))
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 1);
-        mBroadcaster.setCameraSurface(mPreviewSurface);
-        mBroadcaster.onActivityResume();
-        mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
-
     }
 
     private boolean hasPermission(String permission) {
         return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private Broadcaster.Observer mBroadcasterObserver = new Broadcaster.Observer() {
-        @Override
-        public void onConnectionStatusChange(BroadcastStatus broadcastStatus) {
-            Log.i(LOGTAG, "Received status change: " + broadcastStatus);
-            if (broadcastStatus == BroadcastStatus.STARTING)
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            if (broadcastStatus == BroadcastStatus.IDLE)
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            mBroadcastButton.setImageResource(broadcastStatus == BroadcastStatus.IDLE ? R.drawable.live_strm_button: R.drawable.stop);
-            mBroadcastButton2.setImageResource(broadcastStatus == BroadcastStatus.IDLE ? R.drawable.blank_change: R.drawable.ic_action_mic2);
-            mBroadcastsatus.setImageResource(broadcastStatus == BroadcastStatus.IDLE ? R.drawable.blank_change: R.drawable.live_action);
-            mBroadcastButton3.setImageResource(broadcastStatus == BroadcastStatus.IDLE ? R.drawable.blank_change: R.drawable.ic_action_vid);
-            mBroadcastclose.setImageResource(broadcastStatus == BroadcastStatus.IDLE ? R.drawable.ic_clear_black_24dp: R.drawable.ic_clear_black_24dp);
-            mBroadcastcamchange.setImageResource(broadcastStatus == BroadcastStatus.IDLE ? R.drawable.blank_change: R.drawable.ic_baseline_sync_24);
-        }
-        @Override
-        public void onStreamHealthUpdate(int i) {
-        }
-        @Override
-        public void onConnectionError(ConnectionError connectionError, String s) {
-            Log.w(LOGTAG, "Received connection error: " + connectionError + ", " + s);
-        }
-        @Override
-        public void onCameraError(CameraError cameraError) {
-            Log.w(LOGTAG, "Received camera error: " + cameraError);
-        }
-        @Override
-        public void onChatMessage(String s) {
-        }
-        @Override
-        public void onResolutionsScanned() {
-        }
-        @Override
-        public void onCameraPreviewStateChanged() {
-        }
-        @Override
-        public void onBroadcastInfoAvailable(String s, String s1) {
-        }
-        @Override
-        public void onBroadcastIdAvailable(String s) {
-        }
-    };
+    private boolean mInPermissionRequest = false;
+    private boolean mUploading = false;
+    private AlertDialog mUploadDialog;
+    private long mLastUploadStatusUpdateTime = 0;
 
-    SurfaceView mPreviewSurface;
-    Broadcaster mBroadcaster;
-    ImageView mBroadcastButton;
-    ImageView mBroadcastButton2;
-    ImageView mBroadcastsatus;
-    ImageView mBroadcastButton3;
-    ImageView mBroadcastclose;
-    ImageView mBroadcastcamchange;
-    ImageView SwitchCameraButton;
+    private void emptyInputEditText() {
+        EditText input_post_comment = findViewById(R.id.say_comment);
+        input_post_comment.setText("");
+        refreshActivity();
+    }
+
+    private void refreshActivity(){
+        recreate();
+    }
 
 }

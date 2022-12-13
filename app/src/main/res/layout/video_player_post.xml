@@ -389,40 +389,5 @@
         android:background="@android:color/white">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="125"
-            android:background="#FFFFFF"
-            android:paddingTop="50dp"
-            android:paddingBottom="16dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="horizontal">
-
-            <com.bambuser.broadcaster.SurfaceViewWithAutoAR
-                android:id="@+id/NEMAVIDSurfaceView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/NEMAVIDButton"
-                android:layout_width="65dp"
-                android:layout_height="68dp"
-                android:layout_marginStart="173dp"
-                android:layout_marginTop="603dp"
-                android:layout_marginEnd="173dp"
-                android:layout_marginBottom="60dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/record" />
-
-        </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
