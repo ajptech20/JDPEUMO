@@ -78,6 +78,53 @@
         <item>Election Day</item>
     </string-array>
 
+    <string-array name="gbv_form_option">
+        <item>Type of Violence</item>
+        <item>Physical</item>
+        <item>Sexual</item>
+        <item>Emotional and psychological</item>
+        <item>Socio-economic</item>
+        <item>Harmful traditional practices</item>
+    </string-array>
+
+    <string-array name="gbv_form_physical_option">
+        <item>Nature of Physical Violence</item>
+        <item>Attempted or threatened physical assault or battery</item>
+        <item>Slavery and slave-like practices; and trafficking</item>
+        <item>Emotional and psychological</item>
+        <item>Socio-economic</item>
+    </string-array>
+
+    <string-array name="gbv_form_sexual_option">
+        <item>Nature of Sexual Violence</item>
+        <item>Actual, attempted or threatened (vaginal, anal or oral) rape</item>
+        <item>Marital rape</item>
+        <item>Sexual abuse and exploitation</item>
+        <item>Forced prostitution; transactional/survival sex</item>
+        <item>Sexual harassment, intimidation and humiliation</item>
+    </string-array>
+
+    <string-array name="gbv_form_option_emotional">
+        <item>Nature of Emotional Violence</item>
+        <item>Abuse and humiliation, such as insults; cruel and degrading treatment</item>
+        <item> Compelling a person to engage in humiliating acts</item>
+        <item>Placing restrictions on liberty and freedom of movement</item>
+    </string-array>
+
+    <string-array name="gbv_form_option_socio">
+        <item>Nature of Socio-economic Violence</item>
+        <item>Discrimination and denial of opportunities or services on the basis of sex, gender, or sexual orientation; social exclusion</item>
+        <item>Obstructive legal practices, such as denial of the exercise</item>
+        <item>Enjoyment of civil, social, economic, cultural and political rights, mainly to women and girls</item>
+    </string-array>
+
+    <string-array name="gbv_form_option_harmful">
+        <item>Nature of Harmful tradition Violence</item>
+        <item>Female genital mutilation/cutting (FGM/C)</item>
+        <item>Denial of education and economic opportunities for women and girls</item>
+        <item>Forced marriage; child marriage and</item>
+        <item> Sex-selective neglect and abuse</item>
+    </string-array>
 
     <string-array name="nscdcvalue">
         <item>Select...</item>

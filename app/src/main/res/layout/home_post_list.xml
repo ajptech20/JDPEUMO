@@ -22,8 +22,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <com.android.volley.toolbox.NetworkImageView
+                    <ImageView
                         android:id="@+id/post_image"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
@@ -57,10 +56,11 @@
                             android:shape="ring"
                             android:layout_alignParentStart="true"
                             android:layout_marginTop="0dp">
-                            <com.android.volley.toolbox.NetworkImageView
+                            <ImageView
                                 android:id="@+id/reporter_image"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"/>
                         </androidx.cardview.widget.CardView>
 
                         <TextView

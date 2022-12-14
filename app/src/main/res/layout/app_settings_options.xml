@@ -36,6 +36,13 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
+            <ProgressBar
+                android:id="@+id/very_progress_bar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="100dp"
+                android:visibility="gone" />
+
             <ImageView
                 android:id="@+id/close_settings"
                 android:layout_width="36dp"
@@ -69,10 +76,12 @@
                     app:cardElevation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/unconfirmed"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:layout_centerInParent="true"
+                        android:visibility="gone"
                         android:orientation="vertical">
 
                         <TextView
@@ -97,6 +106,7 @@
                             android:textAlignment="center"
                             android:textSize="14sp" />
                         <Button
+                            android:id="@+id/confirm_me"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Confirm Account"
@@ -106,8 +116,50 @@
                             android:layout_gravity="center"
                             android:background="@android:color/holo_orange_dark"
                             android:textSize="13sp"/>
-
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/confirmed_acc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/calibri"
+                            android:padding="5dp"
+                            android:text="J-WATCHER Personnel's Account Confirmed"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/calibri"
+                            android:padding="5dp"
+                            android:text="Your account has been confirmed as a J-WATCHER personnel kindly not that all posts from this account are treated as genuine"
+                            android:textColor="#000000"
+                            android:textAlignment="center"
+                            android:textSize="14sp" />
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Account Confirmed"
+                            android:textColor="#FFFF"
+                            android:padding="10dp"
+                            app:cornerRadius="80dp"
+                            android:layout_gravity="center"
+                            android:background="@color/colorPrimary"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -146,7 +198,7 @@
                                     android:id="@+id/user_image"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/user_img"/>
+                                    android:src="@drawable/img"/>
                             </androidx.cardview.widget.CardView>
 
                             <TextView

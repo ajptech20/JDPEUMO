@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/coordinator"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/coat_arm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/menu_image"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/bars" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/logo"
+                        android:layout_width="70dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/white"
+                        app:srcCompat="@drawable/coat_of_arm" />
+
+                    <TextView
+                        android:id="@+id/interior"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/logo"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:text="Ministry of Interior (MOI)"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/white">
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/white"
+                            android:ellipsize="marquee"
+                            android:fadingEdge="horizontal"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:fontFamily="sans-serif"
+                            android:gravity="center_horizontal"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:text="Nigeria Internal Security and Public Safety Alert System"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/name">
+
+                            <TextView
+                                android:id="@+id/namn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:background="@color/white"
+                                android:ellipsize="marquee"
+                                android:fadingEdge="horizontal"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                android:text="(NISPSAS)"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="668dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteY="93dp">
+
+
+                    <ImageView
+                        android:id="@+id/flood"
+                        android:layout_width="122dp"
+                        android:layout_height="113dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="357dp"
+                        android:layout_marginEnd="273dp"
+                        android:layout_marginBottom="175dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/prevent_flood" />
+
+                    <ImageView
+                        android:id="@+id/seesay"
+                        android:layout_width="154dp"
+                        android:layout_height="158dp"
+                        android:layout_marginStart="128dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="129dp"
+                        android:layout_marginBottom="509dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/eye" />
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/sndviewpager"
+                        android:layout_width="454dp"
+                        android:layout_height="286dp"
+                        android:visibility="gone"
+                        tools:layout_editor_absoluteY="357dp" />
+
+                    <ImageView
+                        android:id="@+id/fire"
+                        android:layout_width="115dp"
+                        android:layout_height="124dp"
+                        android:layout_marginStart="280dp"
+                        android:layout_marginTop="357dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="164dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/fire_prevent" />
+
+                    <ImageView
+                        android:id="@+id/complain"
+                        android:layout_width="186dp"
+                        android:layout_height="137dp"
+                        android:layout_marginStart="139dp"
+                        android:layout_marginTop="352dp"
+                        android:layout_marginEnd="139dp"
+                        android:layout_marginBottom="165dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.509"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        app:srcCompat="@drawable/m_o_i" />
+
+                    <com.bambuser.broadcaster.SurfaceViewWithAutoAR
+                        android:id="@+id/PreviewSurfaceView"
+                        android:layout_width="389dp"
+                        android:layout_height="0.3dp"
+                        android:layout_centerInParent="false"
+                        android:layout_marginStart="11dp"
+                        android:layout_marginTop="637dp"
+                        android:layout_marginEnd="11dp"
+                        android:layout_marginBottom="31dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/crime"
+                        android:layout_width="151dp"
+                        android:layout_height="155dp"
+                        android:layout_marginStart="130dp"
+                        android:layout_marginTop="178dp"
+                        android:layout_marginEnd="130dp"
+                        android:layout_marginBottom="335dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/disasterprevention" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <!--      <com.takusemba.multisnaprecyclerview.MultiSnapRecyclerView
+                          android:id="@+id/agencies_recyclerview"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:paddingRight="40dp"
+                          android:paddingLeft="40dp"
+                          app:msrv_gravity="center"
+                          app:msrv_ms_per_inch="@dimen/low_speed"
+                          app:msrv_snap_count="2" /> -->
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/s"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/prog"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/prog_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/prog"
+                android:layout_centerHorizontal="true"
+                android:text="TextView"
+                android:textColor="#F44336" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

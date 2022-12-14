@@ -39,7 +39,7 @@
                 android:layout_height="64dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/coat_of_arm"
+                app:srcCompat="@drawable/jdlogo"
                 android:contentDescription="@string/app_name" />
 
             <TextView
@@ -47,8 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Ministry of Interior"
-                android:textColor="@color/colorPrimary"
+                android:text="Justice, Development"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -56,15 +56,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Federal Republic Of Nigeria"
-                android:textColor="@color/colorPrimary"
+                android:text="and Peace Makers' Centre"
+                android:textColor="@color/colorAccent"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorAccent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="100dp"
                 android:text="@string/app_name"
@@ -114,6 +114,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
+                    android:background="@color/colorAccent"
+                    android:textColor="@color/white"
                     android:text="@string/next" />
             </RelativeLayout>
         </LinearLayout>

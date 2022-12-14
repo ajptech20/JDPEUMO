@@ -1,4 +1,4 @@
-rootProject.name='NISPSAS'
+rootProject.name='JDPMC'
 include ':app', ':libbambuser-1.0.0'
 include ':app:assets'
 include ':app:assets2'

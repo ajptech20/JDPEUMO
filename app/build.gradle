@@ -10,7 +10,7 @@ android {
         abortOnError false
     }
     defaultConfig {
-        applicationId "com.a2tocsolutions.nispsasapp"
+        applicationId 'com.jdpmc.jwatcherapp'
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
