@@ -84,7 +84,6 @@
         <activity android:name="com.jdpmc.jwatcherapp.activities.fasm" />
         <activity android:name="com.jdpmc.jwatcherapp.RAPE" />
         <activity android:name="com.jdpmc.jwatcherapp.NEMA" />
-        <activity android:name="com.jdpmc.jwatcherapp.FireService" />
         <activity android:name="com.jdpmc.jwatcherapp.Fragments.adminis" />
         <activity
             android:name="com.jdpmc.jwatcherapp.activities.LoginActivity"
@@ -163,6 +162,7 @@
                 android:value="com.jdpmc.jwatcherapp.activities.StateComplaint" />
         </activity>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:hardwareAccelerated="true"
             android:theme="@style/Base.Theme.AppCompat"/>
         <activity
             android:name="com.jdpmc.jwatcherapp.activities.statactivities.Bauchi"
@@ -1202,7 +1202,7 @@
             android:name="com.jdpmc.jwatcherapp.Go_New_live"
             android:parentActivityName="com.jdpmc.jwatcherapp.Activity_home_backup"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/PostsTheme"
             android:title="Streaming Live">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
@@ -1213,7 +1213,7 @@
         <activity
             android:name="com.jdpmc.jwatcherapp.picture_uploader"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/PostsTheme"
             android:title="Upload Picture">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
@@ -1224,7 +1224,7 @@
         <activity
             android:name="com.jdpmc.jwatcherapp.shortvideo_uploader"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/PostsTheme"
             android:title="Upload Video">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
@@ -1267,6 +1267,17 @@
         </activity>
         <activity
             android:name="com.jdpmc.jwatcherapp.Video_post_player"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:title="Posts">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jdpmc.jwatcherapp.Image_Post_Viewer_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:title="Posts">
@@ -1348,6 +1359,7 @@
 
         <activity
             android:name="com.jdpmc.jwatcherapp.hot_picture_uploader"
+            android:theme="@style/HotTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
@@ -1358,6 +1370,7 @@
 
         <activity
             android:name="com.jdpmc.jwatcherapp.hot_shortvid_uploader"
+            android:theme="@style/HotTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
@@ -1368,6 +1381,50 @@
 
         <activity
             android:name="com.jdpmc.jwatcherapp.activities.AccountSetUp"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.jdpmc.jwatcherapp.view_and_comment"
+            android:theme="@style/AppDialogTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.jdpmc.jwatcherapp.view_hot_zone"
+            android:theme="@style/AppDialogTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.jdpmc.jwatcherapp.Hot_Video_post_player"
+            android:theme="@style/AppDialogTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK_ACTIVITY" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.jdpmc.jwatcherapp.Hot_Image_post_viewer"
+            android:theme="@style/AppDialogTheme"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />

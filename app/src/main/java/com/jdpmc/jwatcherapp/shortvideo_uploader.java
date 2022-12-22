@@ -133,8 +133,6 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
     private Spinner live_stream_types;
     private String swi;
     String id = UUID.randomUUID().toString();
-
-
     @BindView(R.id.menu_image)
     AppCompatImageView menu_image;
 
@@ -223,12 +221,11 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
     public shortvideo_uploader() {
 
     }
-    private void floodAlert() {
-
+    private void upshortVideo() {
         String type="ShortVideoUp";
+        String authorId = id;
         startLocationUpdates();
         startLocation();
-
         if (latitude == null) {
 
             startLocation();
@@ -241,13 +238,17 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
             String mreptype = live_stream_types.getSelectedItem().toString();
             EditText input_post_comment = findViewById(R.id.say_comment);
             String comment = input_post_comment.getText().toString().trim();
-            Call<Void> call = service.ShortVidPost(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type);
+            Call<Void> call = service.ShortVidPost(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type, authorId);
 
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         FancyToast.makeText(getApplicationContext(), "Your Short Video Post was successfull", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        finish();
+                        overridePendingTransition(0, 0);
+                        startActivity(getIntent());
+                        overridePendingTransition(0, 0);
                         //emptyInputEditText();
                     } else {
 
@@ -286,8 +287,8 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
         mPreviewSurface = findViewById(R.id.short_videos_page);
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
-        mBroadcaster.setTitle("FLOOD-VIR");
-        mBroadcaster.setAuthor("NISPSAS-VIR");
+        mBroadcaster.setTitle("Uploaded Video");
+        mBroadcaster.setAuthor(id);
         mBroadcaster.setSendPosition(true);
         //mBroadcastButton = findViewById(R.id.NEMAVIDButton);
         mBroadcastButton2 = findViewById(R.id.mich_on);
@@ -547,7 +548,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
         getWindow().addFlags(FLAG_KEEP_SCREEN_ON);
         mUploading = true;
         showDialog(UPLOAD_PROGRESS_DIALOG);
-        UploadHelper.upload(this, uri, APPLICATION_ID, "", "uploaded Video", null, this);
+        UploadHelper.upload(this, uri, APPLICATION_ID, id, "uploaded Video", null, this);
     }
 
     @Override
@@ -615,9 +616,9 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        floodAlert();
+                        upshortVideo();
                     }
-                }, 2000);
+                }, 6000);
 
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
@@ -877,51 +878,6 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
-
-
-
-    private void fetchArticle() {
-        try{
-            Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<ArticleResponse> call = service.article("All");
-
-            call.enqueue(new Callback<ArticleResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<ArticleResponse> call, @NonNull Response<ArticleResponse> response) {
-                    if (response.isSuccessful()) {
-                        if (response.body()!= null) {
-                            AppExecutors.getInstance().diskIO().execute(() -> mDb.nispsasDao().deleteAll());
-                            List<Article> articleResponseList = response.body().getArticles();
-                            if (articleResponseList != null) {
-                                for (Article article : articleResponseList) {
-                                    int id = article.getId();
-                                    String articleid = article.getArticleid();
-                                    String pic_name = article.getPicname();
-                                    String post_title = article.getPostTitle();
-                                    String post_notes = article.getPostNotes();
-                                    String post_category = (String) article.getPostCategory();
-                                    String article_type = article.getArticletype();
-                                    String video_url = article.getVideourl();
-
-                                    ArticleEntry articleEntry = new ArticleEntry(id, articleid, pic_name, post_title, post_notes, post_category, article_type, video_url);
-                                    AppExecutors.getInstance().diskIO().execute(() ->mDb.nispsasDao().insertArticle(articleEntry));
-                                }
-                            }
-                        }
-                    } else {
-
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<ArticleResponse> call, @NonNull Throwable t) {
-
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
 
     private void launchMedia() {
         Intent intent = new Intent(this, CovidActivity.class);

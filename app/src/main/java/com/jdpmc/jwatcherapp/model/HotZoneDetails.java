@@ -45,6 +45,14 @@ public class HotZoneDetails implements Parcelable
     @Expose
     private String lga;
 
+    @SerializedName("Id")
+    @Expose
+    private String id;
+
+    @SerializedName("Area")
+    @Expose
+    private String hotarea;
+
     @SerializedName("Date")
     @Expose
     private String date;
@@ -52,6 +60,10 @@ public class HotZoneDetails implements Parcelable
     @SerializedName("Image")
     @Expose
     private String image;
+
+    @SerializedName("UserImage")
+    @Expose
+    private String userimage;
 
     //////////////////////
     public final static Creator<HotZoneDetails> CREATOR = new Creator<HotZoneDetails>() {
@@ -81,8 +93,11 @@ public class HotZoneDetails implements Parcelable
         this.sgstatuse = ((String) in.readValue((String.class.getClassLoader())));
         this.sgreptype = ((String) in.readValue((String.class.getClassLoader())));
         this.lga = ((String) in.readValue((String.class.getClassLoader())));
+        this.id = ((String) in.readValue((String.class.getClassLoader())));
+        this.hotarea = ((String) in.readValue((String.class.getClassLoader())));
         this.date = ((String) in.readValue((String.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));
+        this.userimage = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     public HotZoneDetails() {
@@ -118,22 +133,25 @@ public class HotZoneDetails implements Parcelable
     public String getLga() {return lga;}
     public void setLga(String lga) {this.lga = lga;}
 
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
+
+    public String getArea() {return hotarea;}
+    public void setArea(String hotarea) {this.hotarea = hotarea;}
+
     public String getSGstate() {return sgstate;}
     public void setSGcompany(String sgstate) {this.sgstate = sgstate;}
 
-    public String getSGvideourl() {
-        return vidsrc;
-    }
-    public void getSGvideourl(String vidsrc) {
-        this.vidsrc= vidsrc;
-    }
+    public String getSGvideourl() {return vidsrc;}
+    public void setSGvideourl(String vidsrc) {this.vidsrc= vidsrc;}
 
-    public String getImage() {
-        return image;
-    }
+    public String getImage() {return image;}
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getUserimage() {return userimage;}
+    public void setUserimage(String userimage) {this.userimage = userimage;}
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(response);
@@ -142,9 +160,12 @@ public class HotZoneDetails implements Parcelable
         dest.writeValue(vidsrc);
         dest.writeValue(sgreptype);
         dest.writeValue(lga);
+        dest.writeValue(id);
+        dest.writeValue(hotarea);
         dest.writeValue(sgcomment);
         dest.writeValue(sgstatuse);
         dest.writeValue(image);
+        dest.writeValue(userimage);
 
     }
 

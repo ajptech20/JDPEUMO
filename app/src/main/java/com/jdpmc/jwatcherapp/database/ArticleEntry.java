@@ -15,109 +15,158 @@ public class ArticleEntry {
     @ColumnInfo(name = "id")
     private int id;
 
-    @ColumnInfo(name = "articleid")
-    private String articleid;
+    @ColumnInfo(name = "image")
+    String image;
 
-    @ColumnInfo(name = "picname")
-    private String picname;
+    @ColumnInfo(name = "officername")
+    String officername;
 
-    @ColumnInfo(name = "posttitle")
-    private String posttitle;
+    @ColumnInfo(name = "postcomment")
+    private String postcomment;
 
-    @ColumnInfo(name = "postnotes")
-    private String postnotes;
+    @ColumnInfo(name = "state")
+    String state;
 
-    @ColumnInfo(name = "postcategory")
-    private String postcategory;
+    @ColumnInfo(name = "status")
+    String status;
 
-    @ColumnInfo(name = "articletype")
-    private String articletype;
+    @ColumnInfo(name = "reptype")
+    String reptype;
 
-    @ColumnInfo(name = "videourl")
-    private String videourl;
+    @ColumnInfo(name = "area")
+    String area;
+
+    @ColumnInfo(name = "like_count")
+    String like_count;
+
+    @ColumnInfo(name = "comm_count")
+    String comm_count;
+
+    @ColumnInfo(name = "preview")
+    private String preview;
+
+    @ColumnInfo(name = "vid")
+    String vid;
+
+    @ColumnInfo(name = "date")
+    String date;
 
     @Ignore
-    public ArticleEntry(String articleid, String picname, String posttitle, String postnotes, String postcategory, String articletype, String videourl) {
-        this.articleid = articleid;
-        this.picname = picname;
-        this.posttitle = posttitle;
-        this.postnotes = postnotes;
-        this.postcategory = postcategory;
-        this.articletype = articletype;
-        this.videourl = videourl;
+    public ArticleEntry(String image, String officername, String postcomment, String state, String status, String reptype, String area,
+                        String like_count, String comm_count, String preview, String vid, String date) {
+        this.image = image;
+        this.officername = officername;
+        this.postcomment = postcomment;
+        this.state = state;
+        this.status = status;
+        this.reptype = reptype;
+        this.area = area;
+
+        this.like_count = like_count;
+        this.comm_count = comm_count;
+        this.preview = preview;
+        this.vid = vid;
+        this.date = date;
     }
 
-    public ArticleEntry(int id, String articleid, String picname, String posttitle, String postnotes, String postcategory, String articletype, String videourl) {
+    public ArticleEntry(int id, String image, String officername, String postcomment, String state, String status, String reptype, String area,
+                        String like_count, String comm_count, String preview, String vid, String date) {
         this.id = id;
-        this.articleid = articleid;
-        this.picname = picname;
-        this.posttitle = posttitle;
-        this.postnotes = postnotes;
-        this.postcategory = postcategory;
-        this.articletype = articletype;
-        this.videourl = videourl;
+        this.image = image;
+        this.officername = officername;
+        this.postcomment = postcomment;
+        this.state = state;
+        this.status = status;
+        this.reptype = reptype;
+        this.area = area;
+        this.like_count = like_count;
+        this.comm_count = comm_count;
+        this.preview = preview;
+        this.vid = vid;
+        this.date = date;
     }
 
     @NonNull
     public int getId() {
         return id;
     }
-
     public void setId(@NonNull int id) {
         this.id = id;
     }
 
-    public String getArticleid() { return articleid; }
-
-    public void setArticleid(String articleid) {
-        this.articleid = articleid;
+    public String getUserimage() { return image; }
+    public void setUserimage(String image) {
+        this.image = image;
     }
 
-    public String getPicname() {
-        return picname;
+    public String getUsername() {
+        return officername;
+    }
+    public void setUsername(String officername) {
+        this.officername = officername;
     }
 
-    public void setPicname(String picname) {
-        this.picname = picname;
+    public String getPostcomment() {return postcomment;}
+    public void setPostcomment(String postcomment) {
+        this.postcomment = postcomment;
     }
 
-    public String getPosttitle() {
-        return posttitle;
+    public String getPoststate() {
+        return state;
+    }
+    public void setPoststate(String state) {
+        this.state = state;
     }
 
-    public void setPosttitle(String posttitle) {
-        this.posttitle = posttitle;
+    public String getPoststatus() {
+        return status;
+    }
+    public void setPoststatus(String status) {
+        this.status = status;
     }
 
-    public String getPostnotes() {
-        return postnotes;
+    public String getPosttype() {
+        return reptype;
+    }
+    public void setPosttype(String reptype) {
+        this.reptype = reptype;
     }
 
-    public void setPostnotes(String postnotes) {
-        this.postnotes = postnotes;
+    public String getPostarea() {
+        return area;
+    }
+    public void setPostarea(String area) {
+        this.area = area;
     }
 
-    public String getPostcategory() {
-        return postcategory;
+    public String getLikscount() {
+        return like_count;
+    }
+    public void setLikscount(String like_count) {
+        this.like_count = like_count;
     }
 
-    public void setPostcategory(String postcategory) {
-        this.postcategory = postcategory;
+    public String getCommentcount() {
+        return comm_count;
+    }
+    public void setCommentcountt(String comm_count) {
+        this.comm_count = comm_count;
     }
 
-    public String getArticletype() {
-        return articletype;
+    public String getPreview() {return preview;}
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 
-    public void setArticletype(String articletype) {
-        this.articletype = articletype;
+    public String getVidrscurl() {
+        return vid;
     }
+    public void setVidrscurl(String vid) {this.vid = vid;}
 
-    public String getVideourl() {
-        return videourl;
+    public String getPostdate() {
+        return date;
     }
-
-    public void setVideourl(String videourl) {
-        this.videourl = videourl;
+    public void setPostdate(String date) {
+        this.date = date;
     }
 }

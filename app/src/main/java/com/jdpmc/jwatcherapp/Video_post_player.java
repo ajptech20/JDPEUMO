@@ -1,6 +1,6 @@
 package com.jdpmc.jwatcherapp;
 
-import static com.jdpmc.jwatcherapp.utils.Constants.VERIFY_BASE_URL;
+import static com.jdpmc.jwatcherapp.utils.Constants.VIDEO_PLAYER_BASE_URL;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,27 +14,25 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.MediaController;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.jdpmc.jwatcherapp.model.VideoReportDetails;
-import com.jdpmc.jwatcherapp.networking.api.Service;
-import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
 import com.bambuser.broadcaster.BroadcastPlayer;
 import com.bambuser.broadcaster.LatencyMeasurement;
 import com.bambuser.broadcaster.PlayerState;
 import com.bambuser.broadcaster.SurfaceViewWithAutoAR;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jdpmc.jwatcherapp.model.VideoReportDetails;
+import com.jdpmc.jwatcherapp.networking.api.Service;
+import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
 import com.mancj.slideup.SlideUp;
 
 import java.io.IOException;
 
-import butterknife.BindView;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -58,10 +56,6 @@ public class Video_post_player extends Activity {
     //private static final String resourceuri = "https://cdn.bambuser.net/broadcasts/14905708-614c-4594-82b5-204480d79088?da_signature_method=HMAC-SHA256&da_id=9e1b1e83-657d-7c83-b8e7-0b782ac9543a&da_timestamp=1668467523&da_static=1&da_ttl=0&da_signature=803fc706e07267c94297983bc5ae2728d7b415ff1efc9b72f6a5580df814d442";
     private static final String live_vid = "amlive";
     //TextView receiver_msg;
-
-    @BindView(R.id.vidprogression)
-    RelativeLayout progress;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +99,7 @@ public class Video_post_player extends Activity {
         //receiver_msg.setText(str);
         String callid = (str);
         //String callid = (live_vid);
-        verifyPsid(callid);
+        playAvideoPost(callid);
         //Toast.makeText(Video_post_player.this, callid, Toast.LENGTH_SHORT).show();
 
         ImageView go_home = findViewById(R.id.app_home1);
@@ -251,11 +245,11 @@ public class Video_post_player extends Activity {
         return true;
     }
 
-    private void verifyPsid(String callid) {
+    private void playAvideoPost(String callid) {
         if (verifyFields()) {
             //progress.setVisibility(View.VISIBLE);
             try {
-                Service service = DataGenerator.createService(Service.class, VERIFY_BASE_URL);
+                Service service = DataGenerator.createService(Service.class, VIDEO_PLAYER_BASE_URL);
                 retrofit2.Call<VideoReportDetails> call = service.getlivevideos(callid);
 
                 call.enqueue(new retrofit2.Callback<VideoReportDetails>() {

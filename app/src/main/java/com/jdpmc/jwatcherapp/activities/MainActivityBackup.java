@@ -38,7 +38,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.jdpmc.jwatcherapp.Activity_home_backup;
 import com.jdpmc.jwatcherapp.DisasterPage;
-import com.jdpmc.jwatcherapp.FireService;
 import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
 import com.jdpmc.jwatcherapp.NEMA;
 import com.jdpmc.jwatcherapp.R;
@@ -362,13 +361,6 @@ public class MainActivityBackup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent Intent = new Intent(getApplicationContext(), pg.class);
-                startActivity(Intent);
-            }
-        });
-        fire.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Intent = new Intent(getApplicationContext(), FireService.class);
                 startActivity(Intent);
             }
         });
@@ -728,15 +720,22 @@ public class MainActivityBackup extends AppCompatActivity {
                             if (articleResponseList != null) {
                                 for (Article article : articleResponseList) {
                                     int id = article.getId();
-                                    String articleid = article.getArticleid();
-                                    String pic_name = article.getPicname();
-                                    String post_title = article.getPostTitle();
-                                    String post_notes = article.getPostNotes();
-                                    String post_category = (String) article.getPostCategory();
-                                    String article_type = article.getArticletype();
-                                    String video_url = article.getVideourl();
+                                    String userimage = article.getUserimage();
+                                    String username = article.getUsername();
+                                    String postcomment = article.getPostcomment();
+                                    String postsate = article.getPoststate();
+                                    String postsatus = article.getPoststatus();
 
-                                    ArticleEntry articleEntry = new ArticleEntry(id, articleid, pic_name, post_title, post_notes, post_category, article_type, video_url);
+                                    String posttype = article.getPosttype();
+                                    String postarea = article.getPostarea();
+                                    String likscount = article.getLikscount();
+                                    String commentcount = article.getCommentcount();
+                                    String preview = article.getPreview();
+                                    String vidrscurl = article.getVidrscurl();
+                                    String postdate = article.getPostdate();
+
+                                    ArticleEntry articleEntry = new ArticleEntry(id, userimage, username, postcomment, postsate, postsatus, posttype,
+                                            postarea, likscount, commentcount, preview, vidrscurl, postdate);
                                     AppExecutors.getInstance().diskIO().execute(() ->mDb.nispsasDao().insertArticle(articleEntry));
                                 }
                             }

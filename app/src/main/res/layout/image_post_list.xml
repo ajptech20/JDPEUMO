@@ -61,6 +61,13 @@
                     android:layout_alignParentRight="true"
                     android:src="@drawable/ic_baseline_more_vert_24" />-->
             </RelativeLayout>
+            <EditText
+                android:id="@+id/send_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Input"
+                android:textSize="25dp"
+                android:visibility="gone"/>
 
             <ImageView
                 android:id="@+id/img_post_image"
@@ -165,6 +172,27 @@
                     android:text="Abuja is in good condition and thins are going well"
                     android:textColor="#090909"
                     android:textSize="14sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+                <TextView
+                    android:id="@+id/userimgurl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/rscurilink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/post_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/postimgurl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"

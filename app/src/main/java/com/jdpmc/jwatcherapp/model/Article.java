@@ -12,42 +12,55 @@ public class Article implements Parcelable
     @SerializedName("id")
     @Expose
     private int id;
-    @SerializedName("articleid")
+
+    @SerializedName("image")
     @Expose
-    private String articleid;
-    @SerializedName("picname")
+    private String image;
+
+    @SerializedName("officername")
     @Expose
-    private String picname;
-    @SerializedName("post_title")
+    private String officername;
+
+    @SerializedName("postcomment")
     @Expose
-    private String postTitle;
-    @SerializedName("post_notes")
+    private String postcomment;
+
+    @SerializedName("state")
     @Expose
-    private String postNotes;
-    @SerializedName("post_category")
+    private String state;
+
+    @SerializedName("status")
     @Expose
-    private Object postCategory;
-    @SerializedName("page_id")
+    private String status;
+
+    @SerializedName("reptype")
     @Expose
-    private Object pageId;
-    @SerializedName("views")
+    private String reptype;
+
+    @SerializedName("area")
     @Expose
-    private Object views;
-    @SerializedName("articletype")
+    private String area;
+
+    @SerializedName("like_count")
     @Expose
-    private String articletype;
-    @SerializedName("videourl")
+    private String like_count;
+
+    @SerializedName("comm_count")
     @Expose
-    private String videourl;
-    @SerializedName("category")
+    private String comm_count;
+
+    @SerializedName("preview")
     @Expose
-    private String category;
-    @SerializedName("sortorder")
+    private String preview;
+
+    @SerializedName("vid")
     @Expose
-    private String sortorder;
-    @SerializedName("author")
+    private String vid;
+
+    @SerializedName("date")
     @Expose
-    private String author;
+    private String date;
+
     public final static Parcelable.Creator<Article> CREATOR = new Creator<Article>() {
 
 
@@ -62,143 +75,127 @@ public class Article implements Parcelable
             return (new Article[size]);
         }
 
-    }
-            ;
+    };
 
     protected Article(Parcel in) {
         this.id = (int) in.readValue((String.class.getClassLoader()));
-        this.articleid = (String) in.readValue((String.class.getClassLoader()));
-        this.picname = ((String) in.readValue((String.class.getClassLoader())));
-        this.postTitle = ((String) in.readValue((String.class.getClassLoader())));
-        this.postNotes = ((String) in.readValue((String.class.getClassLoader())));
-        this.postCategory = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.pageId = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.views = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.articletype = ((String) in.readValue((String.class.getClassLoader())));
-        this.videourl = ((String) in.readValue((String.class.getClassLoader())));
-        this.category = ((String) in.readValue((String.class.getClassLoader())));
-        this.sortorder = ((String) in.readValue((String.class.getClassLoader())));
-        this.author = ((String) in.readValue((String.class.getClassLoader())));
+        this.image = ((String) in.readValue((String.class.getClassLoader())));
+        this.officername = ((String) in.readValue((String.class.getClassLoader())));
+        this.postcomment = ((String) in.readValue((String.class.getClassLoader())));
+        this.state = ((String) in.readValue((String.class.getClassLoader())));
+        this.status = ((String) in.readValue((String.class.getClassLoader())));
+        this.reptype = ((String) in.readValue((String.class.getClassLoader())));
+        this.area = ((String) in.readValue((String.class.getClassLoader())));
+        this.like_count = ((String) in.readValue((String.class.getClassLoader())));
+        this.comm_count = ((String) in.readValue((String.class.getClassLoader())));
+        this.preview = ((String) in.readValue((String.class.getClassLoader())));
+        this.vid = ((String) in.readValue((String.class.getClassLoader())));
+        this.date = ((String) in.readValue((String.class.getClassLoader())));
+
     }
 
     public Article() {
     }
 
     public int getId() { return id; }
-
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getArticleid() { return articleid;
+    public String getUserimage() {
+        return image;
+    }
+    public void setUserimage(String image) {
+        this.image = image;
     }
 
-    public void setArticleid(String articleid) {
-        this.articleid = articleid;
+    public String getUsername() {return officername;}
+    public void setUsername(String officername) {
+        this.officername = officername;
     }
 
-    public String getPicname() {
-        return picname;
+    public String getPostcomment() {
+        return postcomment;
+    }
+    public void setPostcomment(String postcomment) {
+        this.postcomment = postcomment;
     }
 
-    public void setPicname(String picname) {
-        this.picname = picname;
+    public String getPoststate() {
+        return state;
+    }
+    public void setPoststate(String state) {
+        this.state = state;
     }
 
-    public String getPostTitle() {
-        return postTitle;
+    public String getPoststatus() {return status;}
+    public void setPoststatus(String status) {
+        this.status = status;
     }
 
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
+    public String getPosttype() {
+        return reptype;
+    }
+    public void setPosttype(String reptype) {
+        this.reptype = reptype;
     }
 
-    public String getPostNotes() {
-        return postNotes;
+    public String getPostarea() {
+        return area;
+    }
+    public void setPostarea(String area) {
+        this.area = area;
     }
 
-    public void setPostNotes(String postNotes) {
-        this.postNotes = postNotes;
+    public String getLikscount() {
+        return like_count;
+    }
+    public void setLikscount(String like_count) {
+        this.like_count = like_count;
     }
 
-    public Object getPostCategory() {
-        return postCategory;
+    public String getCommentcount() {
+        return comm_count;
+    }
+    public void setCommentcount(String comm_count) {
+        this.comm_count = comm_count;
     }
 
-    public void setPostCategory(Object postCategory) {
-        this.postCategory = postCategory;
+    public String getPreview() {
+        return preview;
+    }
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 
-    public Object getPageId() {
-        return pageId;
+    public String getVidrscurl() {
+        return vid;
+    }
+    public void setVidrscurl(String vid) {
+        this.vid = vid;
     }
 
-    public void setPageId(Object pageId) {
-        this.pageId = pageId;
+    public String getPostdate() {
+        return date;
     }
-
-    public Object getViews() {
-        return views;
-    }
-
-    public void setViews(Object views) {
-        this.views = views;
-    }
-
-    public String getArticletype() {
-        return articletype;
-    }
-
-    public void setArticletype(String articletype) {
-        this.articletype = articletype;
-    }
-
-    public String getVideourl() {
-        return videourl;
-    }
-
-    public void setVideourl(String videourl) {
-        this.videourl = videourl;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getSortorder() {
-        return sortorder;
-    }
-
-    public void setSortorder(String sortorder) {
-        this.sortorder = sortorder;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setPostdate(String postdate) {
+        this.date = postdate;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
-        dest.writeValue(articleid);
-        dest.writeValue(picname);
-        dest.writeValue(postTitle);
-        dest.writeValue(postNotes);
-        dest.writeValue(postCategory);
-        dest.writeValue(pageId);
-        dest.writeValue(views);
-        dest.writeValue(articletype);
-        dest.writeValue(videourl);
-        dest.writeValue(category);
-        dest.writeValue(sortorder);
-        dest.writeValue(author);
+        dest.writeValue(image);
+        dest.writeValue(officername);
+        dest.writeValue(postcomment);
+        dest.writeValue(state);
+        dest.writeValue(status);
+        dest.writeValue(reptype);
+        dest.writeValue(area);
+        dest.writeValue(like_count);
+        dest.writeValue(comm_count);
+        dest.writeValue(preview);
+        dest.writeValue(vid);
+        dest.writeValue(date);
     }
 
     public int describeContents() {

@@ -490,7 +490,6 @@ public class UserDataUpdate extends AppCompatActivity {
         ProgressBar progress = findViewById(R.id.electionProgress);
         progress.setVisibility(View.VISIBLE);
         Service userService = DataGenerator.createService(Service.class, "https://nispsas.com.ng/");
-
         // create part for file (photo, video, ...)
         MultipartBody.Part body = prepareFilePart("passport");
         EditText input_user_name = findViewById(R.id.name_user);
@@ -511,9 +510,6 @@ public class UserDataUpdate extends AppCompatActivity {
         RequestBody officerphone = createPartFromString(mphonenumber);
         RequestBody officername = createPartFromString(username);
         RequestBody town = createPartFromString(usertown);
-
-
-
         Call<Void> call = userService.updateUserdata(officerphone, body, state, lga, officername, town);
         call.enqueue(new Callback<Void>() {
             @Override

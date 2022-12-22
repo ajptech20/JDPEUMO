@@ -1,10 +1,11 @@
 package com.jdpmc.jwatcherapp;
 
-import static com.jdpmc.jwatcherapp.utils.Constants.BASE_URL;
+import static com.jdpmc.jwatcherapp.utils.Constants.CONFIRM_ACC_BASE_URL;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -29,7 +32,6 @@ import com.jdpmc.jwatcherapp.networking.api.Service;
 import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
 import com.jdpmc.jwatcherapp.utils.FancyToast;
 import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
-import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -148,6 +150,83 @@ public class AppSettings extends AppCompatActivity {
                 //finish();
             }
         });
+        RelativeLayout about = findViewById(R.id.about_us);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://j-watcher.org/Apps/Mobile/jdabout";
+                //String url = "https://j-watcher.org/about/about.html";
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                customTabsIntent.launchUrl(getApplicationContext(), Uri.parse(url));
+            }
+        });
+
+        RelativeLayout terms = findViewById(R.id.term_and_con);
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout privacy = findViewById(R.id.privacy_text);
+                privacy.setVisibility(View.GONE);
+                RelativeLayout faq = findViewById(R.id.faq_text);
+                faq.setVisibility(View.GONE);
+                RelativeLayout ratting = findViewById(R.id.rate_us_area);
+                ratting.setVisibility(View.GONE);
+                RelativeLayout termstext = findViewById(R.id.terms_text);
+                termstext.setVisibility(View.VISIBLE);
+                //FancyToast.makeText(getApplicationContext(), "Terms clicked", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+            }
+        });
+
+        RelativeLayout privacy = findViewById(R.id.privacy_policy);
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                RelativeLayout terms = findViewById(R.id.terms_text);
+                terms.setVisibility(View.GONE);
+                RelativeLayout faq = findViewById(R.id.faq_text);
+                faq.setVisibility(View.GONE);
+                RelativeLayout ratting = findViewById(R.id.rate_us_area);
+                ratting.setVisibility(View.GONE);
+                RelativeLayout privacy = findViewById(R.id.privacy_text);
+                privacy.setVisibility(View.VISIBLE);
+                //FancyToast.makeText(getApplicationContext(), "Privacy clicked", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+            }
+        });
+
+        RelativeLayout ratting = findViewById(R.id.rate_us);
+        ratting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout privacy = findViewById(R.id.privacy_text);
+                privacy.setVisibility(View.GONE);
+                RelativeLayout faq = findViewById(R.id.faq_text);
+                faq.setVisibility(View.GONE);
+                RelativeLayout termstext = findViewById(R.id.terms_text);
+                termstext.setVisibility(View.GONE);
+                RelativeLayout ratting = findViewById(R.id.rate_us_area);
+                ratting.setVisibility(View.VISIBLE);
+                //FancyToast.makeText(getApplicationContext(), "Ratting clicked", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+            }
+        });
+
+        RelativeLayout faq = findViewById(R.id.faq_questions);
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RelativeLayout privacy = findViewById(R.id.privacy_text);
+                privacy.setVisibility(View.GONE);
+                RelativeLayout ratting = findViewById(R.id.rate_us_area);
+                ratting.setVisibility(View.GONE);
+                RelativeLayout termstext = findViewById(R.id.terms_text);
+                termstext.setVisibility(View.GONE);
+                RelativeLayout faq = findViewById(R.id.faq_text);
+                faq.setVisibility(View.VISIBLE);
+                //FancyToast.makeText(getApplicationContext(), "FAQ clicked", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+            }
+        });
 
     }
 
@@ -155,7 +234,7 @@ public class AppSettings extends AppCompatActivity {
         ProgressBar progression = findViewById(R.id.very_progress_bar);
         progression.setVisibility(View.VISIBLE);
         try {
-            Service service = DataGenerator.createService(Service.class, BASE_URL);
+            Service service = DataGenerator.createService(Service.class, CONFIRM_ACC_BASE_URL);
             String userphone = PreferenceUtils.getPhoneNumber(getApplicationContext());
             Call<ExtinguisherResponse> call = service.verifyJpersonnel(jwcode, userphone);
             call.enqueue(new Callback<ExtinguisherResponse>() {

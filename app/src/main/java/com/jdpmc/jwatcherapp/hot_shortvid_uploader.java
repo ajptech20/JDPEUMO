@@ -46,21 +46,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
-import com.jdpmc.jwatcherapp.activities.CovidActivity;
-import com.jdpmc.jwatcherapp.activities.HowToActivity;
-import com.jdpmc.jwatcherapp.activities.MyCustomPagerAdapter;
-import com.jdpmc.jwatcherapp.adapter.ArticleslideAdapter;
-import com.jdpmc.jwatcherapp.database.AppDatabase;
-import com.jdpmc.jwatcherapp.database.ArticleEntry;
-import com.jdpmc.jwatcherapp.model.Article;
-import com.jdpmc.jwatcherapp.model.ArticleResponse;
-import com.jdpmc.jwatcherapp.networking.api.Service;
-import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
-import com.jdpmc.jwatcherapp.service.NispsasLockService;
-import com.jdpmc.jwatcherapp.utils.AppExecutors;
-import com.jdpmc.jwatcherapp.utils.FancyToast;
-import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.afollestad.materialdialogs.BuildConfig;
 import com.bambuser.broadcaster.BroadcastStatus;
 import com.bambuser.broadcaster.Broadcaster;
@@ -87,6 +72,17 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.ikhiloyaimokhai.nigeriastatesandlgas.Nigeria;
+import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
+import com.jdpmc.jwatcherapp.activities.CovidActivity;
+import com.jdpmc.jwatcherapp.activities.HowToActivity;
+import com.jdpmc.jwatcherapp.activities.MyCustomPagerAdapter;
+import com.jdpmc.jwatcherapp.adapter.ArticleslideAdapter;
+import com.jdpmc.jwatcherapp.database.AppDatabase;
+import com.jdpmc.jwatcherapp.networking.api.Service;
+import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
+import com.jdpmc.jwatcherapp.service.NispsasLockService;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
+import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -139,8 +135,6 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
     private Spinner mStateSpinner, mLgaSpinner;
     private String mState, mLga;
     String id = UUID.randomUUID().toString();
-
-
     @BindView(R.id.menu_image)
     AppCompatImageView menu_image;
 
@@ -228,8 +222,8 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
     public hot_shortvid_uploader() {
 
     }
-    private void floodAlert() {
-
+    private void UploadHotShortvid() {
+        String authorId = id;
         String type="HotVideoUpload";
         startLocationUpdates();
         startLocation();
@@ -247,14 +241,21 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
             String hotstate = mStateSpinner.getSelectedItem().toString();
             EditText input_post_comment = findViewById(R.id.say_comment);
             String comment = input_post_comment.getText().toString().trim();
-            Call<Void> call = service.HotShortVidPostUp(reporter, latitude, longitude, repname, repstate, replga, hotlga, hotstate, comment, type);
+            EditText input_area_hot = findViewById(R.id.area_spec);
+            String hotarea = input_area_hot.getText().toString().trim();
+            Call<Void> call = service.HotShortVidPostUp(reporter, latitude, longitude, repname, repstate, replga, hotstate, hotlga, comment, type, hotarea, authorId);
 
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         FancyToast.makeText(getApplicationContext(), "This area has been marked as hot sport zone", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        finish();
+                        overridePendingTransition(0, 0);
+                        startActivity(getIntent());
+                        overridePendingTransition(0, 0);
                         //emptyInputEditText();
+                        //Log.d("myTag", "error" + response);
                     } else {
 
                         FancyToast.makeText(getApplicationContext(), "Short Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
@@ -293,7 +294,7 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
         mBroadcaster.setTitle("HotZone");
-        mBroadcaster.setAuthor("JWatcher");
+        mBroadcaster.setAuthor(id);
         mBroadcaster.setSendPosition(true);
         //mBroadcastButton = findViewById(R.id.NEMAVIDButton);
         mBroadcastButton2 = findViewById(R.id.mich_on);
@@ -540,7 +541,7 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
         getWindow().addFlags(FLAG_KEEP_SCREEN_ON);
         mUploading = true;
         showDialog(UPLOAD_PROGRESS_DIALOG);
-        UploadHelper.upload(this, uri, APPLICATION_ID, "", "uploaded Video", null, this);
+        UploadHelper.upload(this, uri, APPLICATION_ID, id, "uploaded Video", null, this);
     }
 
     @Override
@@ -608,9 +609,9 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        floodAlert();
+                        UploadHotShortvid();
                     }
-                }, 2000);
+                }, 6000);
 
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
@@ -645,7 +646,7 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
         return mUploading;
     }
 
-    public class ItemSelectedListener implements AdapterView.OnItemSelectedListener{
+    /*public class ItemSelectedListener implements AdapterView.OnItemSelectedListener{
         //get first string in the array
         String firstItem = String.valueOf(live_stream_types.getSelectedItem());
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
@@ -657,7 +658,7 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
 
         }
 
-    }
+    }*/
 
     /*public class ItemSelectedListener implements AdapterView.OnItemSelectedListener{
         //get first string in the array
@@ -884,51 +885,6 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
-
-
-
-    private void fetchArticle() {
-        try{
-            Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<ArticleResponse> call = service.article("All");
-
-            call.enqueue(new Callback<ArticleResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<ArticleResponse> call, @NonNull Response<ArticleResponse> response) {
-                    if (response.isSuccessful()) {
-                        if (response.body()!= null) {
-                            AppExecutors.getInstance().diskIO().execute(() -> mDb.nispsasDao().deleteAll());
-                            List<Article> articleResponseList = response.body().getArticles();
-                            if (articleResponseList != null) {
-                                for (Article article : articleResponseList) {
-                                    int id = article.getId();
-                                    String articleid = article.getArticleid();
-                                    String pic_name = article.getPicname();
-                                    String post_title = article.getPostTitle();
-                                    String post_notes = article.getPostNotes();
-                                    String post_category = (String) article.getPostCategory();
-                                    String article_type = article.getArticletype();
-                                    String video_url = article.getVideourl();
-
-                                    ArticleEntry articleEntry = new ArticleEntry(id, articleid, pic_name, post_title, post_notes, post_category, article_type, video_url);
-                                    AppExecutors.getInstance().diskIO().execute(() ->mDb.nispsasDao().insertArticle(articleEntry));
-                                }
-                            }
-                        }
-                    } else {
-
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<ArticleResponse> call, @NonNull Throwable t) {
-
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
 
     private void launchMedia() {
         Intent intent = new Intent(this, CovidActivity.class);

@@ -31,18 +31,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
-import com.jdpmc.jwatcherapp.adapter.ArticleslideAdapter;
-import com.jdpmc.jwatcherapp.database.AppDatabase;
-import com.jdpmc.jwatcherapp.database.ArticleEntry;
-import com.jdpmc.jwatcherapp.model.Article;
-import com.jdpmc.jwatcherapp.model.ArticleResponse;
-import com.jdpmc.jwatcherapp.networking.api.Service;
-import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
-import com.jdpmc.jwatcherapp.service.NispsasLockService;
-import com.jdpmc.jwatcherapp.utils.AppExecutors;
-import com.jdpmc.jwatcherapp.utils.FancyToast;
-import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.afollestad.materialdialogs.BuildConfig;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -62,6 +50,14 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
+import com.jdpmc.jwatcherapp.adapter.ArticleslideAdapter;
+import com.jdpmc.jwatcherapp.database.AppDatabase;
+import com.jdpmc.jwatcherapp.networking.api.Service;
+import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
+import com.jdpmc.jwatcherapp.service.NispsasLockService;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
+import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -159,7 +155,6 @@ public class Gbv_form_Activity extends AppCompatActivity{
     private LocationSettingsRequest mLocationSettingsRequest;
     private LocationCallback mLocationCallback;
     private Location mCurrentLocation;
-    private String InteriorLink = "http://interior.gov.ng";
 
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
@@ -249,7 +244,7 @@ public class Gbv_form_Activity extends AppCompatActivity{
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                floodAlert();
+                gbvformSubmit();
             }
         });
 
@@ -263,7 +258,7 @@ public class Gbv_form_Activity extends AppCompatActivity{
 
     }
 
-    private void floodAlert() {
+    private void gbvformSubmit() {
 
         String type="GbvForm";
         startLocationUpdates();
@@ -276,7 +271,6 @@ public class Gbv_form_Activity extends AppCompatActivity{
         }
         try{
             //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
-
             Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
             String mreptype = gbv_rep_type_option.getSelectedItem().toString();
             String physicaltype = gbv_rep_type_option_physical_selected.getSelectedItem().toString();
@@ -295,16 +289,15 @@ public class Gbv_form_Activity extends AppCompatActivity{
             EditText input_gencomment = findViewById(R.id.gen_comment);
             String comment = input_gencomment.getText().toString().trim();
             Call<Void> call = service.SubmitGbvForm(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type, physicaltype, sextype, emotiontype, sociotype, harmfultype, witness, victim, address, victphone);
-
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
-                        FancyToast.makeText(getApplicationContext(), "Your Short Video Post was successfull", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        FancyToast.makeText(getApplicationContext(), "Thanks Your GBV Case has been taken", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
                         //emptyInputEditText();
                     } else {
 
-                        FancyToast.makeText(getApplicationContext(), "Short Video Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                        FancyToast.makeText(getApplicationContext(), "GBV Case Filing Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                     }
                 }
 
@@ -314,7 +307,7 @@ public class Gbv_form_Activity extends AppCompatActivity{
                 }
             });
         } catch (Exception e) {
-            FancyToast.makeText(getApplicationContext(), "Short Video Post Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+            FancyToast.makeText(getApplicationContext(), "GBV Case Filing Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
 
         }
     }
@@ -562,50 +555,6 @@ public class Gbv_form_Activity extends AppCompatActivity{
     }
 
 
-
-
-    private void fetchArticle() {
-        try{
-            Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<ArticleResponse> call = service.article("All");
-
-            call.enqueue(new Callback<ArticleResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<ArticleResponse> call, @NonNull Response<ArticleResponse> response) {
-                    if (response.isSuccessful()) {
-                        if (response.body()!= null) {
-                            AppExecutors.getInstance().diskIO().execute(() -> mDb.nispsasDao().deleteAll());
-                            List<Article> articleResponseList = response.body().getArticles();
-                            if (articleResponseList != null) {
-                                for (Article article : articleResponseList) {
-                                    int id = article.getId();
-                                    String articleid = article.getArticleid();
-                                    String pic_name = article.getPicname();
-                                    String post_title = article.getPostTitle();
-                                    String post_notes = article.getPostNotes();
-                                    String post_category = (String) article.getPostCategory();
-                                    String article_type = article.getArticletype();
-                                    String video_url = article.getVideourl();
-
-                                    ArticleEntry articleEntry = new ArticleEntry(id, articleid, pic_name, post_title, post_notes, post_category, article_type, video_url);
-                                    AppExecutors.getInstance().diskIO().execute(() ->mDb.nispsasDao().insertArticle(articleEntry));
-                                }
-                            }
-                        }
-                    } else {
-
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<ArticleResponse> call, @NonNull Throwable t) {
-
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
 
     @Override
     public void onResume() {

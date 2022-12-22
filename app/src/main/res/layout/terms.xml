@@ -14,6 +14,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_margin"
             android:text="@string/terms"
+            android:textStyle="bold"
             android:textColor="@color/black" />
 
         <TextView
@@ -21,6 +22,8 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/activity_margin"
             android:text="@string/terms_ncondition"
+            android:justificationMode="inter_word"
+            android:lineSpacingExtra="5dp"
             android:textColor="@color/black" />
 
         <CheckBox

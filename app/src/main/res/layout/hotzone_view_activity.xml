@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2F050505"
+    tools:context=".view_and_comment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp">
+
+                <ProgressBar
+                    android:id="@+id/hotprogressBar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/stop_close_live3"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/met_ic_close" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/calibri"
+                    android:padding="8dp"
+                    android:text="Hot Zone Areas"
+                    android:textColor="#090909"
+                    android:textSize="17sp" />
+
+                <!--<ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_baseline_more_vert_24" />-->
+            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/view_hot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="8dp">
+                    <ImageView
+                        android:id="@+id/hot_imgview"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/habso"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="70dp"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/calibri"
+                        android:text="Please be ware of this area"
+                        android:textColor="#FD0404"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/hot_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="105dp"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/calibri"
+                        android:text="Lugbe"
+                        android:maxLines="1"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:textColor="#090909"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/hot_statetext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="60dp"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/calibri"
+                        android:text="Osun"
+                        android:maxLines="1"
+                        android:maxLength="5"
+                        android:ellipsize="end"
+                        android:textColor="#090909"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/hot_lgatxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/calibri"
+                        android:text="Osogbo"
+                        android:maxLines="1"
+                        android:maxLength="8"
+                        android:ellipsize="end"
+                        android:textColor="#090909"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/hot_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="@dimen/activity_margin"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/calibri"
+                        android:padding="8dp"
+                        android:lineSpacingExtra="7dp"
+                        android:text="This post speak well of what is happening in Nigeria now and i like the post"
+                        android:textColor="#090909"
+                        android:textSize="14sp" />
+                    <EditText
+                        android:id="@+id/send_text_id"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Input"
+                        android:textSize="25dp"
+                        android:visibility="gone"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="15dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/hotrecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerInParent="true" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

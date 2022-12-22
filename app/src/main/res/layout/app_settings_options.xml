@@ -90,7 +90,7 @@
                             android:layout_gravity="center"
                             android:fontFamily="@font/calibri"
                             android:padding="5dp"
-                            android:text="JDPCM Personnel's Account Confirmation"
+                            android:text="J-WATCHER Personnel's Account Confirmation"
                             android:textColor="#000000"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -101,7 +101,7 @@
                             android:layout_gravity="center"
                             android:fontFamily="@font/calibri"
                             android:padding="5dp"
-                            android:text="Kindly confirm your account if you are a JDPCM Personnel"
+                            android:text="Kindly confirm your account if you are a J-WATCHER Personnel"
                             android:textColor="#000000"
                             android:textAlignment="center"
                             android:textSize="14sp" />
@@ -183,23 +183,16 @@
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="8dp">
 
-                            <androidx.cardview.widget.CardView
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/user_image"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:elevation="12dp"
-                                android:id="@+id/view2"
-                                app:cardCornerRadius="40dp"
-                                android:layout_centerHorizontal="true"
-                                android:innerRadius="0dp"
-                                android:shape="ring"
+                                android:src="@drawable/img"
+                                app:civ_border_width="2dp"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginTop="0dp">
-                                <ImageView
-                                    android:id="@+id/user_image"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:src="@drawable/img"/>
-                            </androidx.cardview.widget.CardView>
+                                android:layout_marginTop="0dp"
+                                app:civ_border_color="#03A9F4"/>
 
                             <TextView
                                 android:id="@+id/user_name"
@@ -294,7 +287,7 @@
                                 android:padding="5dp"
                                 android:text="About"
                                 android:textColor="#000000"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
                             <ImageView
                                 android:layout_width="25dp"
@@ -322,7 +315,7 @@
                                 android:text="Privacy Policy"
                                 android:textColor="#000000"
                                 android:textStyle="bold"
-                                android:textSize="16sp" />
+                                android:textSize="18sp" />
                             <ImageView
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
@@ -349,7 +342,7 @@
                                 android:text="Rate this app"
                                 android:textColor="#000000"
                                 android:textStyle="bold"
-                                android:textSize="16sp" />
+                                android:textSize="18sp" />
                             <ImageView
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
@@ -375,7 +368,7 @@
                                 android:padding="5dp"
                                 android:text="Terms"
                                 android:textColor="#000000"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
                             <ImageView
                                 android:layout_width="25dp"
@@ -403,7 +396,7 @@
                                 android:text="FAQ"
                                 android:textColor="#000000"
                                 android:textStyle="bold"
-                                android:textSize="16sp" />
+                                android:textSize="18sp" />
                             <ImageView
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
@@ -414,6 +407,147 @@
 
                         </RelativeLayout>
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="4dp"
+                    android:layout_margin="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:id="@+id/privacy_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Privacy Policy"
+                                android:textSize="15dp"
+                                android:padding="5dp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/jdprivacy"
+                                android:padding="5dp"
+                                android:layout_marginTop="25dp"
+                                android:textSize="14dp"
+                                android:justificationMode="inter_word"
+                                android:lineSpacingExtra="5dp"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/terms_text">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Terms of Service"
+                                android:textSize="15dp"
+                                android:padding="5dp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/terms_ncondition"
+                                android:padding="5dp"
+                                android:justificationMode="inter_word"
+                                android:lineSpacingExtra="5dp"
+                                android:textSize="16dp"
+                                android:layout_marginTop="25dp"
+                                />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/faq_text"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Frequently Asked Questions"
+                                android:textSize="15dp"
+                                android:padding="5dp"
+                                android:textColor="#000000"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="This is the FAQ text"
+                                android:padding="10dp"
+                                android:textSize="16dp"
+                                android:layout_marginTop="25dp"
+                                />
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:id="@+id/rate_us_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pleas give us a 5 star Rating"
+                            android:textSize="14dp"
+                            android:padding="5dp"
+                            android:textColor="#000000"/>
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:src="@android:drawable/btn_star_big_on"
+                            android:padding="5dp"
+                            android:layout_marginTop="25dp"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="150dp"
+                            android:src="@android:drawable/btn_star_big_on"
+                            android:padding="5dp"
+                            android:layout_marginTop="25dp"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="60dp"
+                            android:src="@android:drawable/btn_star_big_on"
+                            android:padding="5dp"
+                            android:layout_marginTop="25dp"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="95dp"
+                            android:src="@android:drawable/btn_star_big_on"
+                            android:padding="5dp"
+                            android:layout_marginTop="25dp"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="80dp"
+                            android:src="@android:drawable/btn_star_big_on"
+                            android:padding="5dp"
+                            android:layout_marginTop="25dp"/>
+
+                    </RelativeLayout>
+
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </ScrollView>

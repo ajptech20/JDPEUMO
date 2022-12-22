@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,25 +20,24 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.jdpmc.jwatcherapp.Image_Post_Viewer_Activity;
+import com.jdpmc.jwatcherapp.Hot_Image_post_viewer;
+import com.jdpmc.jwatcherapp.Hot_Video_post_player;
 import com.jdpmc.jwatcherapp.R;
-import com.jdpmc.jwatcherapp.Video_post_player;
-import com.jdpmc.jwatcherapp.database.LivePost;
+import com.jdpmc.jwatcherapp.database.HotZonePost;
 
 import java.util.List;
-import java.util.Objects;
 
-public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdapter.ViewHolder> {
+public class HotZonePostAdapter extends RecyclerView.Adapter<HotZonePostAdapter.ViewHolder> {
     //Imageloader to load image
     private String imgpost;
     private String userImage;
     private Context context;
 
     //List to store all superheroes
-    List<LivePost> superHeroes;
+    List<HotZonePost> superHeroes;
 
     //Constructor of this class
-    public LiveVideoPostAdapter(List<LivePost> superHeroes, Context context){
+    public HotZonePostAdapter(List<HotZonePost> superHeroes, Context context){
         super();
         //Getting all superheroes
         this.superHeroes = superHeroes;
@@ -50,7 +48,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.live_vid_post_list, parent, false);
+                .inflate(R.layout.hot_zones_post_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
@@ -60,7 +58,7 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         //Getting the particular item from the list
-        LivePost superHero =  superHeroes.get(position);
+        HotZonePost superHero =  superHeroes.get(position);
 
         //Loading image from url
         userImage = (superHero.getImageUrl());
@@ -106,14 +104,15 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
 
         //Showing data on the views
         holder.textViewName.setText(superHero.getName());
-        holder.textViewRepId.setText(superHero.getId());
+        holder.textViewhotarea.setText(superHero.getHotarea());
+        //holder.textViewRepId.setText(superHero.getId());
         holder.textViewDescription.setText(superHero.getComment());
-        holder.textViewPostimg.setText(superHero.getPreview());
-        //holder.textViewRepId.setText(superHero.getRepId());
+        holder.texUserimage.setText(superHero.getImageUrl());
+        holder.textViewRepImgUrl.setText(superHero.getPreview());
         holder.textViewState.setText(superHero.getState());
-        holder.textViewStatus.setText(superHero.getStatus());
-        holder.textViewRType.setText(superHero.getRepType());
-        holder.textViewUserimg.setText(superHero.getImageUrl());
+        holder.textViewLga.setText(superHero.getLga());
+        //holder.textViewRType.setText(superHero.getRepType());
+        holder.textViewArea.setText(superHero.getArea());
         holder.textViewLikes.setText(superHero.getLikes());
         holder.textViewComments.setText(superHero.getComments());
         holder.textViewDate.setText(superHero.getDate());
@@ -129,19 +128,20 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
         //private final ImageView send_button;
         //Views
         public ImageView send_button;
-        public TextView send_text;
         public NetworkImageView imageView;
         public TextView textViewName;
-        public TextView textViewUserimg;
-        public TextView textViewPostimg;
+        public TextView textViewhotarea;
+        public TextView textViewId;
+        public TextView texUserimage;
         public TextView textViewDescription;
 
         public ImageView postImage;
         public ImageView Userimage;
+        public TextView textViewRepImgUrl;
 
         public TextView textViewRepId;
         public TextView textViewState;
-        public TextView textViewStatus;
+        public TextView textViewLga;
         public TextView textViewRType;
         public TextView textViewArea;
         public TextView textViewLikes;
@@ -150,102 +150,114 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
         public TextView textViewRsuri;
         public NetworkImageView imageViewPreview;
 
+        String Postsrc = "Hot Zone";
+
         //Initializing Views
         public ViewHolder(View itemView) {
             super(itemView);
-            send_button = (ImageView) itemView.findViewById(R.id.send_button_id);
+            /*send_button = (TextView) itemView.findViewById(R.id.send_button_id);
+            itemView.setOnClickListener(this);*/
+            postImage = (ImageView) itemView.findViewById(R.id.post_image);
             itemView.setOnClickListener(this);
-            postImage = (ImageView) itemView.findViewById(R.id.live_post_image);
-            itemView.setOnClickListener(this);
-            Userimage = (ImageView) itemView.findViewById(R.id.live_reporter_image);
+            Userimage = (ImageView) itemView.findViewById(R.id.reporter_image);
             textViewName = (TextView) itemView.findViewById(R.id.Poster_name);
-            textViewStatus = (TextView) itemView.findViewById(R.id.post_status);
-            textViewUserimg = (TextView) itemView.findViewById(R.id.userimgurl);
-            textViewRepId = (TextView) itemView.findViewById(R.id.send_text_id);
+            textViewhotarea = (TextView) itemView.findViewById(R.id.hot_postArea);
+            //textViewId = (TextView) itemView.findViewById(R.id.textViewId);
+            textViewRepImgUrl = (TextView) itemView.findViewById(R.id.imgurl);
             textViewState = (TextView) itemView.findViewById(R.id.post_state);
-            textViewPostimg = (TextView) itemView.findViewById(R.id.postimgurl);
-            textViewRType = (TextView) itemView.findViewById(R.id.post_type);
+            textViewLga = (TextView) itemView.findViewById(R.id.post_lga);
+            texUserimage = (TextView) itemView.findViewById(R.id.user_img);
+            textViewRsuri = (TextView) itemView.findViewById(R.id.vid_url);
+
+            //textViewRType = (TextView) itemView.findViewById(R.id.post_type);
+
             textViewArea = (TextView) itemView.findViewById(R.id.set_area);
             textViewLikes = (TextView) itemView.findViewById(R.id.post_likes);
             textViewComments = (TextView) itemView.findViewById(R.id.post_comments);
+            textViewDescription = (TextView) itemView.findViewById(R.id.post_describ);
             textViewDate = (TextView) itemView.findViewById(R.id.post_date);
-            textViewRsuri = (TextView) itemView.findViewById(R.id.rscurlchecker);
-            textViewDescription = (TextView) itemView.findViewById(R.id.post_description);
-            send_text = (EditText) itemView.findViewById(R.id.send_text_id);
+            //textViewDescription = (TextView) itemView.findViewById(R.id.post_description);
 
         }
 
         @Override
         public void onClick(View view) {
+
             String rsc_uri_checker = textViewRsuri.getText().toString();
-            if (!Objects.equals(rsc_uri_checker, "")){
-                send_button.setOnClickListener(v -> {
-                    String str = send_text.getText().toString();
-                    Intent intent = new Intent(context.getApplicationContext(), Video_post_player.class);
-                    intent.putExtra("message_key", str);
-                    view.getContext().startActivity(intent);
-                });
-            }else{
-                //Toast.makeText(context, "This is Image Post", Toast.LENGTH_SHORT).show();
-                send_button.setOnClickListener(v -> {
+            if (!rsc_uri_checker.equals("")){
+                postImage.setOnClickListener(v -> {
                     String username = textViewName.getText().toString();
-                    String postimgurl = textViewPostimg.getText().toString();
-                    String userimg = textViewUserimg.getText().toString();
-                    String typeofpost = textViewRType.getText().toString();
-                    String repstatus = textViewStatus.getText().toString();
+                    String userimg = texUserimage.getText().toString();
+                    String postimg = textViewRepImgUrl.getText().toString();
+                    String town = textViewhotarea.getText().toString();
                     String state = textViewState.getText().toString();
+                    String lga = textViewLga.getText().toString();
                     String date = textViewDate.getText().toString();
                     String comment = textViewDescription.getText().toString();
-                    String area = textViewArea.getText().toString();
-                    String str = send_text.getText().toString();
-                    Intent intent = new Intent(context.getApplicationContext(), Image_Post_Viewer_Activity.class);
-                    intent.putExtra("message_key", str);
+                    String rscurl = textViewRsuri.getText().toString();
+                    String source = Postsrc;
+                    Intent intent = new Intent(context.getApplicationContext(), Hot_Video_post_player.class);
                     intent.putExtra("username_key", username);
-                    intent.putExtra("imgurl_key", postimgurl);
                     intent.putExtra("userimg_key", userimg);
-                    intent.putExtra("reptype_key", typeofpost);
+                    intent.putExtra("imgurl_key", postimg);
+                    intent.putExtra("town_key", town);
                     intent.putExtra("state_key", state);
+                    intent.putExtra("lga_key", lga);
                     intent.putExtra("date_key", date);
                     intent.putExtra("comment_key", comment);
-                    intent.putExtra("area_key", area);
-                    intent.putExtra("repstatus_key", repstatus);
+                    intent.putExtra("rscurl_key", rscurl);
+                    intent.putExtra("postsrc_key", source);
+                    view.getContext().startActivity(intent);
+                });
+            }else {
+                postImage.setOnClickListener(v -> {
+                    String username = textViewName.getText().toString();
+                    String userimg = texUserimage.getText().toString();
+                    String postimg = textViewRepImgUrl.getText().toString();
+                    String town = textViewhotarea.getText().toString();
+                    String state = textViewState.getText().toString();
+                    String lga = textViewLga.getText().toString();
+                    String date = textViewDate.getText().toString();
+                    String comment = textViewDescription.getText().toString();
+                    String rscurl = textViewRsuri.getText().toString();
+                    String source = Postsrc;
+                    Intent intent = new Intent(context.getApplicationContext(), Hot_Image_post_viewer.class);
+                    intent.putExtra("username_key", username);
+                    intent.putExtra("userimg_key", userimg);
+                    intent.putExtra("imgurl_key", postimg);
+                    intent.putExtra("town_key", town);
+                    intent.putExtra("state_key", state);
+                    intent.putExtra("lga_key", lga);
+                    intent.putExtra("date_key", date);
+                    intent.putExtra("comment_key", comment);
+                    intent.putExtra("rscurl_key", rscurl);
+                    intent.putExtra("postsrc_key", source);
                     view.getContext().startActivity(intent);
                 });
             }
-            if (!Objects.equals(rsc_uri_checker, "")){
-                postImage.setOnClickListener(v -> {
-                    String str = send_text.getText().toString();
-                    Intent intent = new Intent(context.getApplicationContext(), Video_post_player.class);
-                    intent.putExtra("message_key", str);
-                    view.getContext().startActivity(intent);
-                });
-            }else{
-                //Toast.makeText(context, "This is Image Post", Toast.LENGTH_SHORT).show();
-                postImage.setOnClickListener(v -> {
-                    String username = textViewName.getText().toString();
-                    String postimgurl = textViewPostimg.getText().toString();
-                    String userimg = textViewUserimg.getText().toString();
-                    String typeofpost = textViewRType.getText().toString();
-                    String repstatus = textViewStatus.getText().toString();
-                    String state = textViewState.getText().toString();
-                    String date = textViewDate.getText().toString();
-                    String comment = textViewDescription.getText().toString();
-                    String area = textViewArea.getText().toString();
-                    String str = send_text.getText().toString();
-                    Intent intent = new Intent(context.getApplicationContext(), Image_Post_Viewer_Activity.class);
-                    intent.putExtra("message_key", str);
-                    intent.putExtra("username_key", username);
-                    intent.putExtra("imgurl_key", postimgurl);
-                    intent.putExtra("userimg_key", userimg);
-                    intent.putExtra("reptype_key", typeofpost);
-                    intent.putExtra("state_key", state);
-                    intent.putExtra("date_key", date);
-                    intent.putExtra("comment_key", comment);
-                    intent.putExtra("area_key", area);
-                    intent.putExtra("repstatus_key", repstatus);
-                    view.getContext().startActivity(intent);
-                });
-            }
+
+            /*postImage.setOnClickListener(v -> {
+                String username = textViewName.getText().toString();
+                String userimg = texUserimage.getText().toString();
+                String postimg = textViewRepImgUrl.getText().toString();
+                String town = textViewhotarea.getText().toString();
+                String state = textViewState.getText().toString();
+                String lga = textViewLga.getText().toString();
+                String date = textViewDate.getText().toString();
+                String comment = textViewDescription.getText().toString();
+                String rscurl = textViewRsuri.getText().toString();
+                Intent intent = new Intent(context.getApplicationContext(), Hot_Video_post_player.class);
+                intent.putExtra("username_key", username);
+                intent.putExtra("userimg_key", userimg);
+                intent.putExtra("postimg_key", postimg);
+                intent.putExtra("town_key", town);
+                intent.putExtra("state_key", state);
+                intent.putExtra("lga_key", lga);
+                intent.putExtra("date_key", date);
+                intent.putExtra("comment_key", comment);
+                intent.putExtra("rscurl_key", rscurl);
+                view.getContext().startActivity(intent);
+            });*/
         }
     }
 

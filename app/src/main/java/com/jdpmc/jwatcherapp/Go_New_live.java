@@ -92,10 +92,7 @@ import retrofit2.Response;
 
 public class Go_New_live extends AppCompatActivity {
     private static final String LOGTAG = "Mybroadcastingapp";
-
     private static final String APPLICATION_ID = "mOQq8sbExROCWxFjbkGoaA";
-
-
     private static final String TAG = "NEMA";
     private static final int RC_APP_UPDATE = 0;
     AlertFrag mActivity = new AlertFrag();
@@ -108,18 +105,10 @@ public class Go_New_live extends AppCompatActivity {
     private Spinner live_stream_types;
     private String swi;
     String id = UUID.randomUUID().toString();
-
-
     @BindView(R.id.menu_image)
     AppCompatImageView menu_image;
-
-
     @BindView(R.id.crime)
     AppCompatImageView crime;
-
-
-
-
     @BindView(R.id.progress_bar2)
     ProgressBar progress_bar;
 
@@ -224,8 +213,7 @@ public class Go_New_live extends AppCompatActivity {
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
         mBroadcaster.setTitle("LiveBroadcast");
-        mBroadcaster.setAuthor("NISPSAS-VIR");
-        //mBroadcaster.setAuthor(id);
+        mBroadcaster.setAuthor(id);
         mBroadcaster.setSendPosition(true);
         mBroadcastButton = findViewById(R.id.live_event);
         mBroadcastButton2 = findViewById(R.id.mich_on);
@@ -243,11 +231,18 @@ public class Go_New_live extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            floodAlert();
+                            upLivetoServer();
                         }
                     }, 5000);
                 }else{
                     mBroadcaster.stopBroadcast();
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
+
+                    FancyToast.makeText(getApplicationContext(), "You have ended the Live Broadcast", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+
                 } if (viewId == R.id.SwitchCameraButton) {
                     mBroadcaster.switchCamera();
                     //Log.e(TAG, "Button Cliked: something else");
@@ -354,14 +349,12 @@ public class Go_New_live extends AppCompatActivity {
 
     }
 
-    private void floodAlert() {
-
+    private void upLivetoServer() {
         String type="LiveBroadcast";
+        String authorId = id;
         startLocationUpdates();
         startLocation();
-
         if (latitude == null) {
-
             startLocation();
             return;
         }
@@ -372,7 +365,7 @@ public class Go_New_live extends AppCompatActivity {
             String mreptype = live_stream_types.getSelectedItem().toString();
             EditText input_post_comment = findViewById(R.id.say_comment);
             String comment = input_post_comment.getText().toString().trim();
-            Call<Void> call = service.goingLivePost(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type);
+            Call<Void> call = service.goingLivePost(reporter, latitude, longitude, repname, repstate, replga, mreptype, comment, type, authorId);
 
             call.enqueue(new Callback<Void>() {
                 @Override
@@ -607,51 +600,6 @@ public class Go_New_live extends AppCompatActivity {
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
-
-
-
-    private void fetchArticle() {
-        try{
-            Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<ArticleResponse> call = service.article("All");
-
-            call.enqueue(new Callback<ArticleResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<ArticleResponse> call, @NonNull Response<ArticleResponse> response) {
-                    if (response.isSuccessful()) {
-                        if (response.body()!= null) {
-                            AppExecutors.getInstance().diskIO().execute(() -> mDb.nispsasDao().deleteAll());
-                            List<Article> articleResponseList = response.body().getArticles();
-                            if (articleResponseList != null) {
-                                for (Article article : articleResponseList) {
-                                    int id = article.getId();
-                                    String articleid = article.getArticleid();
-                                    String pic_name = article.getPicname();
-                                    String post_title = article.getPostTitle();
-                                    String post_notes = article.getPostNotes();
-                                    String post_category = (String) article.getPostCategory();
-                                    String article_type = article.getArticletype();
-                                    String video_url = article.getVideourl();
-
-                                    ArticleEntry articleEntry = new ArticleEntry(id, articleid, pic_name, post_title, post_notes, post_category, article_type, video_url);
-                                    AppExecutors.getInstance().diskIO().execute(() ->mDb.nispsasDao().insertArticle(articleEntry));
-                                }
-                            }
-                        }
-                    } else {
-
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<ArticleResponse> call, @NonNull Throwable t) {
-
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
 
     private void launchMedia() {
         Intent intent = new Intent(this, CovidActivity.class);

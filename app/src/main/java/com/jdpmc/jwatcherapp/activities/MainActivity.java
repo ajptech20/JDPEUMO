@@ -1,6 +1,8 @@
 package com.jdpmc.jwatcherapp.activities;
 
 import static com.jdpmc.jwatcherapp.utils.Constants.GET_HOT_URL;
+import static com.jdpmc.jwatcherapp.utils.Constants.GET_USEFUL_URL;
+import static com.jdpmc.jwatcherapp.utils.Constants.RECENT_POST_URL;
 
 import android.Manifest;
 import android.content.Intent;
@@ -9,9 +11,12 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,31 +26,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jdpmc.jwatcherapp.AppSettings;
-import com.jdpmc.jwatcherapp.Gbv_form_Activity;
-import com.jdpmc.jwatcherapp.Go_New_live;
-import com.jdpmc.jwatcherapp.ImagePostsActivity;
-import com.jdpmc.jwatcherapp.LiveVideoActivity;
-import com.jdpmc.jwatcherapp.R;
-import com.jdpmc.jwatcherapp.ShortVideoActivity;
-import com.jdpmc.jwatcherapp.adapter.HomePostAdapter;
-import com.jdpmc.jwatcherapp.database.AppDatabase;
-import com.jdpmc.jwatcherapp.database.HomePosts;
-import com.jdpmc.jwatcherapp.hot_picture_uploader;
-import com.jdpmc.jwatcherapp.model.HotZoneDetails;
-import com.jdpmc.jwatcherapp.model.UseRscDetails;
-import com.jdpmc.jwatcherapp.networking.api.Service;
-import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
-import com.jdpmc.jwatcherapp.picture_uploader;
-import com.jdpmc.jwatcherapp.service.NispsasLockService;
-import com.jdpmc.jwatcherapp.shortvideo_uploader;
-import com.jdpmc.jwatcherapp.utils.Config4;
-import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -67,6 +54,33 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.jdpmc.jwatcherapp.AppSettings;
+import com.jdpmc.jwatcherapp.Gbv_form_Activity;
+import com.jdpmc.jwatcherapp.Go_New_live;
+import com.jdpmc.jwatcherapp.ImagePostsActivity;
+import com.jdpmc.jwatcherapp.LiveVideoActivity;
+import com.jdpmc.jwatcherapp.R;
+import com.jdpmc.jwatcherapp.ShortVideoActivity;
+import com.jdpmc.jwatcherapp.adapter.ArticleAdapter;
+import com.jdpmc.jwatcherapp.adapter.HomePostAdapter;
+import com.jdpmc.jwatcherapp.database.AppDatabase;
+import com.jdpmc.jwatcherapp.database.ArticleEntry;
+import com.jdpmc.jwatcherapp.database.HomePosts;
+import com.jdpmc.jwatcherapp.hot_picture_uploader;
+import com.jdpmc.jwatcherapp.model.Article;
+import com.jdpmc.jwatcherapp.model.ArticleResponse;
+import com.jdpmc.jwatcherapp.model.HotZoneDetails;
+import com.jdpmc.jwatcherapp.model.UseRscDetails;
+import com.jdpmc.jwatcherapp.networking.api.Service;
+import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
+import com.jdpmc.jwatcherapp.picture_uploader;
+import com.jdpmc.jwatcherapp.service.NispsasLockService;
+import com.jdpmc.jwatcherapp.shortvideo_uploader;
+import com.jdpmc.jwatcherapp.utils.AppExecutors;
+import com.jdpmc.jwatcherapp.utils.Config4;
+import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
+import com.jdpmc.jwatcherapp.view_hot_zone;
+import com.jdpmc.jwatcherapp.viewmodel.ArticleViewModel;
 import com.mancj.slideup.SlideUp;
 
 import org.json.JSONArray;
@@ -77,15 +91,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 @RequiresApi(api = Build.VERSION_CODES.M)
 public class MainActivity extends AppCompatActivity implements RecyclerView.OnScrollChangeListener{
     private static final String TAG = "MainActivity";
     private static final int RC_APP_UPDATE = 0;
     private AppUpdateManager mAppUpdateManager;
-    private static final String live_vid = "amlive";
-    private static final String live_vid2 = "amlive";
+    private static final String live_vid = "hotzone";
+    private static final String live_vid2 = "hotzone";
+    private ArticleAdapter articleAdapter;
     //Creating a List of superheroes
     private List<HomePosts> listSuperHeroes;
     private List<HomePosts> listSuperHeroes2;
@@ -94,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-
+    private int current_position = 0;
     //Volley Request Queue
     private RequestQueue requestQueue;
 
@@ -118,12 +136,45 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
     private View liveVid;
     private String Unconfirmed;
     private String Confirmed;
+    public TextView send_text;
+    public TextView hot_state_text;
+    public TextView hot_lga_text;
+    public TextView hot_town_text;
+    public TextView hot_imag_banner;
+    public TextView hot_comment;
+    public TextView hot_username;
+    public TextView hot_rscurl;
     String id = UUID.randomUUID().toString();
-
     FloatingActionButton flGoLive, flShortVid, flImagePost;
     FloatingActionButton mMainbutton;
     //TextView addAlarmActionText, addPersonActionText;
     Boolean isAllFabsVisible;
+
+    @BindView(R.id.articleRecyclerview)
+    RecyclerView articleRecyclerview;
+
+    final int duration = 6000;
+    final int pixelsToMove = 1080;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Runnable SCROLLING_RUNNABLE = new Runnable() {
+
+        @Override
+        public void run() {
+            if (current_position == 0) {
+                articleRecyclerview.smoothScrollToPosition(0);
+                current_position = 1;
+            } else if (current_position == 1) {
+                articleRecyclerview.smoothScrollToPosition(1);
+                current_position = 2;
+            } else if (current_position == 2) {
+                articleRecyclerview.smoothScrollToPosition(2);
+                current_position = 0;
+            }
+
+            articleRecyclerview.smoothScrollBy(pixelsToMove, 0);
+            mHandler.postDelayed(this, duration);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
             campain_finance_form.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String url = "https://nispsas.com.ng/NISPSAS/Registration/verifyCfm";
+                    String url = "https://j-watcher.org/Apps/Mobile/campainform";
                     CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                     CustomTabsIntent customTabsIntent = builder.build();
                     customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -187,10 +238,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
         slideUpnewLive.hideImmediately();
 
         String callid = (live_vid);
-        verifyPsid(callid);
+        getHotZone(callid);
 
         String callid2 = (live_vid2);
-        GetHotzones(callid2);
+        GetUsefullRsc(callid2);
 
         //Initializing Views
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -216,6 +267,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
 
         //Adding adapter to recyclerview
         recyclerView.setAdapter(adapter);
+
+        send_text = (EditText) findViewById(R.id.send_text_id);
+        hot_state_text = (EditText) findViewById(R.id.hot_state_txt);
+        hot_lga_text = (EditText) findViewById(R.id.hot_lga_txt);
+        hot_town_text = (EditText) findViewById(R.id.hot_town_txt);
+        hot_imag_banner = (EditText) findViewById(R.id.hot_imag_txt);
+        hot_comment = (EditText) findViewById(R.id.hot_commenttxt);
+        hot_username = (EditText) findViewById(R.id.hot_usernamettxt);
+        hot_rscurl = (EditText) findViewById(R.id.hot_rscurlttxt);
 
         ImageView New_postbam = findViewById(R.id.new_post);
         New_postbam.setOnClickListener(new View.OnClickListener() {
@@ -416,6 +476,48 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
             }
         });
 
+        RecyclerView autoScroll = (RecyclerView) findViewById(R.id.articleRecyclerview);
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        autoScroll.setLayoutManager(layoutManager);
+
+        autoScroll.setHasFixedSize(true);
+        articleAdapter = new ArticleAdapter(MainActivity.this);
+        autoScroll.setAdapter(articleAdapter);
+
+
+        articleRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastItem = layoutManager.findLastCompletelyVisibleItemPosition();
+                if(lastItem == layoutManager.getItemCount()){
+                    mHandler.removeCallbacks(SCROLLING_RUNNABLE);
+                    Handler postHandler = new Handler();
+                    postHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            articleRecyclerview.setAdapter(null);
+                            articleRecyclerview.setAdapter(articleAdapter);
+                            mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+                        }
+                    }, 2000);
+                }
+            }
+        });
+        mHandler.postDelayed(SCROLLING_RUNNABLE, 2000);
+
+        mDb = AppDatabase.getInstance(getApplicationContext());
+        fetchArticle();
+        ArticleViewModel viewModel = ViewModelProviders.of(this).get(ArticleViewModel.class);
+        viewModel.getArticle().observe(this, articleEntries -> {
+            if (articleEntries != null) {
+                articleAdapter.setTasks(articleEntries);
+            }
+        });
+
     }
 
     InstallStateUpdatedListener installStateUpdatedListener = new
@@ -499,7 +601,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
 
     //This method will parse json data
     private void parseData(JSONArray array) {
-        for (int i = 0; i < array.length(); i++) {
+        for (int i=array.length()-1;i>=0;i--) {
             //Creating the superhero object
             HomePosts superHero = new HomePosts();
             JSONObject json = null;
@@ -558,7 +660,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
         return true;
     }
 
-    private void verifyPsid(String callid) {
+    private void getHotZone(String callid) {
         if (verifyFields()) {
             //progress.setVisibility(View.VISIBLE);
             try {
@@ -581,11 +683,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                                 String sglga = verifyResponse.getLga();
                                 String sgcomment = verifyResponse.getSGcomment();
                                 String sgstatuse = verifyResponse.getSgstatuse();
+                                String hot_id = verifyResponse.getId();
+                                String hot_area = verifyResponse.getArea();
 
                                 String videosrc = verifyResponse.getSGvideourl();
                                 String imageUrl = verifyResponse.getImage();
+                                String UserimageUrl = verifyResponse.getUserimage();
                                 //progress.setVisibility(View.GONE);
-                                showDialog(sgresponse, sgname, sgphone, sgstate, imageUrl, videosrc, sgreptype, sglga, sgcomment, sgstatuse, date);
+                                showDialog(sgresponse, sgname, sgphone, sgstate, imageUrl, videosrc, sgreptype, sglga, sgcomment, sgstatuse, date, hot_id, hot_area, UserimageUrl);
                                 //Toast.makeText(Video_post_player.this, resourceuri, Toast.LENGTH_SHORT).show();
                             }
                         } else {
@@ -608,29 +713,69 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
         }
     }
 
-    private void showDialog(String sgresponse, String sgname, String sgphone, String sgstate, String imageUrl, String videosrc, String sgreptype, String sglga, String sgcomment, String sgstatuse, String date) {
+    private void showDialog(String sgresponse, String sgname, String sgphone, String sgstate, String imageUrl, String videosrc, String sgreptype, String sglga, String sgcomment, String sgstatuse, String date, String hot_id, String hot_area, String UserimageUrl) {
         //TextView verifiedResponse = view.findViewById(R.id.verifiedResponse);
         //verifiedResponse.setText(sgresponse);
-        //TextView nametext = findViewById(R.id.hot_pic);
-        //nametext.setText(sgname);
+        TextView nametext = findViewById(R.id.hotuser_name);
+        nametext.setText(sgname);
         //TextView statustext = findViewById(R.id.brstatus);
         //statustext.setText(sgstatuse);
         //TextView psttype = findViewById(R.id.post_type);
         //psttype.setText(sgstatuse);
+        TextView VidUrl = findViewById(R.id.video_url);
+        VidUrl.setText(videosrc);
         TextView statetext = findViewById(R.id.hot_state);
         statetext.setText(sgstate);
         TextView Areaofrep = findViewById(R.id.hot_lga);
         Areaofrep.setText(sglga);
-        //TextView ReportType = findViewById(R.id.rep_type);
-        //ReportType.setText(sgreptype);
-        //TextView RepDate = findViewById(R.id.report_date);
-        //RepDate.setText(date);
-        //TextView ReporComment = findViewById(R.id.rep_comment);
-        //ReporComment.setText(sgcomment);
+
+        EditText hotid = findViewById(R.id.send_text_id);
+        hotid.setText(hot_id);
+
+        TextView hotviewstate = findViewById(R.id.hot_state_txt);
+        hotviewstate.setText(sgstate);
+        TextView hotviewlga = findViewById(R.id.hot_lga_txt);
+        hotviewlga.setText(sglga);
+        TextView hotviewtown = findViewById(R.id.hot_town_txt);
+        hotviewtown.setText(hot_area);
+        TextView hotvieimg = findViewById(R.id.hot_imag_txt);
+        hotvieimg.setText(imageUrl);
+        TextView hotviewcomment = findViewById(R.id.hot_commenttxt);
+        hotviewcomment.setText(sgcomment);
         ImageView imageView = (ImageView) findViewById(R.id.hot_pic);
         Glide.with(MainActivity.this)
                 .load(imageUrl)
                 .into(imageView);
+
+        CardView open_hot_zones = findViewById(R.id.hot_zone);
+        open_hot_zones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = send_text.getText().toString();
+                String state = hot_state_text.getText().toString();
+                String lga = hot_lga_text.getText().toString();
+                String town = hot_town_text.getText().toString();
+                String imgurl = hot_imag_banner.getText().toString();
+                String comment = hot_comment.getText().toString();
+                String username = hot_username.getText().toString();
+                String rscurl = hot_rscurl.getText().toString();
+                //Intent intent = new Intent(MainActivity.getApplicationContext(), view_and_comment.class);
+                Intent intent = new Intent(MainActivity.this, view_hot_zone.class);
+                intent.putExtra("message_key", str);
+                intent.putExtra("state_key", state);
+                intent.putExtra("lga_key", lga);
+                intent.putExtra("town_key", town);
+                intent.putExtra("imgurl_key", imgurl);
+                intent.putExtra("comment_key", comment);
+                intent.putExtra("username_key", sgname);
+                intent.putExtra("rscurl_key", videosrc);
+                intent.putExtra("userimg_key", UserimageUrl);
+                intent.putExtra("date_key", date);
+                v.getContext().startActivity(intent);
+
+                //Toast.makeText(MainActivity.this, sgname, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -638,11 +783,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
         return true;
     }
 
-    private void GetHotzones(String callid) {
+    private void GetUsefullRsc(String callid) {
         if (verifyFields2()) {
             //progress.setVisibility(View.VISIBLE);
             try {
-                Service service = DataGenerator.createService(Service.class, GET_HOT_URL);
+                Service service = DataGenerator.createService(Service.class, GET_USEFUL_URL);
                 retrofit2.Call<UseRscDetails> call = service.getuseresoutce(callid);
 
                 call.enqueue(new retrofit2.Callback<UseRscDetails>() {
@@ -677,7 +822,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                     @Override
                     public void onFailure(@NonNull retrofit2.Call<UseRscDetails> call, @NonNull Throwable t) {
                         //progress.setVisibility(View.GONE);
-                        Toast.makeText(MainActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "No Useful Resources Posted", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -712,5 +857,60 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                 .load(imageUrl)
                 .into(imageView);
     }
+
+
+    private void fetchArticle() {
+        try{
+            Service service = DataGenerator.createService(Service.class, RECENT_POST_URL);
+            Call<ArticleResponse> call = service.recentPosts("All");
+
+            call.enqueue(new Callback<ArticleResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<ArticleResponse> call, @NonNull retrofit2.Response<ArticleResponse> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body()!= null) {
+                            AppExecutors.getInstance().diskIO().execute(() -> mDb.nispsasDao().deleteAll());
+                            List<Article> articleResponseList = response.body().getArticles();
+                            if (articleResponseList != null) {
+                                for (Article article : articleResponseList) {
+                                    int id = article.getId();
+                                    //String articleid = article.getArticleid();
+                                    String user_pic_name = article.getUserimage();
+                                    String urser_name = article.getUsername();
+                                    String post_comment = article.getPostcomment();
+                                    String post_state = article.getPoststate();
+                                    String post_status = article.getPoststatus();
+
+                                    String post_type = article.getPosttype();
+                                    String post_area = article.getPostarea();
+                                    String post_likes = article.getLikscount();
+                                    String post_comments = article.getCommentcount();
+                                    String post_image = article.getPreview();
+                                    String post_vidurl = article.getVidrscurl();
+                                    String post_date = article.getPostdate();
+                                    Log.v(TAG, "https://nispsas.com.ng/NISPSAS/Postpics/"+article.getUserimage());
+
+                                    ArticleEntry articleEntry = new ArticleEntry(id, user_pic_name, urser_name, post_comment, post_state, post_status, post_type
+                                    ,post_area, post_likes, post_comments, post_image, post_vidurl, post_date);
+                                    AppExecutors.getInstance().diskIO().execute(() ->mDb.nispsasDao().insertArticle(articleEntry));
+                                }
+                            }
+                        }
+                    } else {
+
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ArticleResponse> call, @NonNull Throwable t) {
+
+                }
+            });
+        } catch (Exception e) {
+
+        }
+    }
+
+
 
 }

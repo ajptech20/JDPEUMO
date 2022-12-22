@@ -344,7 +344,7 @@ public class ShortVideoActivity extends AppCompatActivity implements RecyclerVie
 
     //This method will parse json data
     private void parseData(JSONArray array) {
-        for (int i = 0; i < array.length(); i++) {
+        for (int i=array.length()-1;i>=0;i--) {
             //Creating the superhero object
             ShortPost superHero = new ShortPost();
             JSONObject json = null;

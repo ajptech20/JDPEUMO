@@ -1,6 +1,6 @@
 package com.jdpmc.jwatcherapp;
 
-import static com.jdpmc.jwatcherapp.utils.Constants.VERIFY_BASE_URL;
+import static com.jdpmc.jwatcherapp.utils.Constants.VIDEO_PLAYER_BASE_URL;
 
 import android.graphics.Point;
 import android.os.Bundle;
@@ -105,7 +105,7 @@ public class A_live_video_posts extends AppCompatActivity {
         if (verifyFields()) {
             progress.setVisibility(View.VISIBLE);
             try {
-                Service service = DataGenerator.createService(Service.class, VERIFY_BASE_URL);
+                Service service = DataGenerator.createService(Service.class, VIDEO_PLAYER_BASE_URL);
                 Call<VerifyDetails> call = service.recievcall(callid);
 
                 call.enqueue(new Callback<VerifyDetails>() {

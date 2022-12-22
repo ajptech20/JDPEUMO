@@ -7,8 +7,8 @@ public interface Routes {
     String MEDICAL_ALERT = "NFDR/Mobile";
     String VERIFY_NATIONAL = "/NISPSAS/Mobile";
     String FLOOD_ALERT = "NISPSAS/Mobile";
-    String POST_REP_URL = "NISPSAS/Mobile";
-    String POST_GBVFORM_URL = "NISPSAS/Mobile";
+    String POST_REP_URL = "JWApp/Mobile";
+    String POST_GBVFORM_URL = "JWApp/Mobile";
     String COVID_ALERT = "NISPSAS/Mobile";
     String CRIME_ALERT = "NISPSAS/Mobile";
     String PANIC_BUTTON = "NISPSAS/Mobile";
@@ -18,11 +18,12 @@ public interface Routes {
     String SCHOOL_REG = "PCAS/Mobile";
     String LAGOS_MEDIA = "NISPSAS/Mobile/lagosMediaAlert";
     String ARTICLE = "NISPSAS/Mobile";
+    String MOSTRECENT = "Apps/Mobile";
     String LOGIN = "NISPSAS/Mobile";
     String LOGIN2 = "NISPSAS/Mobile";
     String UPLOAD_AGRIC = "NISPSAS/Mobile/saveSATCForm";
     String VERIFY_ADDRESS = "/PCAS/Mobile";
-    String VERIFY_JWATCHER_PERSON = "/NISPSAS/Monitor";
+    String VERIFY_JWATCHER_PERSON = "/Apps/Mobile";
     //String UPLOAD_MEDIA = "NISPSAS/comment/commentreport";
     String VERIFY_TRANSPORTER = "Account/Account/Admin/Mobile";
     String VERIFY_ALGON = "NISPSAS/Mobile";

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2F050505"
+    tools:context=".view_and_comment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="18dp"
+        android:layout_gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="700dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+            <com.bambuser.broadcaster.SurfaceViewWithAutoAR
+                android:id="@+id/VideoSurfaceView"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_centerInParent="true" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:padding="5dp"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:id="@+id/stop_close_live3"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_clear_black_24dp" />
+
+                <TextView
+                    android:id="@+id/post_source"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:layout_marginTop="5dp"
+                    android:text=""
+                    android:layout_marginStart="50dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/poster_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="50dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/reporter_image"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/img"
+                    app:civ_border_width="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    app:civ_border_color="#03A9F4"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/PlayerContentView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="180dp"
+                android:layout_marginStart="100dp">
+            </RelativeLayout>
+            <TextView android:id="@+id/PlayerStatusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="90dp"
+                android:textColor="#FFFFFF"
+                android:text="Player Status"
+                android:textSize="20sp"/>
+            <RelativeLayout
+                android:id="@+id/cursion_text"
+                android:layout_width="390dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/activity_margin"
+                android:visibility="gone"
+                android:background="@color/semi_transparent">
+
+                <ImageView
+                    android:id="@+id/stop_close_live2"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_baseline_cast_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:text="Please note that this area has been marked as HOT ZONE please be vigilante if you are around this area"
+                    android:layout_marginStart="50dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/rep_town"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/calibri"
+                android:layout_marginBottom="170dp"
+                android:text="Hot Zone"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="10dp"
+                android:background="@color/colorAccent"
+                android:padding="6dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:padding="@dimen/activity_margin"
+                android:layout_gravity="bottom">
+
+                <TextView
+                    android:id="@+id/rep_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:layout_alignParentStart="true"
+                    android:text="Abuja Nigeria"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/vidarea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:text="Fct"
+                    android:layout_marginStart="120dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/report_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:text="12/12/2022"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="40dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/rep_comment"
+                android:layout_width="390dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@color/semi_transparent"
+                android:fontFamily="@font/calibri"
+                android:padding="10dp"
+                android:text="This area is ery danger please stay away from the ais of kuje and others"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/activity_margin"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                app:cardCornerRadius="10dp" />
+
+            <!--<SeekBar android:id="@+id/PlayerVolumeSeekBar"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:progress="100"
+                android:max="100" />-->
+
+            <TextView android:id="@+id/BroadcastLiveTextView"
+                android:text="LIVE"
+                android:background="#FF0000"
+                android:textColor="#FFFFFF"
+                android:padding="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+            <TextView android:id="@+id/BroadcastLatencyTextView"
+                android:padding="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/BroadcastLiveTextView"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                android:visibility="gone" />
+
+            <TextView android:id="@+id/ViewerStatusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -27,20 +27,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
-import com.jdpmc.jwatcherapp.activities.CovidActivity;
-import com.jdpmc.jwatcherapp.activities.HowToActivity;
-import com.jdpmc.jwatcherapp.activities.MyCustomPagerAdapter;
-import com.jdpmc.jwatcherapp.adapter.ArticleslideAdapter;
-import com.jdpmc.jwatcherapp.database.AppDatabase;
-import com.jdpmc.jwatcherapp.database.ArticleEntry;
-import com.jdpmc.jwatcherapp.model.Article;
-import com.jdpmc.jwatcherapp.model.ArticleResponse;
-import com.jdpmc.jwatcherapp.networking.api.Service;
-import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
-import com.jdpmc.jwatcherapp.service.NispsasLockService;
-import com.jdpmc.jwatcherapp.utils.AppExecutors;
-import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.afollestad.materialdialogs.BuildConfig;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -61,6 +47,16 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
+import com.jdpmc.jwatcherapp.activities.CovidActivity;
+import com.jdpmc.jwatcherapp.activities.HowToActivity;
+import com.jdpmc.jwatcherapp.activities.MyCustomPagerAdapter;
+import com.jdpmc.jwatcherapp.adapter.ArticleslideAdapter;
+import com.jdpmc.jwatcherapp.database.AppDatabase;
+import com.jdpmc.jwatcherapp.networking.api.Service;
+import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
+import com.jdpmc.jwatcherapp.service.NispsasLockService;
+import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -68,7 +64,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-import java.util.List;
 import java.util.Timer;
 
 import butterknife.BindView;
@@ -523,51 +518,6 @@ public class NEMA extends AppCompatActivity {
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
-
-
-
-    private void fetchArticle() {
-        try{
-            Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
-            Call<ArticleResponse> call = service.article("All");
-
-            call.enqueue(new Callback<ArticleResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<ArticleResponse> call, @NonNull Response<ArticleResponse> response) {
-                    if (response.isSuccessful()) {
-                        if (response.body()!= null) {
-                            AppExecutors.getInstance().diskIO().execute(() -> mDb.nispsasDao().deleteAll());
-                            List<Article> articleResponseList = response.body().getArticles();
-                            if (articleResponseList != null) {
-                                for (Article article : articleResponseList) {
-                                    int id = article.getId();
-                                    String articleid = article.getArticleid();
-                                    String pic_name = article.getPicname();
-                                    String post_title = article.getPostTitle();
-                                    String post_notes = article.getPostNotes();
-                                    String post_category = (String) article.getPostCategory();
-                                    String article_type = article.getArticletype();
-                                    String video_url = article.getVideourl();
-
-                                    ArticleEntry articleEntry = new ArticleEntry(id, articleid, pic_name, post_title, post_notes, post_category, article_type, video_url);
-                                    AppExecutors.getInstance().diskIO().execute(() ->mDb.nispsasDao().insertArticle(articleEntry));
-                                }
-                            }
-                        }
-                    } else {
-
-                    }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<ArticleResponse> call, @NonNull Throwable t) {
-
-                }
-            });
-        } catch (Exception e) {
-
-        }
-    }
 
     private void launchMedia() {
         Intent intent = new Intent(this, CovidActivity.class);

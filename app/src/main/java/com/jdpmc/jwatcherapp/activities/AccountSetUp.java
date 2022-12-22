@@ -491,7 +491,6 @@ public class AccountSetUp extends AppCompatActivity {
         ProgressBar progress = findViewById(R.id.electionProgress);
         progress.setVisibility(View.VISIBLE);
         Service userService = DataGenerator.createService(Service.class, "https://nispsas.com.ng/");
-
         // create part for file (photo, video, ...)
         MultipartBody.Part body = prepareFilePart("passport");
         EditText input_user_name = findViewById(R.id.name_user);
@@ -512,9 +511,6 @@ public class AccountSetUp extends AppCompatActivity {
         RequestBody userphone = createPartFromString(mphonenumber);
         RequestBody fullname = createPartFromString(username);
         RequestBody town = createPartFromString(usertown);
-
-
-
         Call<Void> call = userService.createUserdata(userphone, body, state, lga, fullname, town);
         call.enqueue(new Callback<Void>() {
             @Override

@@ -1,10 +1,12 @@
 package com.jdpmc.jwatcherapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.jdpmc.jwatcherapp.Image_Post_Viewer_Activity;
 import com.jdpmc.jwatcherapp.R;
 import com.jdpmc.jwatcherapp.database.ImgPost;
 
@@ -100,16 +103,16 @@ public class ImgPostAdapter extends RecyclerView.Adapter<ImgPostAdapter.ViewHold
         holder.textViewName.setText(superHero.getName());
         //holder.textViewId.setText(superHero.getId());
         holder.textViewDescription.setText(superHero.getComment());
-        //holder.textViewimg.setText(superHero.getImageUrl());
-        //holder.textViewRepId.setText(superHero.getRepId());
+        holder.textViewUserimg.setText(superHero.getImageUrl());
+        holder.textViewPostimg.setText(superHero.getPreview());
         holder.textViewState.setText(superHero.getState());
-        //holder.textViewStatus.setText(superHero.getStatus());
+        holder.textViewStatus.setText(superHero.getStatus());
         holder.textViewRType.setText(superHero.getRepType());
-        //holder.textViewArea.setText(superHero.getArea());
+        holder.textViewArea.setText(superHero.getArea());
         holder.textViewLikes.setText(superHero.getLikes());
         holder.textViewComments.setText(superHero.getComments());
         holder.textViewDate.setText(superHero.getDate());
-        //holder.textViewRsuri.setText(superHero.getResUri());
+        holder.textViewRsuri.setText(superHero.getResUri());
 
 
     }
@@ -119,12 +122,14 @@ public class ImgPostAdapter extends RecyclerView.Adapter<ImgPostAdapter.ViewHold
         return superHeroes.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //Views
+        public ImageView postImgViewer;
+        public TextView send_text;
         public NetworkImageView imageView;
         public TextView textViewName;
-        public TextView textViewId;
-        public TextView textViewimg;
+        public TextView textViewUserimg;
+        public TextView textViewPostimg;
         public TextView textViewDescription;
 
         public ImageView postImage;
@@ -143,21 +148,51 @@ public class ImgPostAdapter extends RecyclerView.Adapter<ImgPostAdapter.ViewHold
         //Initializing Views
         public ViewHolder(View itemView) {
             super(itemView);
+            postImgViewer = (ImageView) itemView.findViewById(R.id.img_post_image);
+            itemView.setOnClickListener(this);
             postImage = (ImageView) itemView.findViewById(R.id.img_post_image);
             Userimage = (ImageView) itemView.findViewById(R.id.img_reporter_image);
             textViewName = (TextView) itemView.findViewById(R.id.Poster_name);
-            //textViewId = (TextView) itemView.findViewById(R.id.textViewId);
-            //textViewimg = (TextView) itemView.findViewById(R.id.textViewName2);
-            //textViewRepId = (TextView) itemView.findViewById(R.id.textViewName3);
+            textViewUserimg = (TextView) itemView.findViewById(R.id.userimgurl);
+            textViewRsuri = (TextView) itemView.findViewById(R.id.rscurilink);
+            textViewPostimg = (TextView) itemView.findViewById(R.id.postimgurl);
+            send_text = (EditText) itemView.findViewById(R.id.send_text_id);
             textViewState = (TextView) itemView.findViewById(R.id.post_state);
-            //textViewStatus = (TextView) itemView.findViewById(R.id.textViewName5);
+            textViewStatus = (TextView) itemView.findViewById(R.id.post_status);
             textViewRType = (TextView) itemView.findViewById(R.id.post_type);
             textViewArea = (TextView) itemView.findViewById(R.id.set_area);
             textViewLikes = (TextView) itemView.findViewById(R.id.post_likes);
             textViewComments = (TextView) itemView.findViewById(R.id.post_comments);
             textViewDate = (TextView) itemView.findViewById(R.id.post_date);
-            //textViewRsuri = (TextView) itemView.findViewById(R.id.textViewName10);
             textViewDescription = (TextView) itemView.findViewById(R.id.post_description);
+        }
+
+        @Override
+        public void onClick(View view) {
+            postImgViewer.setOnClickListener(v -> {
+                String username = textViewName.getText().toString();
+                String postimgurl = textViewPostimg.getText().toString();
+                String userimg = textViewUserimg.getText().toString();
+                String typeofpost = textViewRType.getText().toString();
+                String repstatus = textViewStatus.getText().toString();
+                String state = textViewState.getText().toString();
+                String date = textViewDate.getText().toString();
+                String comment = textViewDescription.getText().toString();
+                String area = textViewArea.getText().toString();
+                String str = send_text.getText().toString();
+                Intent intent = new Intent(context.getApplicationContext(), Image_Post_Viewer_Activity.class);
+                intent.putExtra("message_key", str);
+                intent.putExtra("username_key", username);
+                intent.putExtra("imgurl_key", postimgurl);
+                intent.putExtra("userimg_key", userimg);
+                intent.putExtra("reptype_key", typeofpost);
+                intent.putExtra("state_key", state);
+                intent.putExtra("date_key", date);
+                intent.putExtra("comment_key", comment);
+                intent.putExtra("area_key", area);
+                intent.putExtra("repstatus_key", repstatus);
+                view.getContext().startActivity(intent);
+            });
         }
     }
 }

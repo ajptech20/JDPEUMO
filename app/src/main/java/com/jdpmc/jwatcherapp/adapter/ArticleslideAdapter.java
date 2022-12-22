@@ -43,8 +43,8 @@ public class ArticleslideAdapter extends RecyclerView.Adapter<ArticleslideAdapte
         String image_url = "https://nispsas.com.ng/NISPSAS/Postpics/";
         // Determine the values of the wanted data
         ArticleEntry articleEntry = mArticleEntries.get(position);
-        String name = articleEntry.getPosttitle();
-        String images = articleEntry.getPicname();
+        String name = articleEntry.getPostcomment();
+        String images = articleEntry.getUsername();
 
         //Set values
         holder.articleSnippet.setText(name);
@@ -92,7 +92,7 @@ public class ArticleslideAdapter extends RecyclerView.Adapter<ArticleslideAdapte
                 if (pos != RecyclerView.NO_POSITION) {
                     ArticleEntry clickedDataItem = mArticleEntries.get(pos);
                     CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                    String link = "https://nispsas.com.ng/blog/Safetyblog/ViewPost/" + clickedDataItem.getPicname();
+                    String link = "https://nispsas.com.ng/blog/Safetyblog/ViewPost/" + clickedDataItem.getUsername();
                     builder.setStartAnimations(mContext, R.anim.slide_in_right, R.anim.slide_out_left);
                     builder.setExitAnimations(mContext, R.anim.slide_in_left, R.anim.slide_out_right);
                     builder.setToolbarColor(mContext.getResources().getColor(R.color.colorPrimary));

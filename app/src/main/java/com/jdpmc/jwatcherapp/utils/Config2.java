@@ -2,8 +2,7 @@ package com.jdpmc.jwatcherapp.utils;
 
 public class Config2 {
     //Data URL
-    //public static final String DATA_URL = "https://nispsas.com.ng/paginationtest/shortvids.php?page=";
-    public static final String DATA_URL = "http://nispsas.org.ng/paginationtest/shortvids.php?page=";
+    public static final String DATA_URL = "https://j-watcher.org/paginationtest/shortvids.php?page=";
 
     //JSON TAGS
     public static final String TAG_IMAGE_URL = "image";

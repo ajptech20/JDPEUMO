@@ -128,7 +128,17 @@
     <string name="about">
 Nigeria Internal Security and Public Safety Alert System (NISPSAS) is a converged mobile application platform for public safety related facilities in various Ministries, Departments and Agencies (MDAs). NISPSAS is a fulfillment of internal security and public safety mandates of Ministry of Interior(MoI) and Ministry of Communications and digital Economy  converged regulation piller of  National Digital Economy Policy and Strategy(NDEPS),  which highlights the need for a single regulatory instrument that will enable government put to effective use the splitter safety and security platform operating in silos across MDAs and operationalize  Government to Citizens (G2C) and Citizens to Government (C2G) interactive pillar of  NDEPS to create safe environment for smooth implementation of presidential order 003 and 005.
     </string>
-
+<string name="jdprivacy">
+    Our Privacy Policy governs your use of the j-watcher Mobile app, and explains how we collect, safeguard and disclose information that results from your use of our Service.
+We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
+Our Terms and Conditions (“Terms”) govern all use of our Service and together with the Privacy Policy constitutes your agreement with us (“agreement”).
+Personal Data
+While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (“Personal Data”).
+Location Data
+We may use and store information about your location if you give us permission to do so (“Location Data”). We use this data to provide features of our Service, to improve and customize our Service.
+You can enable or disable location services when you use our Service at any time by way of your device settings.
+The security of your data is important to us but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
+</string>
 
     <string name="terms_ncondition">
         1. Introduction

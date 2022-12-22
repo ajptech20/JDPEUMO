@@ -74,28 +74,28 @@ public interface Service {
 
     @FormUrlEncoded
     @POST(Routes.POST_REP_URL + "/pushLivePost")
-    Call<Void> goingLivePost(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
+    Call<Void> goingLivePost(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("postcomment") String comment, @Field("type") String type, @Field("repuuid") String authorId);
 
     @FormUrlEncoded
     @POST(Routes.POST_REP_URL + "/pushShortsPost")
-    Call<Void> ShortVidPost(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
+    Call<Void> ShortVidPost(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("postcomment") String comment, @Field("type") String type, @Field("repuuid") String authorId);
 
     @FormUrlEncoded
     @POST(Routes.POST_GBVFORM_URL + "/pushGbvForm")
-    Call<Void> SubmitGbvForm(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("fullname") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type,
+    Call<Void> SubmitGbvForm(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("fullname") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("postcomment") String comment, @Field("type") String type,
                              @Field("optphysical") String physicaltype, @Field("optsex") String sextype, @Field("optemotion") String emotiontype, @Field("optsocial") String sociotype, @Field("optharm") String harmfultype, @Field("optwitness") String witness, @Field("optvictim") String victim, @Field("address") String address, @Field("victphone") String victphone);
 
     @FormUrlEncoded
     @POST(Routes.POST_REP_URL + "/pushImagePost")
-    Call<Void> ImagePostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("repcomment") String comment, @Field("type") String type);
+    Call<Void> ImagePostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("typerep") String mreptype, @Field("postcomment") String comment, @Field("type") String type, @Field("repuuid") String authorId);
 
     @FormUrlEncoded
     @POST(Routes.POST_REP_URL + "/pushHotImagePost")
-    Call<Void> HotImagePostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("statehot") String hotstate, @Field("lgahot") String hotlga, @Field("repcomment") String comment, @Field("type") String type);
+    Call<Void> HotImagePostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("statehot") String hotstate, @Field("lgahot") String hotlga, @Field("postcomment") String comment, @Field("type") String type, @Field("hotarea") String hotarea, @Field("repuuid") String authorId);
 
     @FormUrlEncoded
     @POST(Routes.POST_REP_URL + "/pushHotShortVidPost")
-    Call<Void> HotShortVidPostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("statehot") String hotstate, @Field("lgahot") String hotlga, @Field("repcomment") String comment, @Field("type") String type);
+    Call<Void> HotShortVidPostUp(@Field("reporter") String reporter, @Field("lat") String lat, @Field("lng") String lng, @Field("officername") String repname, @Field("state") String repstate, @Field("lga") String replga, @Field("statehot") String hotstate, @Field("lgahot") String hotlga, @Field("postcomment") String comment, @Field("type") String type, @Field("hotarea") String hotarea, @Field("repuuid") String authorId);
 
     @FormUrlEncoded
     @POST(Routes.CRIME_ALERT + "/pushCrimeAlerts")
@@ -219,11 +219,11 @@ public interface Service {
 
     @FormUrlEncoded
     @POST(Routes.Fetch_Hot_zones)
-    Call<HotZoneDetails> gethotzones(@Field("vidtype") String callid);
+    Call<HotZoneDetails> gethotzones(@Field("hottype") String callid);
 
     @FormUrlEncoded
     @POST(Routes.Fetch_Use_Res)
-    Call<UseRscDetails> getuseresoutce(@Field("vidtype") String callid);
+    Call<UseRscDetails> getuseresoutce(@Field("hottype") String callid);
 
     @FormUrlEncoded
     @POST(Routes.LOGIN + "/Registerpolinunit")
@@ -231,7 +231,7 @@ public interface Service {
 
 
     @Multipart
-    @POST(Routes.UPLOAD_USER_DATA + "/UdateUserProfile")
+    @POST(Routes.UPLOAD_USER_DATA + "/UserProfileUpdate")
     Call<Void> updateUserdata( @Part("officerphone") RequestBody officerphone, @Part MultipartBody.Part file, @Part("state") RequestBody states, @Part("lga") RequestBody lga, @Part("officername") RequestBody fullname, @Part("town") RequestBody town);
 
     @Multipart
@@ -242,4 +242,8 @@ public interface Service {
     @FormUrlEncoded
     @POST(Routes.ARTICLE + "/Nemanews/")
     Call<ArticleResponse> article(@Field("type") String type);
+
+    @FormUrlEncoded
+    @POST(Routes.MOSTRECENT + "/RecentlyPosted/")
+    Call<ArticleResponse> recentPosts(@Field("type") String type);
 }
