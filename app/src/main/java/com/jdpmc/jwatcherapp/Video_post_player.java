@@ -1,10 +1,9 @@
 package com.jdpmc.jwatcherapp;
 
-import static com.jdpmc.jwatcherapp.utils.Constants.VIDEO_PLAYER_BASE_URL;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
@@ -14,11 +13,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.bambuser.broadcaster.BroadcastPlayer;
 import com.bambuser.broadcaster.LatencyMeasurement;
@@ -26,9 +23,8 @@ import com.bambuser.broadcaster.PlayerState;
 import com.bambuser.broadcaster.SurfaceViewWithAutoAR;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.jdpmc.jwatcherapp.model.VideoReportDetails;
-import com.jdpmc.jwatcherapp.networking.api.Service;
-import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
+import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.mancj.slideup.SlideUp;
 
 import java.io.IOException;
@@ -60,7 +56,6 @@ public class Video_post_player extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video_player_post);
-
         mMainbutton = findViewById(R.id.floating_action_button);
         flGoLive = findViewById(R.id.go_live_stream);
         flShortVid = findViewById(R.id.post_new_short);
@@ -85,6 +80,15 @@ public class Video_post_player extends Activity {
         mDefaultDisplay = getWindowManager().getDefaultDisplay();
         mPlayerContentView = findViewById(R.id.PlayerContentView2);
         mPlayerStatusTextView = findViewById(R.id.PlayerStatusTextView);
+
+        /*final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mrmoveprogress.setVisibility(View.GONE);
+            }
+        }, 6000);*/
+
         mBroadcastLiveTextView = findViewById(R.id.BroadcastLiveTextView);
         mBroadcastLatencyTextView = findViewById(R.id.BroadcastLatencyTextView);
         mVideoSurfaceView = findViewById(R.id.VideoSurfaceView);
@@ -95,12 +99,36 @@ public class Video_post_player extends Activity {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         mOkHttpClient = builder.build();
         Intent intent = getIntent();
-        String str = intent.getStringExtra("message_key");
-        //receiver_msg.setText(str);
-        String callid = (str);
-        //String callid = (live_vid);
-        playAvideoPost(callid);
-        //Toast.makeText(Video_post_player.this, callid, Toast.LENGTH_SHORT).show();
+        String user_name = intent.getStringExtra("username_key");
+        String rscurl = intent.getStringExtra("vidurl_key");
+        String userimg_url = intent.getStringExtra("userimg_key");
+        String rep_type = intent.getStringExtra("reptype_key");
+        String rep_state = intent.getStringExtra("state_key");
+        String rep_date = intent.getStringExtra("date_key");
+        String rep_comment = intent.getStringExtra("comment_key");
+        String rep_area = intent.getStringExtra("area_key");
+        String rep_status = intent.getStringExtra("repstatus_key");
+        getLatestResourceUri();
+        TextView nametext = findViewById(R.id.poster_name);
+        nametext.setText(user_name);
+        TextView statustext = findViewById(R.id.brstatus);
+        statustext.setText(rep_status);
+        TextView psttype = findViewById(R.id.post_type);
+        psttype.setText(rep_status);
+        TextView statetext = findViewById(R.id.rep_state);
+        statetext.setText(rep_state);
+        TextView Areaofrep = findViewById(R.id.vidarea);
+        Areaofrep.setText(rep_area);
+        TextView ReportType = findViewById(R.id.rep_type);
+        ReportType.setText(rep_type);
+        TextView RepDate = findViewById(R.id.report_date);
+        RepDate.setText(rep_date);
+        TextView ReporComment = findViewById(R.id.rep_comment);
+        ReporComment.setText(rep_comment);
+        ImageView imageView = (ImageView) findViewById(R.id.reporter_image);
+        Glide.with(Video_post_player.this)
+                .load(userimg_url)
+                .into(imageView);
 
         ImageView go_home = findViewById(R.id.app_home1);
         go_home.setOnClickListener(new View.OnClickListener() {
@@ -163,27 +191,51 @@ public class Video_post_player extends Activity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(Video_post_player.this, shortvideo_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(Video_post_player.this, shortvideo_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(Video_post_player.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flGoLive.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(Video_post_player.this, Go_New_live.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(Video_post_player.this, Go_New_live.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(Video_post_player.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flImagePost.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(Video_post_player.this, picture_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(Video_post_player.this, picture_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(Video_post_player.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
 
@@ -192,7 +244,7 @@ public class Video_post_player extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     intent = new Intent(Video_post_player.this, LiveVideoActivity.class);
                 }
                 //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
@@ -207,7 +259,7 @@ public class Video_post_player extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     intent = new Intent(Video_post_player.this, ImagePostsActivity.class);
                 }
                 //Intent intent = new Intent(getApplicationContext(), shortvideo_uploader.class);
@@ -221,7 +273,7 @@ public class Video_post_player extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     intent = new Intent(Video_post_player.this, ShortVideoActivity.class);
                 }
                 //Intent intent = new Intent(getApplicationContext(), picture_uploader.class);
@@ -238,70 +290,51 @@ public class Video_post_player extends Activity {
                 finish();
             }
         });
+
+        startProgress();
     }
 
-    // validation on all fields
-    public Boolean verifyFields() {
-        return true;
+    private void startProgress(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mrmoveprogress = findViewById(R.id.play_status);
+                mrmoveprogress.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
-    private void playAvideoPost(String callid) {
-        if (verifyFields()) {
-            //progress.setVisibility(View.VISIBLE);
-            try {
-                Service service = DataGenerator.createService(Service.class, VIDEO_PLAYER_BASE_URL);
-                retrofit2.Call<VideoReportDetails> call = service.getlivevideos(callid);
+    private void endProgress(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mrmoveprogress = findViewById(R.id.play_status);
+                mrmoveprogress.setVisibility(View.GONE);
+            }
+        });
+    }
 
-                call.enqueue(new retrofit2.Callback<VideoReportDetails>() {
-                    @Override
-                    public void onResponse(@NonNull retrofit2.Call<VideoReportDetails> call, @NonNull retrofit2.Response<VideoReportDetails> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                VideoReportDetails verifyResponse = response.body();
-                                String sgresponse = verifyResponse.getResponse();
-                                String sgname = verifyResponse.getSGname();
-                                String sgphone = verifyResponse.getSGphone();
-                                String sgstate = verifyResponse.getSGstate();
-                                String date = verifyResponse.getSGdate();
-
-                                String sgreptype = verifyResponse.getSgreptype();
-                                String sgreparea = verifyResponse.getSgreparea();
-                                String sgcomment = verifyResponse.getSGcomment();
-                                String sgstatuse = verifyResponse.getSgstatuse();
-
-                                String videosrc = verifyResponse.getSGvideourl();
-                                String imageUrl = verifyResponse.getImage();
-                                //progress.setVisibility(View.GONE);
-                                showDialog(sgresponse, sgname, sgphone, sgstate, imageUrl, videosrc, sgreptype, sgreparea, sgcomment, sgstatuse, date);
-                                String resourceuri = (videosrc);
-                                //Toast.makeText(Video_post_player.this, resourceuri, Toast.LENGTH_SHORT).show();
-                                getLatestResourceUri(resourceuri);
-                            }
-                        } else {
-                            //progress.setVisibility(View.GONE);
-                            Toast.makeText(Video_post_player.this, "Invalid PSID Service Code !", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    private void getLatestResourceUri(String resourceuri) {
-                        Request request = new Request.Builder()
-                                .url("https://api.bambuser.com/broadcasts")
-                                .addHeader("Accept", "application/vnd.bambuser.v1+json")
-                                .addHeader("Content-Type", "application/json")
-                                .addHeader("Authorization", "Bearer " + API_KEY)
-                                .get()
-                                .build();
-                        mOkHttpClient.newCall(request).enqueue(new Callback() {
-                            @Override
-                            public void onFailure(final Call call, final IOException e) {
-                                runOnUiThread(new Runnable() { @Override public void run() {
-                                    if (mPlayerStatusTextView != null)
-                                        mPlayerStatusTextView.setText("Http exception: " + e);
-                                }});
-                            }
-                            @Override
-                            public void onResponse(final Call call, final Response response) throws IOException {
-                                String resourceUri = null;
+    private void getLatestResourceUri() {
+        Intent intent = getIntent();
+        String rscurl = intent.getStringExtra("vidurl_key");
+        Request request = new Request.Builder()
+                .url("https://api.bambuser.com/broadcasts")
+                .addHeader("Accept", "application/vnd.bambuser.v1+json")
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Authorization", "Bearer " + API_KEY)
+                .get()
+                .build();
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(final Call call, final IOException e) {
+                runOnUiThread(new Runnable() { @Override public void run() {
+                    if (mPlayerStatusTextView != null)
+                        mPlayerStatusTextView.setText("Please check your internet connection");
+                }});
+            }
+            @Override
+            public void onResponse(final Call call, final Response response) throws IOException {
+                String resourceUri = null;
                                 /*try {
                                     String body = response.body().string();
                                     JSONObject json = new JSONObject(body);
@@ -309,53 +342,15 @@ public class Video_post_player extends Activity {
                                     JSONObject latestBroadcast = results.optJSONObject(0);
                                     resourceUri = latestBroadcast.optString("resourceUri");
                                 } catch (Exception ignored) {}*/
-                                String vidresource = resourceuri;
-                                resourceUri = vidresource;
-                                final String uri = resourceUri;
-                                runOnUiThread(new Runnable() { @Override public void run() {
-                                    initPlayer(uri);
-                                }});
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull retrofit2.Call<VideoReportDetails> call, @NonNull Throwable t) {
-                        //progress.setVisibility(View.GONE);
-                        Toast.makeText(Video_post_player.this, "I am not Connected to the Internet !", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            } catch (Exception e) {
-                //progress.setVisibility(View.GONE);
-                Toast.makeText(Video_post_player.this, "Invalid PSID Service Code !", Toast.LENGTH_SHORT).show();
+                String vidresource = rscurl;
+                resourceUri = vidresource;
+                final String uri = resourceUri;
+                runOnUiThread(new Runnable() { @Override public void run() {
+                    initPlayer(uri);
+                    endProgress();
+                }});
             }
-        }
-    }
-
-    private void showDialog(String sgresponse, String sgname, String sgphone, String sgstate, String imageUrl, String videosrc, String sgreptype, String sgreparea, String sgcomment, String sgstatuse, String date) {
-        //TextView verifiedResponse = view.findViewById(R.id.verifiedResponse);
-        //verifiedResponse.setText(sgresponse);
-        TextView nametext = findViewById(R.id.poster_name);
-        nametext.setText(sgname);
-        TextView statustext = findViewById(R.id.brstatus);
-        statustext.setText(sgstatuse);
-        TextView psttype = findViewById(R.id.post_type);
-        psttype.setText(sgstatuse);
-        TextView statetext = findViewById(R.id.rep_state);
-        statetext.setText(sgstate);
-        TextView Areaofrep = findViewById(R.id.vidarea);
-        Areaofrep.setText(sgreparea);
-        TextView ReportType = findViewById(R.id.rep_type);
-        ReportType.setText(sgreptype);
-        TextView RepDate = findViewById(R.id.report_date);
-        RepDate.setText(date);
-        TextView ReporComment = findViewById(R.id.rep_comment);
-        ReporComment.setText(sgcomment);
-        ImageView imageView = (ImageView) findViewById(R.id.reporter_image);
-        Glide.with(Video_post_player.this)
-                .load(imageUrl)
-                .into(imageView);
+        });
     }
 
     @Override
@@ -363,8 +358,15 @@ public class Video_post_player extends Activity {
         super.onResume();
         mVideoSurfaceView = findViewById(R.id.VideoSurfaceView);
         mPlayerStatusTextView.setText("Loading broadcast...");
-        //String callid = (live_vid);
-        //verifyPsid(callid);
+        String resourceUri = null;
+        Intent intent = getIntent();
+        String rscurl = intent.getStringExtra("vidurl_key");
+        String vidresource = rscurl;
+        resourceUri = vidresource;
+        final String uri = resourceUri;
+        runOnUiThread(new Runnable() { @Override public void run() {
+            initPlayer(uri);
+        }});
     }
 
     @Override
@@ -568,6 +570,7 @@ public class Video_post_player extends Activity {
     private SeekBar mVolumeSeekBar = null;
     private View mPlayerContentView = null;
     private TextView mPlayerStatusTextView = null;
+    private RelativeLayout mrmoveprogress = null;
     private TextView mViewerStatusTextView = null;
     private TextView mBroadcastLiveTextView = null;
     private TextView mBroadcastLatencyTextView = null;

@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -130,6 +131,18 @@ public class UserDataUpdate extends AppCompatActivity {
         TextView username = findViewById(R.id.user_name);
         username.setText(PreferenceUtils.getUsername(getApplicationContext()));
 
+        TextView name = findViewById(R.id.name);
+        name.setText(PreferenceUtils.getUsername(getApplicationContext()));
+
+        TextView mystate = findViewById(R.id.state);
+        mystate.setText(PreferenceUtils.getState(getApplicationContext()));
+
+        TextView lga = findViewById(R.id.lga);
+        lga.setText(PreferenceUtils.getLga(getApplicationContext()));
+
+        TextView town = findViewById(R.id.mytown_user);
+        town.setText(PreferenceUtils.getTown(getApplicationContext()));
+
         TextView userphone = findViewById(R.id.user_phone);
         userphone.setText(PreferenceUtils.getPhoneNumber(getApplicationContext()));
 
@@ -144,6 +157,10 @@ public class UserDataUpdate extends AppCompatActivity {
         TextView userLga = findViewById(R.id.user_lga1);
         userLga.setText(PreferenceUtils.getLga(getApplicationContext()));
 
+        LinearLayout myprofile = findViewById(R.id.user_profile);
+        myprofile.setVisibility(View.VISIBLE);
+        LinearLayout editprof = findViewById(R.id.edit_data);
+        editprof.setVisibility(View.GONE);
         String url = (PreferenceUtils.getUserImage(getApplicationContext()));
         ImageView imageView = (ImageView) findViewById(R.id.user_image1);
         Glide.with(UserDataUpdate.this).load(url)
@@ -216,9 +233,21 @@ public class UserDataUpdate extends AppCompatActivity {
             }
         });
 
+        ImageView close = findViewById(R.id.go_back);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         select_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                LinearLayout editprof = findViewById(R.id.edit_data);
+                editprof.setVisibility(View.VISIBLE);
+                LinearLayout myprofile = findViewById(R.id.user_profile);
+                myprofile.setVisibility(View.GONE);
                 Dexter.withActivity(UserDataUpdate.this)
                         .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                         .withListener(new PermissionListener() {
@@ -318,6 +347,8 @@ public class UserDataUpdate extends AppCompatActivity {
                 postPath = String.valueOf(new File(resultUri.getPath()));
                 PreferenceUtils.saveUserImage(postPath, getApplicationContext());
                 Toast.makeText(UserDataUpdate.this, "Click the Save button to Continue:", Toast.LENGTH_SHORT).show();
+                Button submit = findViewById(R.id.profileSubmit);
+                submit.setVisibility(View.VISIBLE);
                 /*img_upload.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -489,7 +520,8 @@ public class UserDataUpdate extends AppCompatActivity {
     private void submitDetails() {
         ProgressBar progress = findViewById(R.id.electionProgress);
         progress.setVisibility(View.VISIBLE);
-        Service userService = DataGenerator.createService(Service.class, "https://nispsas.com.ng/");
+        //Service userService = DataGenerator.createService(Service.class, "https://nispsas.com.ng/");
+        Service userService = DataGenerator.createService(Service.class, "https://j-watcher.org/");
         // create part for file (photo, video, ...)
         MultipartBody.Part body = prepareFilePart("passport");
         EditText input_user_name = findViewById(R.id.name_user);
@@ -518,6 +550,10 @@ public class UserDataUpdate extends AppCompatActivity {
                     progress.setVisibility(View.GONE);
                     emptyInputEditText();
                     FancyToast.makeText(getApplicationContext(), "Profile Updated successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                    LinearLayout editprof = findViewById(R.id.edit_data);
+                    editprof.setVisibility(View.GONE);
+                    LinearLayout myprofile = findViewById(R.id.user_profile);
+                    myprofile.setVisibility(View.VISIBLE);
                 } else {
                     progress.setVisibility(View.GONE);
                     FancyToast.makeText(getApplicationContext(), "Error Uploading Profile.....", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();

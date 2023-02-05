@@ -2,10 +2,13 @@ package com.jdpmc.jwatcherapp.networking.api;
 
 import com.jdpmc.jwatcherapp.model.ArticleResponse;
 import com.jdpmc.jwatcherapp.model.ChildResponse;
+import com.jdpmc.jwatcherapp.model.CommentResponse;
 import com.jdpmc.jwatcherapp.model.ExtinguisherResponse;
 import com.jdpmc.jwatcherapp.model.FaceVerifyResponse;
 import com.jdpmc.jwatcherapp.model.HotZoneDetails;
+import com.jdpmc.jwatcherapp.model.LikesResponse;
 import com.jdpmc.jwatcherapp.model.LoginResponse;
+import com.jdpmc.jwatcherapp.model.RatingResponse;
 import com.jdpmc.jwatcherapp.model.ResponseTransporter;
 import com.jdpmc.jwatcherapp.model.UseRscDetails;
 import com.jdpmc.jwatcherapp.model.VerifyDetails;
@@ -121,6 +124,38 @@ public interface Service {
     Call<ExtinguisherResponse> verifyJpersonnel(@Field("armecode") String jwcode, @Field("phone") String userphone);
 
     @FormUrlEncoded
+    @POST(Routes.VERIFY_JWATCHER_PERSON + "/Retainconfirmed")
+    Call<ExtinguisherResponse> verifyexistJpersonnel(@Field("fullname") String username, @Field("phone") String userphone);
+
+    @FormUrlEncoded
+    @POST(Routes.USER_LIKE_A_POST + "/likapost")
+    Call<LikesResponse> likeApost(@Field("id") String id, @Field("userphone") String userphone, @Field("repuuid") String rpuuid);
+
+    @FormUrlEncoded
+    @POST(Routes.USER_LIKE_A_POST + "/hotlikapost")
+    Call<LikesResponse> HotlikeApost(@Field("id") String id, @Field("userphone") String userphone, @Field("repuuid") String rpuuid);
+
+    @FormUrlEncoded
+    @POST(Routes.USER_LIKE_A_POST + "/rsclikapost")
+    Call<LikesResponse> RsclikeApost(@Field("id") String id, @Field("userphone") String userphone, @Field("repuuid") String rpuuid);
+
+    @FormUrlEncoded
+    @POST(Routes.USER_COMMENT_A_POST + "/commentonapost")
+    Call<CommentResponse> commentApost(@Field("id") String postpid, @Field("userphone") String userphone, @Field("comment") String comment);
+
+    @FormUrlEncoded
+    @POST(Routes.USER_COMMENT_A_POST + "/hotcommentonapost")
+    Call<CommentResponse> hotcommentApost(@Field("id") String postpid, @Field("userphone") String userphone, @Field("comment") String comment);
+
+    @FormUrlEncoded
+    @POST(Routes.USER_COMMENT_A_POST + "/rsccommentonapost")
+    Call<CommentResponse> ResourceCommentOnPost(@Field("id") String postpid, @Field("userphone") String userphone, @Field("comment") String comment);
+
+    @FormUrlEncoded
+    @POST(Routes.USER_COMMENT_A_POST + "/appratting")
+    Call<RatingResponse> RateApp(@Field("star") String star, @Field("userphone") String userphone, @Field("comment") String comment);
+
+    @FormUrlEncoded
     @POST(Routes.VERIFY_NATIONAL + "/VerifyNational")
     Call<ExtinguisherResponse> verifyNational(@Field("phonenumber") String phone);
 
@@ -218,12 +253,16 @@ public interface Service {
     Call<VideoReportDetails> getlivevideos(@Field("id") String callid);
 
     @FormUrlEncoded
+    @POST(Routes.Fetch_Notification_Post)
+    Call<VideoReportDetails> getanotification(@Field("repuuid") String callid);
+
+    @FormUrlEncoded
     @POST(Routes.Fetch_Hot_zones)
     Call<HotZoneDetails> gethotzones(@Field("hottype") String callid);
 
     @FormUrlEncoded
     @POST(Routes.Fetch_Use_Res)
-    Call<UseRscDetails> getuseresoutce(@Field("hottype") String callid);
+    Call<UseRscDetails> getuseresoutce(@Field("author") String author);
 
     @FormUrlEncoded
     @POST(Routes.LOGIN + "/Registerpolinunit")

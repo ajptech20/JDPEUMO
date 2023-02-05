@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f7f7f7"
-    tools:context=".AppSettings">
+    tools:context=".UserDataUpdate">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,11 +28,11 @@
                     android:layout_marginEnd="16dp">
 
                     <ImageView
-                        android:id="@+id/close_settings"
+                        android:id="@+id/go_back"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_alignParentStart="true"
-                        android:src="@drawable/met_ic_close" />
+                        android:src="@drawable/ic_baseline_arrow_back_ios_24" />
                     <ProgressBar
                         android:id="@+id/electionProgress"
                         android:layout_alignParentStart="true"
@@ -73,6 +73,7 @@
                         android:textCursorDrawable="@color/colorPrimary"/>-->
 
                     <Button
+                        android:visibility="gone"
                         android:id="@+id/profileSubmit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -147,7 +148,7 @@
                                     android:layout_marginBottom="15dp"
                                     android:layout_gravity="center"
                                     android:gravity="center_vertical"
-                                    android:text="Change Profile Imge"
+                                    android:text="Edit Personal Data, Change Profile Imge"
                                     android:textColor="#FFFF"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -181,10 +182,12 @@
                                 android:padding="5dp"
                                 android:layout_marginTop="30dp"
                                 android:layout_marginStart="90dp"
+                                android:maxLines="1"
+                                android:maxLength="10"
                                 android:text=""
                                 android:textColor="#000000"
                                 android:textStyle="bold"
-                                android:textSize="30sp" />
+                                android:textSize="20sp" />
                             <TextView
                                 android:id="@+id/user_state1"
                                 android:layout_width="wrap_content"
@@ -246,11 +249,11 @@
                     app:cardElevation="0dp">
 
                     <LinearLayout
+                        android:id="@+id/edit_data"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:orientation="vertical">
-
                         <RelativeLayout
                             android:id="@+id/about_us"
                             android:layout_width="match_parent"
@@ -316,7 +319,7 @@
                                 android:layout_alignParentStart="true"
                                 android:fontFamily="@font/calibri"
                                 android:padding="5dp"
-                                android:text="State of Residence:"
+                                android:text="Select State of Residence:"
                                 android:textColor="#000000"
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
@@ -343,7 +346,7 @@
                                 android:layout_alignParentStart="true"
                                 android:fontFamily="@font/calibri"
                                 android:padding="5dp"
-                                android:text="L.G.A of Residence:"
+                                android:text="Select L.G.A of Residence:"
                                 android:textColor="#000000"
                                 android:textStyle="bold"
                                 android:textSize="16sp" />
@@ -417,6 +420,128 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="1.0" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/user_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/calibri"
+                                android:padding="5dp"
+                                android:text="Name:"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:padding="5dp"
+                                android:textSize="16dp"
+                                android:background="#FFFFFF" />
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp">
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/calibri"
+                                android:padding="5dp"
+                                android:text="State of Residence:"
+                                android:textColor="#000000"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/state"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:padding="5dp"
+                                android:textSize="16dp"
+                                android:background="#FFFFFF" />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/calibri"
+                                android:padding="5dp"
+                                android:text="L.G.A of Residence:"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/lga"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:padding="5dp"
+                                android:textSize="16dp"
+                                android:background="#FFFFFF" />
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/calibri"
+                                android:padding="5dp"
+                                android:text="Residing Town:"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
+                            <TextView
+                                android:id="@+id/mytown_user"
+                                android:layout_marginTop="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:background="#FFFFFF"/>
+                        </RelativeLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

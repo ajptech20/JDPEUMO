@@ -53,6 +53,10 @@ public class VideoReportDetails implements Parcelable
     @Expose
     private String image;
 
+    @SerializedName("Userimage")
+    @Expose
+    private String userimg;
+
     //////////////////////
     public final static Parcelable.Creator<VideoReportDetails> CREATOR = new Creator<VideoReportDetails>() {
 
@@ -83,6 +87,7 @@ public class VideoReportDetails implements Parcelable
         this.sgreparea = ((String) in.readValue((String.class.getClassLoader())));
         this.date = ((String) in.readValue((String.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));
+        this.userimg = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     public VideoReportDetails() {
@@ -135,6 +140,13 @@ public class VideoReportDetails implements Parcelable
         this.image = image;
     }
 
+    public String getUserImage() {
+        return userimg;
+    }
+    public void setUserImage(String userimg) {
+        this.userimg = userimg;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(response);
         dest.writeValue(sgname);
@@ -145,6 +157,7 @@ public class VideoReportDetails implements Parcelable
         dest.writeValue(sgcomment);
         dest.writeValue(sgstatuse);
         dest.writeValue(image);
+        dest.writeValue(userimg);
 
     }
 

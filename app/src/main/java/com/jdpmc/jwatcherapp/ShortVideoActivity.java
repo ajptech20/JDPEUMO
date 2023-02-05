@@ -15,10 +15,6 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jdpmc.jwatcherapp.adapter.ShortVideoPostAdapter;
-import com.jdpmc.jwatcherapp.database.ShortPost;
-import com.jdpmc.jwatcherapp.utils.Config2;
-import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +22,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jdpmc.jwatcherapp.adapter.ShortVideoPostAdapter;
+import com.jdpmc.jwatcherapp.database.ShortPost;
+import com.jdpmc.jwatcherapp.utils.Config2;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
+import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.mancj.slideup.SlideUp;
 
 import org.json.JSONArray;
@@ -272,27 +273,51 @@ public class ShortVideoActivity extends AppCompatActivity implements RecyclerVie
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(ShortVideoActivity.this, shortvideo_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(ShortVideoActivity.this, shortvideo_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(ShortVideoActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flGoLive.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(ShortVideoActivity.this, Go_New_live.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(ShortVideoActivity.this, Go_New_live.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(ShortVideoActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flImagePost.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(ShortVideoActivity.this, picture_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(ShortVideoActivity.this, picture_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(ShortVideoActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
 
@@ -344,7 +369,7 @@ public class ShortVideoActivity extends AppCompatActivity implements RecyclerVie
 
     //This method will parse json data
     private void parseData(JSONArray array) {
-        for (int i=array.length()-1;i>=0;i--) {
+        for (int i = 0; i < array.length(); i++) {
             //Creating the superhero object
             ShortPost superHero = new ShortPost();
             JSONObject json = null;
@@ -356,6 +381,7 @@ public class ShortVideoActivity extends AppCompatActivity implements RecyclerVie
                 superHero.setImageUrl(json.getString(Config2.TAG_IMAGE_URL));
                 superHero.setName(json.getString(Config2.TAG_NAME));
                 superHero.setId(json.getString(Config2.TAG_Id));
+                superHero.setRepuuid(json.getString(Config2.TAG_UUId));
                 superHero.setComment(json.getString(Config2.TAG_PUBLISHER));
                 superHero.setRepId(json.getString(Config2.TAG_REPID));
                 superHero.setState(json.getString(Config2.TAG_STATE));

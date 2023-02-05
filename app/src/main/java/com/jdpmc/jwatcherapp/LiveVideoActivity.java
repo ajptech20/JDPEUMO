@@ -25,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jdpmc.jwatcherapp.adapter.LiveVideoPostAdapter;
 import com.jdpmc.jwatcherapp.database.LivePost;
 import com.jdpmc.jwatcherapp.utils.Config3;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
 import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.mancj.slideup.SlideUp;
 
@@ -274,27 +275,51 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(LiveVideoActivity.this, shortvideo_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(LiveVideoActivity.this, shortvideo_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(LiveVideoActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flGoLive.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(LiveVideoActivity.this, Go_New_live.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(LiveVideoActivity.this, Go_New_live.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(LiveVideoActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flImagePost.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(LiveVideoActivity.this, picture_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(LiveVideoActivity.this, picture_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(LiveVideoActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
 
@@ -358,6 +383,7 @@ public class LiveVideoActivity extends AppCompatActivity implements RecyclerView
                 superHero.setImageUrl(json.getString(Config3.TAG_IMAGE_URL));
                 superHero.setName(json.getString(Config3.TAG_NAME));
                 superHero.setId(json.getString(Config3.TAG_Id));
+                superHero.setRepuuid(json.getString(Config3.TAG_UUId));
                 superHero.setComment(json.getString(Config3.TAG_PUBLISHER));
                 superHero.setRepId(json.getString(Config3.TAG_REPID));
                 superHero.setState(json.getString(Config3.TAG_STATE));

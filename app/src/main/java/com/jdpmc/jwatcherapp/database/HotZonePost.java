@@ -5,6 +5,7 @@ public class HotZonePost {
     private String image;
     private String name;
     private String id;
+    private String repuuid;
     private String postcomment;
     private String callid;
     private String state;
@@ -30,6 +31,9 @@ public class HotZonePost {
 
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}
+
+    public String getRepuuid() {return repuuid;}
+    public void setRepuuid(String repuuid) {this.repuuid = repuuid;}
 
     public String getComment() {return postcomment;}
     public void setComment(String postcomment) {this.postcomment = postcomment;}

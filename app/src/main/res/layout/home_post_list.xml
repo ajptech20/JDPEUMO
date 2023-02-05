@@ -44,6 +44,14 @@
                             android:textSize="25dp"
                             android:visibility="gone"
                             android:textStyle="bold" />
+                        <EditText
+                            android:id="@+id/send_text_uuid"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:hint="Input"
+                            android:textSize="25dp"
+                            android:visibility="gone"
+                            android:textStyle="bold" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -113,9 +121,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
                                 android:fontFamily="@font/calibri"
-                                android:text="Abu Paul"
+                                android:text="AYINDE EMMANUEL OLABODE"
                                 android:textColor="#000000"
                                 android:textSize="13sp"
+                                android:maxLines="1"
+                                android:maxLength="10"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -126,6 +136,8 @@
                                 android:fontFamily="@font/calibri"
                                 android:text="Voter/Civic Education"
                                 android:textColor="#000000"
+                                android:maxLines="1"
+                                android:maxLength="15"
                                 android:textSize="10sp"
                                 android:layout_alignParentEnd="true"
                                 />
@@ -198,6 +210,16 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="35dp"
                                 android:text="50"
+                                android:textColor="#000000"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/post_liked"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="35dp"
+                                android:text="50"
+                                android:visibility="gone"
                                 android:textColor="#000000"
                                 android:textSize="12sp" />
 

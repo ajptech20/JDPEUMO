@@ -35,10 +35,10 @@ public class All_image_posts extends Activity {
         go_home.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(All_image_posts.this, Activity_home_backup.class);
+                /*Intent intent = new Intent(All_image_posts.this, Activity_home_backup.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
+                finish();*/
             }
         });
 

@@ -75,12 +75,30 @@ public class PreferenceUtils {
         return true;
     }
 
+    public static String getConfirmedCode(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.ACC_STATUS, "");
+    }
+
     public static boolean savePhoneNumber(String phonenumber, Context context) {
         SharedPreferences prefs = getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();
         prefsEditor.putString(Constants.PHONE_NUMBER, phonenumber);
         prefsEditor.apply();
         return true;
+    }
+
+    public static boolean saveNoticeClearer(String clearme, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.CLEAR_A_NOTICE, clearme);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getNoticeClearer(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.CLEAR_A_NOTICE, "");
     }
 
     public static boolean saveUserImage(String postPath, Context context) {
@@ -108,6 +126,64 @@ public class PreferenceUtils {
         prefsEditor.apply();
         return true;
     }
+
+    ///////////App Ratting//////////////////
+    public static boolean saveStar1(String rate1, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.START1, rate1);
+        prefsEditor.apply();
+        return true;
+    }
+    public static String getStar1(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.START1, "");
+    }
+    public static boolean saveStar2(String rate2, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.START2, rate2);
+        prefsEditor.apply();
+        return true;
+    }
+    public static String getStar2(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.START2, "");
+    }
+    public static boolean saveStar3(String rate3, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.START3, rate3);
+        prefsEditor.apply();
+        return true;
+    }
+    public static String getStar3(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.START3, "");
+    }
+    public static boolean saveStar4(String rate4, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.START4, rate4);
+        prefsEditor.apply();
+        return true;
+    }
+    public static String getStar4(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.START4, "");
+    }
+    public static boolean saveStar5(String rate5, Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.START5, rate5);
+        prefsEditor.apply();
+        return true;
+    }
+    public static String getStar5(Context context) {
+        SharedPreferences prefs = getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.START5, "");
+    }
+    ///////////////////////////////////////
 
     public static String getUserkey(Context context) {
         SharedPreferences prefs = getDefaultSharedPreferences(context);

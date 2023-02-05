@@ -1,6 +1,6 @@
 package com.jdpmc.jwatcherapp.activities;
 
-import static com.jdpmc.jwatcherapp.utils.Constants.BASE_URL;
+import static com.jdpmc.jwatcherapp.utils.Constants.REGISTER_USER_BASE_URL;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,12 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.jdpmc.jwatcherapp.R;
 import com.jdpmc.jwatcherapp.model.LoginResponse;
 import com.jdpmc.jwatcherapp.model.Profile;
@@ -20,12 +26,6 @@ import com.jdpmc.jwatcherapp.networking.api.Service;
 import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
 import com.jdpmc.jwatcherapp.utils.FancyToast;
 import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.List;
 import java.util.Objects;
@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             progress.setVisibility(View.VISIBLE);
             String usertoken =   PreferenceUtils.getUserkey(getApplicationContext());
             try {
-                Service service = DataGenerator.createService(Service.class, BASE_URL);
+                Service service = DataGenerator.createService(Service.class, REGISTER_USER_BASE_URL);
                 Call<LoginResponse> call = service.loginUser(name, phonenumber, usertoken);
 
                 call.enqueue(new Callback<LoginResponse>() {

@@ -31,16 +31,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="3dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/calibri"
-                        android:text="J-WATCHER"
+                        android:text="JUST-WATCHER"
                         android:textColor="#03A9F4"
                         android:textSize="24sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/testnotify"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Notifications"
+                        android:visibility="gone"
+                        android:textColor="#070707"
+                        android:layout_marginEnd="80dp"
+                        android:layout_alignParentEnd="true"/>
 
                     <ImageView
                         android:id="@+id/app_settings"
@@ -51,16 +60,29 @@
                         android:layout_marginEnd="40dp"
                         android:src="@drawable/ic_baseline_more_vert_24" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/app_profile"
+                    <RelativeLayout
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/img"
-                        app:civ_border_width="2dp"
+                        android:elevation="12dp"
+                        android:id="@+id/view2"
                         android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        app:civ_border_color="#03A9F4"/>
+                        android:layout_alignParentEnd="true">
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/app_profile"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:src="@drawable/img"
+                            app:civ_border_width="2dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            app:civ_border_color="#03A9F4"/>
+
+                        <ProgressBar
+                            android:id="@+id/progressBar1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
@@ -97,7 +119,7 @@
 
         </android.widget.Toolbar>
 
-        <com.google.android.material.tabs.TabLayout
+        <!--<com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
@@ -119,17 +141,8 @@
                 android:layout_height="wrap_content"
                 android:text="Live" />
 
-            <!--<android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Scooters" />-->
 
-            <!--<android.support.design.widget.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Helicopters" />-->
-
-        </com.google.android.material.tabs.TabLayout>
+        </com.google.android.material.tabs.TabLayout>-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -155,7 +168,7 @@
                     android:layout_marginLeft="16dp"
                     android:baselineAligned="false"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="2dp"
                     android:layout_marginTop="8dp"
                     android:weightSum="100">
 
@@ -199,7 +212,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:fontFamily="@font/calibri"
-                        android:text="Hot Sport Zone"
+                        android:text="Hot Spot Zone"
                         android:textColor="#FF0000"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -220,7 +233,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -229,6 +242,10 @@
                         android:visibility="gone">
                         <EditText
                             android:id="@+id/send_text_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <EditText
+                            android:id="@+id/rsc_text_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         <EditText
@@ -314,6 +331,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/use_resource"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
@@ -335,21 +353,12 @@
                             android:layout_margin="8dp">
 
                             <TextView
-                                android:id="@+id/usersc_state"
+                                android:id="@+id/usersc_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:padding="8dp"
                                 android:textColor="#090909"
-                                android:textSize="14sp" />
-                            <TextView
-                                android:id="@+id/usersc_type"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:padding="8dp"
-                                android:textColor="#020202"
                                 android:textSize="14sp" />
 
                         </RelativeLayout>
@@ -363,9 +372,9 @@
                     android:orientation="horizontal"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="0dp"
                     android:baselineAligned="false"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="0dp"
                     android:weightSum="100">
 
                     <LinearLayout
@@ -378,7 +387,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_margin="8dp">
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4dp"
@@ -387,15 +396,8 @@
                             android:textColor="#000000"
                             android:textSize="18sp"
                             android:layout_alignParentStart="true"
-                            android:textStyle="bold" />
-                        <ProgressBar
-                            android:id="@+id/progressBar1"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="40dp"
-                            android:layout_marginBottom="4dp"
-                            android:layout_alignParentStart="true"
-                            />
+                            android:textStyle="bold" />-->
+
                         </RelativeLayout>
 
                         <TextView

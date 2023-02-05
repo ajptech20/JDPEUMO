@@ -198,7 +198,6 @@ public class hot_picture_uploader extends AppCompatActivity implements UploadHel
     private LocationSettingsRequest mLocationSettingsRequest;
     private LocationCallback mLocationCallback;
     private Location mCurrentLocation;
-    private String InteriorLink = "http://interior.gov.ng";
 
     // boolean flag to toggle the ui
     private Boolean mRequestingLocationUpdates;
@@ -249,6 +248,8 @@ public class hot_picture_uploader extends AppCompatActivity implements UploadHel
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         FancyToast.makeText(getApplicationContext(), "This area has been marked as hot sport zone", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        RelativeLayout prpareup = findViewById(R.id.confirming_post);
+                        prpareup.setVisibility(View.GONE);
                         finish();
                         overridePendingTransition(0, 0);
                         startActivity(getIntent());
@@ -383,7 +384,17 @@ public class hot_picture_uploader extends AppCompatActivity implements UploadHel
         take_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePhoto();
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                EditText post_area = (EditText) findViewById(R.id.area_spec);
+                String area = post_area.getText().toString();
+                String comment = input_comment.getText().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter what is happening", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else if (area.matches("")){
+                    FancyToast.makeText(getApplicationContext(), "You did not enter Area of Violence", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else{
+                    takePhoto();
+                }
                 //Log.e(TAG, "Button Cliked: something else");
             }
         });
@@ -395,8 +406,17 @@ public class hot_picture_uploader extends AppCompatActivity implements UploadHel
 
             @Override
             public void onClick(View v) {
-                chooseFile();
-                //Log.e(TAG, "Button Cliked: Select Image");
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                EditText post_area = (EditText) findViewById(R.id.area_spec);
+                String area = post_area.getText().toString();
+                String comment = input_comment.getText().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter what is happening", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else if (area.matches("")){
+                    FancyToast.makeText(getApplicationContext(), "You did not enter Area of Violence", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else{
+                    chooseFile();
+                }
             }
         });
 
@@ -541,7 +561,7 @@ public class hot_picture_uploader extends AppCompatActivity implements UploadHel
             if (result == Activity.RESULT_OK && data != null && data.getData() != null)
                 startUpload(data.getData());
             else
-                Toast.makeText(getApplicationContext(), "no file chosen", Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getApplicationContext(), "No file selected!", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
         }
         super.onActivityResult(code, result, data);
     }
@@ -611,12 +631,14 @@ public class hot_picture_uploader extends AppCompatActivity implements UploadHel
     @Override
     public void onSuccess(String fileName) {
         runOnUiThread(new Runnable() { @Override public void run() {
-            Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
+            RelativeLayout prpareup = findViewById(R.id.confirming_post);
+            prpareup.setVisibility(View.VISIBLE);
+            //Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
             mUploadDialog = null;
             try {
                 removeDialog(UPLOAD_PROGRESS_DIALOG);
 
-                new Handler().postDelayed(hot_picture_uploader.this::uploadHotPic, 5000);
+                new Handler().postDelayed(hot_picture_uploader.this::uploadHotPic, 10000);
 
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);

@@ -53,7 +53,6 @@ public class Image_Post_Viewer_Activity extends Activity {
         RepArea.setText(areaflag);
         TextView ReporComment = findViewById(R.id.rep_comment);
         ReporComment.setText(comment);
-
         ImageView imageView = (ImageView) findViewById(R.id.reporter_image);
         Glide.with(Image_Post_Viewer_Activity.this)
                 .load(userimg)

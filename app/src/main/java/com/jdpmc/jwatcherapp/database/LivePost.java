@@ -5,6 +5,7 @@ public class LivePost {
     private String image;
     private String name;
     private String id;
+    private String repuuid;
     private String postcomment;
     private String callid;
     private String state;
@@ -32,6 +33,9 @@ public class LivePost {
 
     public String getRepId() {return callid;}
     public void setRepId(String callid) {this.callid = callid;}
+
+    public String getRepuuid() {return repuuid;}
+    public void setRepuuid(String repuuid) {this.repuuid = repuuid;}
 
     public String getState() {return state;}
     public void setState(String state) {this.state = state;}

@@ -5,6 +5,8 @@ import static com.jdpmc.jwatcherapp.utils.Constants.GET_USEFUL_URL;
 import static com.jdpmc.jwatcherapp.utils.Constants.RECENT_POST_URL;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
@@ -59,8 +61,10 @@ import com.jdpmc.jwatcherapp.Gbv_form_Activity;
 import com.jdpmc.jwatcherapp.Go_New_live;
 import com.jdpmc.jwatcherapp.ImagePostsActivity;
 import com.jdpmc.jwatcherapp.LiveVideoActivity;
+import com.jdpmc.jwatcherapp.NotificationActivity;
 import com.jdpmc.jwatcherapp.R;
 import com.jdpmc.jwatcherapp.ShortVideoActivity;
+import com.jdpmc.jwatcherapp.UserDataUpdate;
 import com.jdpmc.jwatcherapp.adapter.ArticleAdapter;
 import com.jdpmc.jwatcherapp.adapter.HomePostAdapter;
 import com.jdpmc.jwatcherapp.database.AppDatabase;
@@ -76,8 +80,10 @@ import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
 import com.jdpmc.jwatcherapp.picture_uploader;
 import com.jdpmc.jwatcherapp.service.NispsasLockService;
 import com.jdpmc.jwatcherapp.shortvideo_uploader;
+import com.jdpmc.jwatcherapp.usefull_resources;
 import com.jdpmc.jwatcherapp.utils.AppExecutors;
 import com.jdpmc.jwatcherapp.utils.Config4;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
 import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.jdpmc.jwatcherapp.view_hot_zone;
 import com.jdpmc.jwatcherapp.viewmodel.ArticleViewModel;
@@ -100,9 +106,10 @@ import retrofit2.Callback;
 public class MainActivity extends AppCompatActivity implements RecyclerView.OnScrollChangeListener{
     private static final String TAG = "MainActivity";
     private static final int RC_APP_UPDATE = 0;
+    private static final String CHANNEL_ID = "111";
     private AppUpdateManager mAppUpdateManager;
     private static final String live_vid = "hotzone";
-    private static final String live_vid2 = "hotzone";
+    private static final String resource_tp = "Admin";
     private ArticleAdapter articleAdapter;
     //Creating a List of superheroes
     private List<HomePosts> listSuperHeroes;
@@ -137,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
     private String Unconfirmed;
     private String Confirmed;
     public TextView send_text;
+    private TextView ursersc_send_text;
     public TextView hot_state_text;
     public TextView hot_lga_text;
     public TextView hot_town_text;
@@ -175,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
             mHandler.postDelayed(this, duration);
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,8 +249,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
         String callid = (live_vid);
         getHotZone(callid);
 
-        String callid2 = (live_vid2);
-        GetUsefullRsc(callid2);
+        String author = (resource_tp);
+        GetUsefullRsc(author);
 
         //Initializing Views
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -267,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
 
         //Adding adapter to recyclerview
         recyclerView.setAdapter(adapter);
-
+        ursersc_send_text = (EditText) findViewById(R.id.rsc_text_id);
         send_text = (EditText) findViewById(R.id.send_text_id);
         hot_state_text = (EditText) findViewById(R.id.hot_state_txt);
         hot_lga_text = (EditText) findViewById(R.id.hot_lga_txt);
@@ -320,6 +329,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                     //fab.show();
                 }
 
+            }
+        });
+
+        TextView trynotic = findViewById(R.id.testnotify);
+        trynotic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NotificationActivity.class);
+                //Intent intent = new Intent(getApplicationContext(), Go_New_live.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                //finish();
             }
         });
 
@@ -427,27 +448,51 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(MainActivity.this, shortvideo_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(MainActivity.this, shortvideo_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(MainActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flGoLive.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(MainActivity.this, Go_New_live.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(MainActivity.this, Go_New_live.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(MainActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         flImagePost.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(MainActivity.this, picture_uploader.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        String user_image = (PreferenceUtils.getUserImage(getApplicationContext()));
+                        if (!user_image.equals("")){
+                            Intent intent = new Intent(MainActivity.this, picture_uploader.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }else {
+                            FancyToast.makeText(getApplicationContext(), "Kindly Update Your profile Image before you can create a  post", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            Intent intent = new Intent(MainActivity.this, UserDataUpdate.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                        }
                     }
                 });
         startService(new Intent(getApplicationContext(), NispsasLockService.class));
@@ -517,6 +562,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                 articleAdapter.setTasks(articleEntries);
             }
         });
+
+        createNotificationChannel();
 
     }
 
@@ -601,7 +648,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
 
     //This method will parse json data
     private void parseData(JSONArray array) {
-        for (int i=array.length()-1;i>=0;i--) {
+        for (int i = 0; i < array.length(); i++) {
             //Creating the superhero object
             HomePosts superHero = new HomePosts();
             JSONObject json = null;
@@ -613,6 +660,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                 superHero.setImageUrl(json.getString(Config4.TAG_IMAGE_URL));
                 superHero.setName(json.getString(Config4.TAG_NAME));
                 superHero.setId(json.getString(Config4.TAG_Id));
+                superHero.setRepuuid(json.getString(Config4.TAG_UUId));
                 superHero.setComment(json.getString(Config4.TAG_PUBLISHER));
                 superHero.setRepId(json.getString(Config4.TAG_REPID));
                 superHero.setState(json.getString(Config4.TAG_STATE));
@@ -776,19 +824,32 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                 //Toast.makeText(MainActivity.this, sgname, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_describe);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            Toast.makeText(MainActivity.this, "Chanel Created", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public Boolean verifyFields2() {
         return true;
     }
 
-    private void GetUsefullRsc(String callid) {
+    private void GetUsefullRsc(String author) {
         if (verifyFields2()) {
             //progress.setVisibility(View.VISIBLE);
             try {
                 Service service = DataGenerator.createService(Service.class, GET_USEFUL_URL);
-                retrofit2.Call<UseRscDetails> call = service.getuseresoutce(callid);
+                retrofit2.Call<UseRscDetails> call = service.getuseresoutce(author);
 
                 call.enqueue(new retrofit2.Callback<UseRscDetails>() {
                     @Override
@@ -797,25 +858,24 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
                             if (response.body() != null) {
                                 UseRscDetails verifyResponse = response.body();
                                 String sgresponse = verifyResponse.getResponse();
-                                String sgname = verifyResponse.getSGname();
-                                String sgphone = verifyResponse.getSGphone();
-                                String sgstate = verifyResponse.getSGstate();
-                                String date = verifyResponse.getSGdate();
+                                String sgtitle = verifyResponse.getSGtitle();
+                                String sgdescrip = verifyResponse.getSGsgdescription();
+                                String sgvidurl = verifyResponse.getSGvidurl();
+                                String author = verifyResponse.getSGsgauthor();
 
-                                String sgreptype = verifyResponse.getSgreptype();
-                                String sglga = verifyResponse.getLga();
-                                String sgcomment = verifyResponse.getSGcomment();
-                                String sgstatuse = verifyResponse.getSgstatuse();
+                                String sgfilename = verifyResponse.getSgsgfile_name();
+                                String imgpreview = verifyResponse.getSgsgpreview();
+                                String date = verifyResponse.getudate();
+                                String sgimgsrc = verifyResponse.getuImage();
+                                String sgtype = verifyResponse.getType();
 
-                                String videosrc = verifyResponse.getSGvideourl();
-                                String imageUrl = verifyResponse.getImage();
                                 //progress.setVisibility(View.GONE);
-                                showDialog2(sgresponse, sgname, sgphone, sgstate, imageUrl, videosrc, sgreptype, sglga, sgcomment, sgstatuse, date);
+                                showDialog2(sgresponse, sgtitle, sgdescrip, sgvidurl, sgfilename, imgpreview, date, sgimgsrc, author, sgtype);
                                 //Toast.makeText(Video_post_player.this, resourceuri, Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             //progress.setVisibility(View.GONE);
-                            Toast.makeText(MainActivity.this, "Invalid PSID Service Code !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "No Useful Resources Posted", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -828,12 +888,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
 
             } catch (Exception e) {
                 //progress.setVisibility(View.GONE);
-                Toast.makeText(MainActivity.this, "Invalid PSID Service Code !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Invalid Source Type", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void showDialog2(String sgresponse, String sgname, String sgphone, String sgstate, String imageUrl, String videosrc, String sgreptype, String sglga, String sgcomment, String sgstatuse, String date) {
+    private void showDialog2(String sgresponse, String sgtitle, String sgdescrip, String sgvidurl, String sgfilename, String imgpreview, String date, String sgimgsrc, String author, String sgtype) {
         //TextView verifiedResponse = view.findViewById(R.id.verifiedResponse);
         //verifiedResponse.setText(sgresponse);
         //TextView nametext = findViewById(R.id.hot_pic);
@@ -842,10 +902,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
         //statustext.setText(sgstatuse);
         //TextView psttype = findViewById(R.id.post_type);
         //psttype.setText(sgstatuse);
-        TextView statetext = findViewById(R.id.usersc_state);
-        statetext.setText(sgstate);
-        TextView Areaofrep = findViewById(R.id.usersc_type);
-        Areaofrep.setText(sglga);
+        TextView rsctitle = findViewById(R.id.usersc_title);
+        rsctitle.setText(sgtitle);
         //TextView ReportType = findViewById(R.id.rep_type);
         //ReportType.setText(sgreptype);
         //TextView RepDate = findViewById(R.id.report_date);
@@ -854,8 +912,31 @@ public class MainActivity extends AppCompatActivity implements RecyclerView.OnSc
         //ReporComment.setText(sgcomment);
         ImageView imageView = (ImageView) findViewById(R.id.usersc_image);
         Glide.with(MainActivity.this)
-                .load(imageUrl)
+                .load(imgpreview)
                 .into(imageView);
+
+        CardView open_use_resource = findViewById(R.id.use_resource);
+        open_use_resource.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String usestr = ursersc_send_text.getText().toString();
+                //Intent intent = new Intent(MainActivity.getApplicationContext(), view_and_comment.class);
+                Intent intent = new Intent(MainActivity.this, usefull_resources.class);
+                intent.putExtra("rscid_key", usestr);
+                intent.putExtra("srctitle_key", sgtitle);
+                intent.putExtra("description_key", sgdescrip);
+                intent.putExtra("vidurl_key", sgvidurl);
+                intent.putExtra("fileurl_key", sgfilename);
+                intent.putExtra("prevurl_key", imgpreview);
+                intent.putExtra("imgurl_key", sgimgsrc);
+                intent.putExtra("author_key", author);
+                intent.putExtra("date_key", date);
+                intent.putExtra("type_key", sgtype);
+                v.getContext().startActivity(intent);
+
+                //Toast.makeText(MainActivity.this, sgname, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

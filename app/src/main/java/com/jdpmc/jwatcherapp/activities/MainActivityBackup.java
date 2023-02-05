@@ -35,8 +35,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
-
-import com.jdpmc.jwatcherapp.Activity_home_backup;
 import com.jdpmc.jwatcherapp.DisasterPage;
 import com.jdpmc.jwatcherapp.Fragments.AlertFrag;
 import com.jdpmc.jwatcherapp.NEMA;
@@ -390,12 +388,6 @@ public class MainActivityBackup extends AppCompatActivity {
             Intent intent = new Intent(this, MoreActivity.class);
             startActivity(intent);
         });*/
-
-        menu_image.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Activity_home_backup.class);
-            startActivity(intent);
-            finish();
-        });
 
 
         mDb = AppDatabase.getInstance(getApplicationContext());

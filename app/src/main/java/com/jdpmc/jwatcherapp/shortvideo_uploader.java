@@ -221,6 +221,14 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
     public shortvideo_uploader() {
 
     }
+    public void delaybfost(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                upshortVideo();
+            }
+        }, 20000);
+    }
     private void upshortVideo() {
         String type="ShortVideoUp";
         String authorId = id;
@@ -233,7 +241,6 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
         }
         try{
             //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
-
             Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
             String mreptype = live_stream_types.getSelectedItem().toString();
             EditText input_post_comment = findViewById(R.id.say_comment);
@@ -245,6 +252,8 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         FancyToast.makeText(getApplicationContext(), "Your Short Video Post was successfull", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        RelativeLayout prpareup = findViewById(R.id.confirming_post);
+                        prpareup.setVisibility(View.GONE);
                         finish();
                         overridePendingTransition(0, 0);
                         startActivity(getIntent());
@@ -266,6 +275,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
 
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -411,8 +421,26 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
 
             @Override
             public void onClick(View v) {
-                chooseFile();
-                Log.e(TAG, "Button Cliked: Select Image");
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                String comment = input_comment.getText().toString();
+                String mreptype = live_stream_types.getSelectedItem().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter a comment", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else {
+                    switch (mreptype) {
+                        case "GBV":
+                        case "Civic/Voter Education":
+                        case "Public Awareness":
+                        case "Campaign Finance Tracking":
+                        case "Election Day":
+                        chooseFile();
+                        break;
+                        default:
+                        FancyToast.makeText(getApplicationContext(), "Please Select Post Type", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                        break;
+                    }
+                }
+
             }
         });
 
@@ -420,9 +448,29 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
         start_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
-                startActivityForResult(intent, 1);
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                String comment = input_comment.getText().toString();
+                String mreptype = live_stream_types.getSelectedItem().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter a comment", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else {
+                    switch (mreptype) {
+                        case "GBV":
+                        case "Civic/Voter Education":
+                        case "Public Awareness":
+                        case "Campaign Finance Tracking":
+                        case "Election Day":
+                        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                        intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
+                        startActivityForResult(intent, 1);
+                        break;
+                        default:
+                        FancyToast.makeText(getApplicationContext(), "Please Select Post Type", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                        break;
+                    }
+                }
+
+
             }
         });
 
@@ -538,7 +586,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
             if (result == Activity.RESULT_OK && data != null && data.getData() != null)
                 startUpload(data.getData());
             else
-                Toast.makeText(getApplicationContext(), "no file chosen", Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getApplicationContext(), "No file selected!", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
         }
         super.onActivityResult(code, result, data);
     }
@@ -565,7 +613,7 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
                     .setMessage("Incoming talkback call")
                     .create();
         } else if (id == UPLOAD_PROGRESS_DIALOG) {
-            mUploadDialog = new AlertDialog.Builder(this).setTitle("Uploading")
+            mUploadDialog = new AlertDialog.Builder(this).setTitle("Uploading...")
                     .setView(getLayoutInflater().inflate(R.layout.upload_progress_dialog, null))
                     .setCancelable(false)
                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -608,18 +656,13 @@ public class shortvideo_uploader extends AppCompatActivity implements UploadHelp
     @Override
     public void onSuccess(String fileName) {
         runOnUiThread(new Runnable() { @Override public void run() {
-            Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
+            RelativeLayout prpareup = findViewById(R.id.confirming_post);
+            prpareup.setVisibility(View.VISIBLE);
+            //Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
             mUploadDialog = null;
             try {
                 removeDialog(UPLOAD_PROGRESS_DIALOG);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        upshortVideo();
-                    }
-                }, 6000);
-
+                 delaybfost();
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);
         }});

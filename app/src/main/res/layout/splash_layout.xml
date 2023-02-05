@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/splash_layout"
+    android:background="@color/colorAccent"
     tools:context=".activities.MainActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -16,7 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.398"
+        app:layout_constraintVertical_bias="0.34"
         app:srcCompat="@drawable/jdlogo" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -24,27 +25,91 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textAllCaps="true"
-        android:textSize="22sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
+        app:layout_constraintVertical_bias="0.47" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mobil"
+        android:textColor="@color/colorButtonNormal"
+        android:textSize="18sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.51" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/power"
+        android:textColor="@color/colorButtonNormal"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="@color/black"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/slogan"
-        android:textColor="@color/colorAccent"
-        android:textSize="12sp"
+        android:textColor="@color/colorButtonNormal"
+        android:textSize="16sp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.628" />
+        app:layout_constraintVertical_bias="0.91" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96"
+        app:srcCompat="@drawable/eulogo" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96"
+        app:srcCompat="@drawable/eusdgn" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7"
+        android:src="@drawable/ic_baseline_home_24"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

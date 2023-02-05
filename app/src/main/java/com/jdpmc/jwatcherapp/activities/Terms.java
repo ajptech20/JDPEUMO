@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.jdpmc.jwatcherapp.AccountSetUp;
 import com.jdpmc.jwatcherapp.R;
 import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
 import com.google.android.material.button.MaterialButton;

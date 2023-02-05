@@ -4,12 +4,18 @@
         <item quantity="one">One location reported</item>
         <item quantity="other">%d locations reported</item>
     </plurals>
-    <string name="app_name">J-WATCHER</string>
-    <string name="slogan">Justice Development and Peace Makers Centre</string>
+    <string name="app_name">JUST-WATCHER</string>
+    <string name="slogan">Justice Development and Peace Makers Centre
+        Osogbo Under EU-SDGN Phase II</string>
+    <string name="power">Powered By</string>
+    <string name="mobil">Mobile Application</string>
     <string name="home">Home</string>
     <string name="verify">Verify</string>
     <string name="bank">Bank</string>
     <string name="shop">Shop</string>
+    <string name="default_notification_channel_id">111</string>
+    <string name="channel_name">Urgent</string>
+    <string name="channel_describe">notification chanel</string>
     <string name="covid">
         1. Report people who have traveled Abroad within the last 4weeks.
         2. Click to report Social gathering
@@ -61,6 +67,28 @@
     <string name="ministry">Federal Ministry of Interior</string>
     <string name="policy_agreement">By Login into this App I Agree to the TERMS and CONDITIONS. </string>
     <string name="privacy">Privacy Policy </string>
+
+    <string name="faqtext">
+        - What is JUST-WATCHER Mobile Application\n
+        JUST-WATCHER mobile application is the mobile app which mean JUSTICE Watcher developed by Justice, Development and Peace Makers Centre, Osogbo with the financial support from European Union.\n
+
+        - What can I use the Mobile Application for\n
+        The mobile application can be used to track and report gender-based violence, report various activities carried out in the EU-SDGN Phase II intervention program. The app can also be used to keep electorates informed on several vital information regarding Nigeria Electoral Process relating to 2023 General Election.\n
+
+        -How Can I download the mobile app\n
+        - The mobile Application can be downloaded from play store for android users and IOS for iPhone users. Just type “Just-Watcher” on the playstore or IOS, it brings out the JDPMC logo, click on it, then it will be downloaded.\n
+
+        -How can I use the mobile App\n
+        The App can be used to report cases in three different ways.\n
+         1) Through the use of pictures by clicking on Picture icon.\n
+        2) Through short videos by clicking on the short video icon.\n
+        3) Through live streaming by clicking on the live streaming icon.\n
+
+        - Who can use the mobile application.\n
+        Anyone can use the mobile application anywhere in Nigeria to report cases of GBV or have access to vital information shared on the mobile application after it has been installed.\
+        -Apart from tracking cases of GBV, what other things can I use the mobile App to do.\n
+        The Application can also be used to track Campaign Finance Expenditures of various political parties during any election. It can also be used to report different election activities on the election day in real time. The app can also be used to identify places which has been marked as hotspot for election violence.
+    </string>
 
     <string name="privacy1">  SCADA built the NISPSAS app as a Free app. This SERVICE is provided by SCADA at no cost and is intended for use as is.
     This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information if anyone decided to use our Service.
@@ -128,7 +156,7 @@
     <string name="about">
 Nigeria Internal Security and Public Safety Alert System (NISPSAS) is a converged mobile application platform for public safety related facilities in various Ministries, Departments and Agencies (MDAs). NISPSAS is a fulfillment of internal security and public safety mandates of Ministry of Interior(MoI) and Ministry of Communications and digital Economy  converged regulation piller of  National Digital Economy Policy and Strategy(NDEPS),  which highlights the need for a single regulatory instrument that will enable government put to effective use the splitter safety and security platform operating in silos across MDAs and operationalize  Government to Citizens (G2C) and Citizens to Government (C2G) interactive pillar of  NDEPS to create safe environment for smooth implementation of presidential order 003 and 005.
     </string>
-<string name="jdprivacy">
+    <string name="jdprivacy">
     Our Privacy Policy governs your use of the j-watcher Mobile app, and explains how we collect, safeguard and disclose information that results from your use of our Service.
 We use your data to provide and improve Service. By using Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, the terms used in this Privacy Policy have the same meanings as in our Terms and Conditions.
 Our Terms and Conditions (“Terms”) govern all use of our Service and together with the Privacy Policy constitutes your agreement with us (“agreement”).
@@ -202,7 +230,6 @@ BY USING SERVICE OR OTHER SERVICES PROVIDED BY US, YOU ACKNOWLEDGE THAT YOU HAVE
 18. Contact Us
 Please send your feedback, comments, requests for technical support by email: contact@jdpmcosogbo.org.ng
     </string>
-
 
 
     <string name="about1">

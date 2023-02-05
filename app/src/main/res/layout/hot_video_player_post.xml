@@ -63,6 +63,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="50dp"
+                    android:maxLines="1"
+                    android:maxLength="16"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -92,7 +94,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="90dp"
                 android:textColor="#FFFFFF"
-                android:text="Player Status"
+                android:text=""
                 android:textSize="20sp"/>
             <RelativeLayout
                 android:id="@+id/cursion_text"
@@ -115,10 +117,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/calibri"
-                    android:text="Please note that this area has been marked as HOT ZONE please be vigilante if you are around this area"
+                    android:text="Please note that this area has been marked as HOT ZONE please be vigilant if you are around this area"
                     android:layout_marginStart="50dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/play_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please wait on network response..."
+                    android:layout_marginTop="@dimen/activity_margin"
+                    android:textColor="#FFF"
+                    android:layout_below="@+id/progress"/>
             </RelativeLayout>
 
             <TextView

@@ -55,6 +55,12 @@
                             android:layout_alignParentStart="true"
                             android:layout_centerHorizontal="true"
                             app:civ_border_color="#03A9F4"/>
+                        <ProgressBar
+                            android:id="@+id/prgress"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:visibility="gone"
+                            />
                         <TextView
                             android:id="@+id/set_area"
                             android:layout_width="wrap_content"
@@ -76,6 +82,8 @@
                             android:background="@drawable/blue_rounded_shape"
                             android:fontFamily="@font/calibri"
                             android:padding="5dp"
+                            android:maxLines="1"
+                            android:maxLength="10"
                             android:text="Abu Paul"
                             android:textColor="#FFFFFF"
                             android:textSize="13sp" />
@@ -191,6 +199,14 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginEnd="5dp"
                             android:layout_marginBottom="5dp">
+                            <EditText
+                                android:id="@+id/send_text_uuid"
+                                android:layout_width="300dp"
+                                android:layout_height="wrap_content"
+                                android:hint="Input"
+                                android:textSize="25dp"
+                                android:visibility="gone"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/post_likes"

@@ -241,6 +241,8 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         FancyToast.makeText(getApplicationContext(), "Your Image Post was successful", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        RelativeLayout prpareup = findViewById(R.id.confirming_post);
+                        prpareup.setVisibility(View.GONE);
                         finish();
                         overridePendingTransition(0, 0);
                         startActivity(getIntent());
@@ -365,7 +367,26 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
         take_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePhoto();
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                String comment = input_comment.getText().toString();
+                String mreptype = live_stream_types.getSelectedItem().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter a comment", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else{
+                    switch (mreptype) {
+                        case "GBV":
+                        case "Civic/Voter Education":
+                        case "Public Awareness":
+                        case "Campaign Finance Tracking":
+                        case "Election Day":
+                            takePhoto();
+                            break;
+                        default:
+                            FancyToast.makeText(getApplicationContext(), "Please Select Post Type", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            break;
+                    }
+                }
+
                 //Log.e(TAG, "Button Cliked: something else");
             }
         });
@@ -377,8 +398,26 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
 
             @Override
             public void onClick(View v) {
-                chooseFile();
-                //Log.e(TAG, "Button Cliked: Select Image");
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                String comment = input_comment.getText().toString();
+                String mreptype = live_stream_types.getSelectedItem().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter a comment", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else {
+                    switch (mreptype) {
+                        case "GBV":
+                        case "Civic/Voter Education":
+                        case "Public Awareness":
+                        case "Campaign Finance Tracking":
+                        case "Election Day":
+                        chooseFile();
+                        break;
+                        default:
+                        FancyToast.makeText(getApplicationContext(), "Please Select Post Type", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                        break;
+                    }
+                }
+
             }
         });
 
@@ -533,7 +572,7 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
             if (result == Activity.RESULT_OK && data != null && data.getData() != null)
                 startUpload(data.getData());
             else
-                Toast.makeText(getApplicationContext(), "no file chosen", Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getApplicationContext(), "No file selected!", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
         }
         super.onActivityResult(code, result, data);
     }
@@ -603,12 +642,14 @@ public class picture_uploader extends AppCompatActivity implements UploadHelper.
     @Override
     public void onSuccess(String fileName) {
         runOnUiThread(new Runnable() { @Override public void run() {
-            Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
+            RelativeLayout prpareup = findViewById(R.id.confirming_post);
+            prpareup.setVisibility(View.VISIBLE);
+            //Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
             mUploadDialog = null;
             try {
                 removeDialog(UPLOAD_PROGRESS_DIALOG);
 
-                new Handler().postDelayed(picture_uploader.this::uploadtoServer, 5000);
+                new Handler().postDelayed(picture_uploader.this::uploadtoServer, 10000);
 
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);

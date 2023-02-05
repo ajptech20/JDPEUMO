@@ -222,6 +222,15 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
     public hot_shortvid_uploader() {
 
     }
+    public void delaybfost(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                UploadHotShortvid();
+            }
+        }, 20000);
+    }
+
     private void UploadHotShortvid() {
         String authorId = id;
         String type="HotVideoUpload";
@@ -250,6 +259,8 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         FancyToast.makeText(getApplicationContext(), "This area has been marked as hot sport zone", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        RelativeLayout prpareup = findViewById(R.id.confirming_post);
+                        prpareup.setVisibility(View.GONE);
                         finish();
                         overridePendingTransition(0, 0);
                         startActivity(getIntent());
@@ -384,9 +395,19 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
         start_record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
-                startActivityForResult(intent, 1);
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                EditText post_area = (EditText) findViewById(R.id.area_spec);
+                String area = post_area.getText().toString();
+                String comment = input_comment.getText().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter what is happening", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else if (area.matches("")){
+                    FancyToast.makeText(getApplicationContext(), "You did not enter Area of Violence", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else{
+                    Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
+                    startActivityForResult(intent, 1);
+                }
             }
         });
 
@@ -397,8 +418,17 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
 
             @Override
             public void onClick(View v) {
-                chooseFile();
-                //Log.e(TAG, "Button Cliked: Select Image");
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                EditText post_area = (EditText) findViewById(R.id.area_spec);
+                String area = post_area.getText().toString();
+                String comment = input_comment.getText().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter what is happening", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else if (area.matches("")){
+                    FancyToast.makeText(getApplicationContext(), "You did not enter Area of Violence", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else{
+                    chooseFile();
+                }
             }
         });
 
@@ -531,7 +561,7 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
             if (result == Activity.RESULT_OK && data != null && data.getData() != null)
                 startUpload(data.getData());
             else
-                Toast.makeText(getApplicationContext(), "no file chosen", Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getApplicationContext(), "No file selected!", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
         }
         super.onActivityResult(code, result, data);
     }
@@ -601,17 +631,13 @@ public class hot_shortvid_uploader extends AppCompatActivity implements UploadHe
     @Override
     public void onSuccess(String fileName) {
         runOnUiThread(new Runnable() { @Override public void run() {
-            Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
+            RelativeLayout prpareup = findViewById(R.id.confirming_post);
+            prpareup.setVisibility(View.VISIBLE);
+            //Toast.makeText(getApplicationContext(), "Upload of " + fileName + " completed", Toast.LENGTH_SHORT).show();
             mUploadDialog = null;
             try {
                 removeDialog(UPLOAD_PROGRESS_DIALOG);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        UploadHotShortvid();
-                    }
-                }, 6000);
+                delaybfost();
 
             } catch (Exception ignored) {}
             getWindow().clearFlags(FLAG_KEEP_SCREEN_ON);

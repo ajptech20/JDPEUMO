@@ -36,11 +36,21 @@
                     android:shape="ring"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="0dp">
-                    <ImageView
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/live_reporter_image"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/img"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#03A9F4"/>
+                    <ProgressBar
+                        android:id="@+id/prgress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"/>
+                        android:visibility="gone"
+                        />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -78,30 +88,40 @@
                 android:layout_marginBottom="0dp">
 
                 <ImageView
+                    android:id="@+id/like"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/ic_action_heart" />
+                    android:src="@drawable/ic_baseline_favorite_24" />
 
                 <ImageView
+                    android:id="@+id/comment"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="40dp"
                     android:layout_alignParentLeft="true"
                     android:src="@drawable/ic_action_comment" />
 
-                <ImageView
+                <!--<ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="75dp"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/ic_action_share" />
+                    android:src="@drawable/ic_action_share" />-->
                 <EditText
                     android:id="@+id/send_text_id"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="20dp"
+                    android:hint="Input"
+                    android:textSize="25dp"
+                    android:visibility="gone"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/send_text_uuid"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
                     android:hint="Input"
                     android:textSize="25dp"
                     android:visibility="gone"

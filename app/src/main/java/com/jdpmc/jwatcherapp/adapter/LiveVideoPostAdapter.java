@@ -1,5 +1,7 @@
 package com.jdpmc.jwatcherapp.adapter;
 
+import static com.jdpmc.jwatcherapp.utils.Constants.USER_LIKE_BASE_URL;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,9 +28,16 @@ import com.jdpmc.jwatcherapp.Image_Post_Viewer_Activity;
 import com.jdpmc.jwatcherapp.R;
 import com.jdpmc.jwatcherapp.Video_post_player;
 import com.jdpmc.jwatcherapp.database.LivePost;
+import com.jdpmc.jwatcherapp.model.LikesResponse;
+import com.jdpmc.jwatcherapp.networking.api.Service;
+import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
+import com.jdpmc.jwatcherapp.utils.PreferenceUtils;
+import com.jdpmc.jwatcherapp.view_and_comment;
 
 import java.util.List;
-import java.util.Objects;
+
+import retrofit2.Call;
 
 public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdapter.ViewHolder> {
     //Imageloader to load image
@@ -106,10 +116,11 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
 
         //Showing data on the views
         holder.textViewName.setText(superHero.getName());
-        holder.textViewRepId.setText(superHero.getId());
         holder.textViewDescription.setText(superHero.getComment());
         holder.textViewPostimg.setText(superHero.getPreview());
         //holder.textViewRepId.setText(superHero.getRepId());
+        holder.textViewRepId.setText(superHero.getId());
+        holder.textViewRepUuid.setText(superHero.getRepuuid());
         holder.textViewState.setText(superHero.getState());
         holder.textViewStatus.setText(superHero.getStatus());
         holder.textViewRType.setText(superHero.getRepType());
@@ -138,7 +149,9 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
 
         public ImageView postImage;
         public ImageView Userimage;
-
+        public ImageView like_button;
+        public ImageView comment_button;
+        public TextView textViewRepUuid;
         public TextView textViewRepId;
         public TextView textViewState;
         public TextView textViewStatus;
@@ -150,6 +163,8 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
         public TextView textViewRsuri;
         public NetworkImageView imageViewPreview;
 
+        public ProgressBar Progview;
+
         //Initializing Views
         public ViewHolder(View itemView) {
             super(itemView);
@@ -157,11 +172,16 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
             itemView.setOnClickListener(this);
             postImage = (ImageView) itemView.findViewById(R.id.live_post_image);
             itemView.setOnClickListener(this);
+            like_button = (ImageView) itemView.findViewById(R.id.like);
+            itemView.setOnClickListener(this);
+            comment_button = (ImageView) itemView.findViewById(R.id.comment);
+            itemView.setOnClickListener(this);
             Userimage = (ImageView) itemView.findViewById(R.id.live_reporter_image);
             textViewName = (TextView) itemView.findViewById(R.id.Poster_name);
             textViewStatus = (TextView) itemView.findViewById(R.id.post_status);
             textViewUserimg = (TextView) itemView.findViewById(R.id.userimgurl);
             textViewRepId = (TextView) itemView.findViewById(R.id.send_text_id);
+            textViewRepUuid = (TextView) itemView.findViewById(R.id.send_text_uuid);
             textViewState = (TextView) itemView.findViewById(R.id.post_state);
             textViewPostimg = (TextView) itemView.findViewById(R.id.postimgurl);
             textViewRType = (TextView) itemView.findViewById(R.id.post_type);
@@ -172,17 +192,33 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
             textViewRsuri = (TextView) itemView.findViewById(R.id.rscurlchecker);
             textViewDescription = (TextView) itemView.findViewById(R.id.post_description);
             send_text = (EditText) itemView.findViewById(R.id.send_text_id);
-
+            Progview = (ProgressBar) itemView.findViewById(R.id.prgress);
         }
 
         @Override
         public void onClick(View view) {
             String rsc_uri_checker = textViewRsuri.getText().toString();
-            if (!Objects.equals(rsc_uri_checker, "")){
+            if (!rsc_uri_checker.equals("")){
                 send_button.setOnClickListener(v -> {
-                    String str = send_text.getText().toString();
+                    String videourl = textViewRsuri.getText().toString();
+                    String username = textViewName.getText().toString();
+                    String userimg = textViewUserimg.getText().toString();
+                    String typeofpost = textViewRType.getText().toString();
+                    String repstatus = textViewStatus.getText().toString();
+                    String state = textViewState.getText().toString();
+                    String date = textViewDate.getText().toString();
+                    String comment = textViewDescription.getText().toString();
+                    String area = textViewArea.getText().toString();
                     Intent intent = new Intent(context.getApplicationContext(), Video_post_player.class);
-                    intent.putExtra("message_key", str);
+                    intent.putExtra("username_key", username);
+                    intent.putExtra("vidurl_key", videourl);
+                    intent.putExtra("userimg_key", userimg);
+                    intent.putExtra("reptype_key", typeofpost);
+                    intent.putExtra("state_key", state);
+                    intent.putExtra("date_key", date);
+                    intent.putExtra("comment_key", comment);
+                    intent.putExtra("area_key", area);
+                    intent.putExtra("repstatus_key", repstatus);
                     view.getContext().startActivity(intent);
                 });
             }else{
@@ -212,11 +248,27 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
                     view.getContext().startActivity(intent);
                 });
             }
-            if (!Objects.equals(rsc_uri_checker, "")){
+            if (!rsc_uri_checker.equals("")){
                 postImage.setOnClickListener(v -> {
-                    String str = send_text.getText().toString();
+                    String videourl = textViewRsuri.getText().toString();
+                    String username = textViewName.getText().toString();
+                    String userimg = textViewUserimg.getText().toString();
+                    String typeofpost = textViewRType.getText().toString();
+                    String repstatus = textViewStatus.getText().toString();
+                    String state = textViewState.getText().toString();
+                    String date = textViewDate.getText().toString();
+                    String comment = textViewDescription.getText().toString();
+                    String area = textViewArea.getText().toString();
                     Intent intent = new Intent(context.getApplicationContext(), Video_post_player.class);
-                    intent.putExtra("message_key", str);
+                    intent.putExtra("username_key", username);
+                    intent.putExtra("vidurl_key", videourl);
+                    intent.putExtra("userimg_key", userimg);
+                    intent.putExtra("reptype_key", typeofpost);
+                    intent.putExtra("state_key", state);
+                    intent.putExtra("date_key", date);
+                    intent.putExtra("comment_key", comment);
+                    intent.putExtra("area_key", area);
+                    intent.putExtra("repstatus_key", repstatus);
                     view.getContext().startActivity(intent);
                 });
             }else{
@@ -245,6 +297,89 @@ public class LiveVideoPostAdapter extends RecyclerView.Adapter<LiveVideoPostAdap
                     intent.putExtra("repstatus_key", repstatus);
                     view.getContext().startActivity(intent);
                 });
+            }
+
+            like_button.setOnClickListener(v -> {
+                //textViewLikes.setText("10");
+                String postpid = send_text.getText().toString();
+                String liks_count = textViewLikes.getText().toString();
+                String rpuuid = textViewRepUuid.getText().toString();
+                LikeMypost(postpid, liks_count, rpuuid);
+                //Toast.makeText(context.getApplicationContext(), "Like Press" +postpid +rpuuid, Toast.LENGTH_SHORT).show();
+            });
+            comment_button.setOnClickListener(v -> {
+                String str = send_text.getText().toString();
+                String userimg = textViewUserimg.getText().toString();
+                String comm_counts =textViewComments.getText().toString();
+                String username = textViewName.getText().toString();
+                String postimgurl = textViewPostimg.getText().toString();
+                String typeofpost = textViewRType.getText().toString();
+                String repstatus = textViewStatus.getText().toString();
+                String state = textViewState.getText().toString();
+                String date = textViewDate.getText().toString();
+                String comment = textViewDescription.getText().toString();
+                String area = textViewArea.getText().toString();
+                Intent intent = new Intent(context.getApplicationContext(), view_and_comment.class);
+                intent.putExtra("message_key", str);
+                intent.putExtra("commenter_userimg_key", userimg);
+                intent.putExtra("comment_count_key", comm_counts);
+                intent.putExtra("username_key", username);
+                intent.putExtra("imgurl_key", postimgurl);
+                intent.putExtra("userimg_key", userimg);
+                intent.putExtra("reptype_key", typeofpost);
+                intent.putExtra("state_key", state);
+                intent.putExtra("date_key", date);
+                intent.putExtra("comment_key", comment);
+                intent.putExtra("area_key", area);
+                intent.putExtra("repstatus_key", repstatus);
+                view.getContext().startActivity(intent);
+                //Toast.makeText(context.getApplicationContext(), "Comment Press", Toast.LENGTH_SHORT).show();
+            });
+        }
+        private void LikeMypost(String postpid, String liks_count, String rpuuid) {
+            Progview.setVisibility(View.VISIBLE);
+            try {
+                Service service = DataGenerator.createService(Service.class, USER_LIKE_BASE_URL);
+                String userphone = PreferenceUtils.getPhoneNumber(context.getApplicationContext());
+                retrofit2.Call<LikesResponse> call = service.likeApost(postpid, userphone, rpuuid);
+                //Call<LikesResponse> call = service.likeApost(postpid, userphone, rpuuid);
+                call.enqueue(new retrofit2.Callback<LikesResponse>() {
+                    @Override
+                    public void onResponse(@NonNull retrofit2.Call<LikesResponse> call, @NonNull retrofit2.Response<LikesResponse> response) {
+                        if (response.isSuccessful()) {
+                            Progview.setVisibility(View.GONE);
+                            //FancyToast.makeText(context.getApplicationContext(), "Like Taken", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                            if (response.body() != null) {
+                                LikesResponse likeResponse = response.body();
+                                String isliked = likeResponse.getLiked();
+                                String isunliked = likeResponse.getUnliked();
+                                String likecount = likeResponse.getLikeCount();
+                                String isErr = likeResponse.getLikeErr();
+                                if (isliked != null){
+                                    String ilike = likeResponse.getLiked();
+                                    textViewLikes.setText(likecount);
+                                    //liks_count.setVisibility(View.GONE);
+                                    FancyToast.makeText(context.getApplicationContext(),ilike, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                                }else{
+                                    String unlik = likeResponse.getUnliked();
+                                    textViewLikes.setText(likecount);
+                                    FancyToast.makeText(context.getApplicationContext(),unlik, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                                }
+                            }else {
+                                Progview.setVisibility(View.GONE);
+                                FancyToast.makeText(context.getApplicationContext(), "Like Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(@NonNull Call<LikesResponse> call, @NonNull Throwable t) {
+                        //progression.setVisibility(View.GONE);
+                        FancyToast.makeText(context.getApplicationContext(), "No Internet", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                    }
+                });
+            } catch (Exception e) {
+                FancyToast.makeText(context.getApplicationContext(), "Like Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+
             }
         }
     }

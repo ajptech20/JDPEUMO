@@ -37,6 +37,7 @@ import com.jdpmc.jwatcherapp.database.HotZonePost;
 import com.jdpmc.jwatcherapp.model.VideoReportDetails;
 import com.jdpmc.jwatcherapp.networking.api.Service;
 import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
+import com.jdpmc.jwatcherapp.utils.FancyToast;
 import com.jdpmc.jwatcherapp.utils.HotConfig;
 
 import org.json.JSONArray;
@@ -219,7 +220,7 @@ public class view_hot_zone extends AppCompatActivity implements RecyclerView.OnS
                     public void onErrorResponse(VolleyError error) {
                         progressBar.setVisibility(View.GONE);
                         //If an error occurs that means end of the list has reached
-                        Toast.makeText(view_hot_zone.this, "No More Items Available", Toast.LENGTH_SHORT).show();
+                        FancyToast.makeText(getApplicationContext(), "No Internet Connection", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                     }
                 });
 
@@ -237,7 +238,7 @@ public class view_hot_zone extends AppCompatActivity implements RecyclerView.OnS
 
     //This method will parse json data
     private void parseData(JSONArray array) {
-        for (int i=array.length()-1;i>=0;i--) {
+        for (int i = 0; i < array.length(); i++) {
             //Creating the superhero object
             HotZonePost superHero = new HotZonePost();
             JSONObject json = null;
@@ -249,6 +250,7 @@ public class view_hot_zone extends AppCompatActivity implements RecyclerView.OnS
                 superHero.setImageUrl(json.getString(HotConfig.TAG_IMAGE_URL));
                 superHero.setName(json.getString(HotConfig.TAG_NAME));
                 superHero.setId(json.getString(HotConfig.TAG_Id));
+                superHero.setRepuuid(json.getString(HotConfig.TAG_UUId));
                 superHero.setComment(json.getString(HotConfig.TAG_PUBLISHER));
                 superHero.setRepId(json.getString(HotConfig.TAG_REPID));
                 superHero.setState(json.getString(HotConfig.TAG_STATE));

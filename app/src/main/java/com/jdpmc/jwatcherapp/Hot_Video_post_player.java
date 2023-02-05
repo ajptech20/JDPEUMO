@@ -69,11 +69,9 @@ public class Hot_Video_post_player extends Activity {
         mOkHttpClient = builder.build();
 
         Intent intent = getIntent();
-        String str = intent.getStringExtra("message_key");
         String state = intent.getStringExtra("state_key");
         String lga = intent.getStringExtra("lga_key");
         String town = intent.getStringExtra("town_key");
-        String imgurl = intent.getStringExtra("imgurl_key");
         String comment = intent.getStringExtra("comment_key");
         String username = intent.getStringExtra("username_key");
         String rscurl = intent.getStringExtra("rscurl_key");
@@ -114,8 +112,28 @@ public class Hot_Video_post_player extends Activity {
                 finish();
             }
         });
+        startProgress();
     }
 
+    private void startProgress(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mrmoveprogress = findViewById(R.id.play_status);
+                mrmoveprogress.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void endProgress(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mrmoveprogress = findViewById(R.id.play_status);
+                mrmoveprogress.setVisibility(View.GONE);
+            }
+        });
+    }
 
     private void getLatestResourceUri(String rscurl) {
         Request request = new Request.Builder()
@@ -148,6 +166,7 @@ public class Hot_Video_post_player extends Activity {
                 final String uri = resourceUri;
                 runOnUiThread(new Runnable() { @Override public void run() {
                     initPlayer(uri);
+                    endProgress();
                 }});
             }
         });
@@ -164,8 +183,15 @@ public class Hot_Video_post_player extends Activity {
         super.onResume();
         mVideoSurfaceView = findViewById(R.id.VideoSurfaceView);
         mPlayerStatusTextView.setText("Loading broadcast...");
-        //String callid = (live_vid);
-        //verifyPsid(callid);
+        String resourceUri = null;
+        Intent intent = getIntent();
+        String rscurl = intent.getStringExtra("rscurl_key");
+        String vidresource = rscurl;
+        resourceUri = vidresource;
+        final String uri = resourceUri;
+        runOnUiThread(new Runnable() { @Override public void run() {
+            initPlayer(uri);
+        }});
     }
 
     @Override
@@ -372,5 +398,6 @@ public class Hot_Video_post_player extends Activity {
     private TextView mViewerStatusTextView = null;
     private TextView mBroadcastLiveTextView = null;
     private TextView mBroadcastLatencyTextView = null;
+    private RelativeLayout mrmoveprogress = null;
     private MediaController mMediaController = null;
 }

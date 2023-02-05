@@ -8,6 +8,7 @@ public class Config2 {
     public static final String TAG_IMAGE_URL = "image";
     public static final String TAG_NAME = "name";
     public static final String TAG_Id = "id";
+    public static final String TAG_UUId = "repuuid";
     public static final String TAG_PUBLISHER = "postcomment";
     public static final String TAG_REPID = "callid";
     public static final String TAG_STATE = "state";

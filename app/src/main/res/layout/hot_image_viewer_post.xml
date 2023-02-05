@@ -66,6 +66,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="50dp"
+                    android:maxLines="1"
+                    android:maxLength="16"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -100,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/calibri"
-                    android:text="Please note that this area has been marked as HOT ZONE please be vigilante if you are around this area"
+                    android:text="Please note that this area has been marked as HOT ZONE please be vigilant if you are around this area"
                     android:layout_marginStart="50dp"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />

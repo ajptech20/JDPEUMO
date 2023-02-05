@@ -1,0 +1,85 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#2F050505"
+    tools:context=".Youtube_Video_player">
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"  />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_below="@id/youtube_view"
+        android:layout_marginTop="232dp"
+        android:background="#131313">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/stop_close_live3"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_clear_black_24dp" />
+
+            <TextView
+                android:id="@+id/usersc_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="5dp"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:fontFamily="@font/calibri"
+                android:text="Admin"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/src_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="54dp"
+                android:fontFamily="@font/calibri"
+                android:maxLength="16"
+                android:maxLines="1"
+                android:textColor="#FFFFFF"
+                android:text="Video Resource"
+                android:textSize="18sp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rsc_image"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/img"
+                app:civ_border_width="2dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                app:civ_border_color="#03A9F4"/>
+            <TextView
+                android:id="@+id/rsc_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/calibri"
+                android:text="This area is ery danger please stay away from the ais of kuje and others"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

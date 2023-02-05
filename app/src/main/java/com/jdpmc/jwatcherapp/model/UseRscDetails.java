@@ -13,37 +13,29 @@ public class UseRscDetails implements Parcelable
     @Expose
     private String response;
 
-    @SerializedName("Name")
+    @SerializedName("Title")
     @Expose
-    private String sgname;
+    private String sgtitle;
 
-    @SerializedName("State")
+    @SerializedName("Description")
     @Expose
-    private String sgstate;
+    private String sgdescription;
 
-    @SerializedName("VideoUrl")
+    @SerializedName("Author")
     @Expose
-    private String vidsrc;
+    private String sgauthor;
 
-    @SerializedName("Phone")
+    @SerializedName("Vidurl")
     @Expose
-    private String sgphone;
+    private String vidurl;
 
-    @SerializedName("Comment")
+    @SerializedName("FileName")
     @Expose
-    private String sgcomment;
+    private String sgfile_name;
 
-    @SerializedName("Vidstatus")
+    @SerializedName("ImgPreview")
     @Expose
-    private String sgstatuse;
-
-    @SerializedName("Type")
-    @Expose
-    private String sgreptype;
-
-    @SerializedName("Lga")
-    @Expose
-    private String lga;
+    private String sgpreview;
 
     @SerializedName("Date")
     @Expose
@@ -52,6 +44,10 @@ public class UseRscDetails implements Parcelable
     @SerializedName("Image")
     @Expose
     private String image;
+
+    @SerializedName("Type")
+    @Expose
+    private String type;
 
     //////////////////////
     public final static Creator<UseRscDetails> CREATOR = new Creator<UseRscDetails>() {
@@ -73,16 +69,15 @@ public class UseRscDetails implements Parcelable
 
     protected UseRscDetails(Parcel in) {
         this.response = ((String) in.readValue((String.class.getClassLoader())));
-        this.sgname = ((String) in.readValue((String.class.getClassLoader())));
-        this.sgstate = ((String) in.readValue((String.class.getClassLoader())));
-        this.vidsrc = ((String) in.readValue((String.class.getClassLoader())));
-        this.sgphone = ((String) in.readValue((String.class.getClassLoader())));
-        this.sgcomment = ((String) in.readValue((String.class.getClassLoader())));
-        this.sgstatuse = ((String) in.readValue((String.class.getClassLoader())));
-        this.sgreptype = ((String) in.readValue((String.class.getClassLoader())));
-        this.lga = ((String) in.readValue((String.class.getClassLoader())));
+        this.sgtitle = ((String) in.readValue((String.class.getClassLoader())));
+        this.sgdescription = ((String) in.readValue((String.class.getClassLoader())));
+        this.sgauthor = ((String) in.readValue((String.class.getClassLoader())));
+        this.vidurl = ((String) in.readValue((String.class.getClassLoader())));
+        this.sgfile_name = ((String) in.readValue((String.class.getClassLoader())));
+        this.sgpreview = ((String) in.readValue((String.class.getClassLoader())));
         this.date = ((String) in.readValue((String.class.getClassLoader())));
         this.image = ((String) in.readValue((String.class.getClassLoader())));
+        this.type = ((String) in.readValue((String.class.getClassLoader())));
     }
 
     public UseRscDetails() {
@@ -95,56 +90,54 @@ public class UseRscDetails implements Parcelable
         this.response = response;
     }
 
-    public String getSGname() {return sgname;}
-    public void setSGname(String sgname) {
-        this.sgname = sgname;
+    public String getSGtitle() {return sgtitle;}
+    public void setSGtitle(String sgtitle) {
+        this.sgtitle = sgtitle;
     }
 
-    public String getSGphone() {return sgphone;}
-    public void setSGphone(String sgphone) {this.sgphone = sgphone;}
+    public String getSGsgdescription() {return sgdescription;}
+    public void setSsgdescription(String sgdescription) {this.sgdescription = sgdescription;}
 
-    public String getSGdate() {return date;}
-    public void setSGdate(String date) {this.date = date;}
+    public String getSGvidurl() {return vidurl;}
+    public void setSGvidurl(String vidurl) {this.vidurl = vidurl;}
 
-    public String getSGcomment() {return sgcomment;}
-    public void setSgcomment(String sgcomment) {this.sgcomment = sgcomment;}
+    public String getSGsgauthor() {return sgauthor;}
+    public void setSgsgauthor(String sgauthor) {this.sgauthor = sgauthor;}
 
-    public String getSgstatuse() {return sgstatuse;}
-    public void setSgstatuse(String sgstatuse) {this.sgstatuse = sgstatuse;}
+    public String getSgsgfile_name() {return sgfile_name;}
+    public void setSgsgfile_name(String sgfile_name) {this.sgfile_name = sgfile_name;}
 
-    public String getSgreptype() {return sgreptype;}
-    public void setSgreptype(String sgreptype) {this.sgreptype = sgreptype;}
+    public String getSgsgpreview() {return sgpreview;}
+    public void setSgsgpreview(String sgpreview) {this.sgpreview = sgpreview;}
 
-    public String getLga() {return lga;}
-    public void setLga(String lga) {this.lga = lga;}
+    public String getudate() {return date;}
+    public void setudate(String date) {this.date = date;}
 
-    public String getSGstate() {return sgstate;}
-    public void setSGcompany(String sgstate) {this.sgstate = sgstate;}
-
-    public String getSGvideourl() {
-        return vidsrc;
-    }
-    public void getSGvideourl(String vidsrc) {
-        this.vidsrc= vidsrc;
-    }
-
-    public String getImage() {
+    public String getuImage() {
         return image;
     }
-    public void setImage(String image) {
+    public void setIumage(String image) {
         this.image = image;
+    }
+
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(response);
-        dest.writeValue(sgname);
-        dest.writeValue(sgstate);
-        dest.writeValue(vidsrc);
-        dest.writeValue(sgreptype);
-        dest.writeValue(lga);
-        dest.writeValue(sgcomment);
-        dest.writeValue(sgstatuse);
+        dest.writeValue(sgtitle);
+        dest.writeValue(sgdescription);
+        dest.writeValue(vidurl);
+        dest.writeValue(sgauthor);
+        dest.writeValue(sgfile_name);
+        dest.writeValue(sgpreview);
+        dest.writeValue(date);
         dest.writeValue(image);
+        dest.writeValue(type);
 
     }
 

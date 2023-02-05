@@ -226,24 +226,46 @@ public class Go_New_live extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final int viewId = v.getId();
-                if (mBroadcaster.canStartBroadcasting()){
-                    mBroadcaster.startBroadcast();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            upLivetoServer();
+                EditText input_comment = (EditText) findViewById(R.id.say_comment);
+                String comment = input_comment.getText().toString();
+                String mreptype = live_stream_types.getSelectedItem().toString();
+                if (comment.matches("")) {
+                    FancyToast.makeText(getApplicationContext(), "You did not enter a comment", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                }else {
+                    switch (mreptype) {
+                        case "GBV":
+                        case "Civic/Voter Education":
+                        case "Public Awareness":
+                        case "Campaign Finance Tracking":
+                        case "Election Day":
+                        if (mBroadcaster.canStartBroadcasting()){
+                            mBroadcaster.startBroadcast();
+                            RelativeLayout prpareup = findViewById(R.id.confirming_post);
+                            prpareup.setVisibility(View.VISIBLE);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    upLivetoServer();
+                                }
+                            }, 5000);
+                        }else{
+                            mBroadcaster.stopBroadcast();
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+                            overridePendingTransition(0, 0);
+
+                            FancyToast.makeText(getApplicationContext(), "You have ended the Live Broadcast", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+
                         }
-                    }, 5000);
-                }else{
-                    mBroadcaster.stopBroadcast();
-                    finish();
-                    overridePendingTransition(0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition(0, 0);
+                        break;
+                        default:
+                        FancyToast.makeText(getApplicationContext(), "Please Select Post Type", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                        break;
+                    }
+                }
 
-                    FancyToast.makeText(getApplicationContext(), "You have ended the Live Broadcast", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
-
-                } if (viewId == R.id.SwitchCameraButton) {
+                if (viewId == R.id.SwitchCameraButton) {
                     mBroadcaster.switchCamera();
                     //Log.e(TAG, "Button Cliked: something else");
                 }if (viewId == R.id.change_camera){
@@ -360,7 +382,6 @@ public class Go_New_live extends AppCompatActivity {
         }
         try{
             //Toast.makeText(this, "lat: " + latitude + " " + "lon: " + longitude, Toast.LENGTH_LONG).show();
-
             Service service = DataGenerator.createService(Service.class, "http://104.131.77.176/");
             String mreptype = live_stream_types.getSelectedItem().toString();
             EditText input_post_comment = findViewById(R.id.say_comment);
@@ -372,6 +393,8 @@ public class Go_New_live extends AppCompatActivity {
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                     if (response.isSuccessful()) {
                         FancyToast.makeText(getApplicationContext(), "You are now broadcasting live", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                        RelativeLayout prpareup = findViewById(R.id.confirming_post);
+                        prpareup.setVisibility(View.GONE);
                     } else {
 
                         FancyToast.makeText(getApplicationContext(), "Live Broadcast Failed", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();

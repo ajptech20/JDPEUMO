@@ -1,4 +1,4 @@
-package com.jdpmc.jwatcherapp.activities;
+package com.jdpmc.jwatcherapp;
 
 import android.Manifest;
 import android.app.Activity;
@@ -36,7 +36,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.ikhiloyaimokhai.nigeriastatesandlgas.Nigeria;
-import com.jdpmc.jwatcherapp.R;
+import com.jdpmc.jwatcherapp.activities.SplashActivity;
 import com.jdpmc.jwatcherapp.networking.api.Service;
 import com.jdpmc.jwatcherapp.networking.generator.DataGenerator;
 import com.jdpmc.jwatcherapp.utils.FancyToast;
@@ -145,9 +145,9 @@ public class AccountSetUp extends AppCompatActivity {
         TextView userLga = findViewById(R.id.user_lga);
         userLga.setText(PreferenceUtils.getLga(getApplicationContext()));
 
-        String url = (PreferenceUtils.getUserImage(getApplicationContext()));
+        //String url = (PreferenceUtils.getUserImage(getApplicationContext()));
         ImageView imageView = (ImageView) findViewById(R.id.user_image);
-        Glide.with(AccountSetUp.this).load(url)
+        Glide.with(AccountSetUp.this).load(R.drawable.img)
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .error(R.drawable.img)
                 .listener(new RequestListener<Drawable>() {
@@ -163,9 +163,9 @@ public class AccountSetUp extends AppCompatActivity {
 
                 }).into(imageView);
 
-        String user_image_banner = (PreferenceUtils.getUserImage(getApplicationContext()));
+        //String user_image_banner = (PreferenceUtils.getUserImage(getApplicationContext()));
         ImageView imageViewBanner = (ImageView) findViewById(R.id.set_profile_image);
-        Glide.with(AccountSetUp.this).load(user_image_banner)
+        Glide.with(AccountSetUp.this).load(R.drawable.img)
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .error(R.drawable.img)
                 .listener(new RequestListener<Drawable>() {
@@ -490,7 +490,8 @@ public class AccountSetUp extends AppCompatActivity {
     private void submitDetails() {
         ProgressBar progress = findViewById(R.id.electionProgress);
         progress.setVisibility(View.VISIBLE);
-        Service userService = DataGenerator.createService(Service.class, "https://nispsas.com.ng/");
+        //Service userService = DataGenerator.createService(Service.class, "https://nispsas.com.ng/");
+        Service userService = DataGenerator.createService(Service.class, "https://j-watcher.org/");
         // create part for file (photo, video, ...)
         MultipartBody.Part body = prepareFilePart("passport");
         EditText input_user_name = findViewById(R.id.name_user);
